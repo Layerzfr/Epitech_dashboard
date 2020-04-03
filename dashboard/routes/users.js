@@ -3,6 +3,7 @@ var router = express.Router();
 const {TwingEnvironment, TwingLoaderFilesystem} = require('twing');
 let loader = new TwingLoaderFilesystem('./views/');
 let twing = new TwingEnvironment(loader);
+var auth = require("../controllers/AuthControllers");
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -10,5 +11,10 @@ router.get('/', function(req, res, next) {
     res.end(output);
   });
 });
+
+router.get('/', auth.update);
+
+router.post('/', auth.doUpdate);
+
 
 module.exports = router;
