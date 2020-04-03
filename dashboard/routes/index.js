@@ -10,7 +10,7 @@ var auth = require("../controllers/AuthControllers");
 router.get('/', auth.home);
 
 //chat for loged user
-router.get('/chat', auth.chat);
+// router.get('/chat', auth.chat);
 
 // route to register page
 router.get('/register', auth.register);

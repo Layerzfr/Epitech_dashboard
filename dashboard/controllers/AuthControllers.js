@@ -39,23 +39,23 @@ userController.login = function(req, res) {
 };
 
 //go chat after login and send username to server
-userController.chat = function(req, res) {
-    if (req.user) {
-        //res.send(req.user.username);
-        res.render("chat", {
-            user: req.user.username
-        });
-        //res.sendFile('index.html',  { root: '.' });
-    } else {
-        res.redirect('/login');
-    }
-
-};
+// userController.chat = function(req, res) {
+//     if (req.user) {
+//         //res.send(req.user.username);
+//         res.render("chat", {
+//             user: req.user.username
+//         });
+//         //res.sendFile('index.html',  { root: '.' });
+//     } else {
+//         res.redirect('/login');
+//     }
+//
+// };
 
 // Post login
 userController.doLogin = function(req, res) {
     passport.authenticate('local')(req, res, function () {
-        res.redirect('/chat');
+        // res.redirect('/chat');
     });
 };
 
