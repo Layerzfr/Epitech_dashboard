@@ -1,15 +1,50 @@
 var mongoose = require("mongoose");
-var passport = require("passport");
+const passport = require('passport');
 var User = require("../model/User");
 const {TwingEnvironment, TwingLoaderFilesystem} = require('twing');
 let loader = new TwingLoaderFilesystem('./views/');
 let twing = new TwingEnvironment(loader);
 
+
+var LocalStrategy = require('passport-local').Strategy;
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+        User.findOne({
+            username: username
+        }, function(err, user) {
+            if (err) {
+                return done(err);
+            }
+
+            if (!user) {
+                return done(null, false);
+            }
+
+            if (user.password != password) {
+                return done(null, false);
+            }
+            return done(null, user);
+        });
+    }
+));
+passport.serializeUser(function(user, cb) {
+    cb(null, user.id);
+});
+
+passport.deserializeUser(function(id, cb) {
+    User.findById(id, function (err, user) {
+        cb(err, user);
+    });
+})
+
 var userController = {};
 
 // Restrict access to root page
 userController.home = function(req, res) {
-    res.render('index', { user : req.user });
+    console.log(req.user);
+    twing.render('index.html.twig', {user: req.user}).then((output) => {
+        res.end(output);
+    });
 };
 
 // Go to registration page
@@ -22,9 +57,11 @@ userController.register = function(req, res) {
 
 // Post registration
 userController.doRegister = function(req, res) {
-    User.register(new User({ email : req.body.email, username : req.body.username, name: req.body.name }), req.body.password, function(err, user) {
+    User.register(new User({ email : req.body.email, username : req.body.username, name: req.body.name, password: req.body.password }), req.body.password, function(err, user) {
         if (err) {
-            return res.render('register', { user : user });
+            return twing.render('register.html.twig', {}).then((output) => {
+                res.end(output);
+            });
         }
 
         passport.authenticate('local')(req, res, function () {
@@ -35,49 +72,47 @@ userController.doRegister = function(req, res) {
 
 // Go to login page
 userController.login = function(req, res) {
-    res.render('login');
+    console.log(req.user)
+    twing.render('login.html.twig', {}).then((output) => {
+        res.end(output);
+    });
+    // res.render('login');
 };
 
-//go chat after login and send username to server
-// userController.chat = function(req, res) {
-//     if (req.user) {
-//         //res.send(req.user.username);
-//         res.render("chat", {
-//             user: req.user.username
-//         });
-//         //res.sendFile('index.html',  { root: '.' });
-//     } else {
-//         res.redirect('/login');
-//     }
-//
-// };
-
 // Post login
-userController.doLogin = function(req, res) {
-    passport.authenticate('local')(req, res, function () {
-        // res.redirect('/chat');
+userController.doLogin = function(req, res, next) {
+    passport.authenticate('local')(req, res , function(err, user, info) {
+        if (err) { return next(err); }
+        if (!req.user) {
+            return res.redirect('/login');
+        }
+
+        req.logIn(req.user, function(err) {
+            if (err) { return next(err); }
+            return res.redirect('/');
+        });
     });
 };
 
-userController.update = function(req, res){
-    if (req.user) {
-        res.render("update", {
-            user : req.user,
-            username: req.user.username,
-            email: req.user.email,
-        });
-    }else{
-        res.redirect('/login');
-    }
-}
-
-userController.doUpdate = function(req,res){
-
-    User.find({username: req.user.username}).updateOne({username: req.body.username, email: req.body.email}, function(err, todo){
-        if (err) return res.status(500).send(err);
-        res.redirect('/');
-    })
-}
+// userController.update = function(req, res){
+//     if (req.user) {
+//         res.render("update", {
+//             user : req.user,
+//             username: req.user.username,
+//             email: req.user.email,
+//         });
+//     }else{
+//         res.redirect('/login');
+//     }
+// }
+//
+// userController.doUpdate = function(req,res){
+//
+//     User.find({username: req.user.username}).updateOne({username: req.body.username, email: req.body.email}, function(err, todo){
+//         if (err) return res.status(500).send(err);
+//         res.redirect('/');
+//     })
+// }
 
 // logout
 userController.logout = function(req, res) {

@@ -1,5 +1,12 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
-    <p>Coucou</p>
+    {{ dump(user) }}
+    {% if user   %}
+    {{ user.username }} zedzed
+        {% else %}
+        <a href="/login">Se connecter</a>
+        <a href="/register">S'inscrire</a>
+    {% endif %}
+{#    <p>Coucou</p>#}
 {% endblock %}
