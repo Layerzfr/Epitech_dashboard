@@ -9,6 +9,12 @@
         {% else %}
             <a href="/twitter/sessions/connect">Connecter mon compte Twitter</a>
         {% endif %}
+
+        {% if user.oauthSpotify %}
+            Spotify: connecté {#TODO AFFICHER LES INFORMATIONS PROFILE EN ATTENDANT#}
+            {% else %}
+                <a href="/spotify/sessions/connect">Connecter mon compte Spotify</a>
+                {% endif %}
     {% else %}
         <a href="/login">Se connecter</a>
         <a href="/register">S'inscrire</a>

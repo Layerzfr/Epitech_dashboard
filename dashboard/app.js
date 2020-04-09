@@ -8,6 +8,8 @@ var passport = require('passport');
 var oauth = require('oauth');
 var sys = require('sys');
 var http = require('http');
+const https = require('https');
+var querystring = require('querystring');
 const LocalStrategy = require('passport-local').Strategy;
 mongoose.Promise = global.Promise;
 
@@ -24,10 +26,19 @@ var app = express();
 var _twitterConsumerKey = "rfivln94JNkVoPVKoBn79crdc";
 var _twitterConsumerSecret = "ppY9iUnH5uEL5QABgd1hEwZMt8cPUHrcCoqqhIwNUR2zl2xr0w";
 
+var _spotifyConsumerKey = "2847f09c105d4a07aec94c448957fe60";
+var _spotifyConsumerSecret = "860cf137d5544e56a0548b1b65fd0908";
+
 function consumer() {
   return new oauth.OAuth(
       "https://twitter.com/oauth/request_token", "https://twitter.com/oauth/access_token",
       _twitterConsumerKey, _twitterConsumerSecret, "1.0A", "http://127.0.0.1:3000/twitter/sessions/callback", "HMAC-SHA1");
+}
+
+function consumerSpotify() {
+  return new oauth.OAuth(
+      "https://accounts.spotify.com/authorize", "https://accounts.spotify.com/authorize",
+      _spotifyConsumerKey, _spotifyConsumerSecret, "1.0A", "http://127.0.0.1:3000/spotify/sessions/callback", "HMAC-SHA1");
 }
 
 // view engine setup
@@ -75,6 +86,72 @@ app.get('/twitter/sessions/callback', function(req, res){
     })
     }
   });
+});
+
+
+app.get('/spotify/sessions/connect', function(req, res){
+  res.redirect("https://accounts.spotify.com/fr/authorize?client_id=2847f09c105d4a07aec94c448957fe60&response_type=code&redirect_uri=http://127.0.0.1:3000/spotify/sessions/callback");
+});
+
+app.get('/spotify/sessions/callback', function(req, res){
+  console.log(req.query.code);
+  console.log(req.query);
+
+  var request = require('request');
+  request.post({
+    headers: {'Authorization' : 'Basic Mjg0N2YwOWMxMDVkNGEwN2FlYzk0YzQ0ODk1N2ZlNjA6ODYwY2YxMzdkNTU0NGU1NmEwNTQ4YjFiNjVmZDA5MDg=',
+      'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    url:     'https://accounts.spotify.com/api/token',
+    body:    "grant_type=authorization_code&code="+req.query.code+"&redirect_uri=http://127.0.0.1:3000/spotify/sessions/callback"
+  }, function(error, response, body){
+    // if(error) {
+    //   console.log(error);
+    // }
+    // console.log(response);
+    // console.log(response);
+    User.find({username: req.user.username}).updateOne({oauthSpotify: JSON.parse(response.body).access_token}, function(err, todo){
+      if (err) return res.status(500).send(err);
+      res.redirect('/');
+    })
+    console.log(JSON.parse(response.body).access_token)
+  });
+  // const options = {
+  //   hostname: 'accounts.spotify.com',
+  //   path: '/api/token',
+  //   method: 'POST',
+  //   body: "grant_type=authorization_code",
+  //   headers: {
+  //     'Content-Type': 'application/x-www-form-urlencoded'
+  //   },
+  //
+  // }
+  //
+  // var reqSpotify = https.request(options, res => {
+  //   console.log(`statusCode: ${res.statusCode}`)
+  //
+  //   res.on('data', d => {
+  //     process.stdout.write(d)
+  //   })
+  // })
+  //
+  // reqSpotify.on('error', error => {
+  //   console.error(error)
+  // })
+  //
+  // reqSpotify.end();
+  // consumerSpotify().getOAuthAccessToken(req.session.oauthRequestToken, req.session.oauthRequestTokenSecret, req.query.oauth_verifier, function(error, oauthAccessToken, oauthAccessTokenSecret, results) {
+  //   if (error) {
+  //     res.send("Error getting OAuth access token : " + sys.inspect(error) + "["+oauthAccessToken+"]"+ "["+oauthAccessTokenSecret+"]"+ "["+sys.inspect(results)+"]", 500);
+  //   } else {
+  //     req.session.oauthAccessToken = oauthAccessToken;
+  //     req.session.oauthAccessTokenSecret = oauthAccessTokenSecret;
+  //     User.find({username: req.user.username}).updateOne({oauthSpotify: oauthAccessToken, oauthSpotifyAccessSecret: oauthAccessTokenSecret}, function(err, todo){
+  //       if (err) return res.status(500).send(err);
+  //       res.redirect('/');
+  //     })
+  //   }
+  // });
 });
 
 // catch 404 and forward to error handler
