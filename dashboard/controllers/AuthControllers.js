@@ -5,43 +5,10 @@ const {TwingEnvironment, TwingLoaderFilesystem} = require('twing');
 let loader = new TwingLoaderFilesystem('./views/');
 let twing = new TwingEnvironment(loader);
 
-
-var LocalStrategy = require('passport-local').Strategy;
-passport.use(new LocalStrategy(
-    function(username, password, done) {
-        User.findOne({
-            username: username
-        }, function(err, user) {
-            if (err) {
-                return done(err);
-            }
-
-            if (!user) {
-                return done(null, false);
-            }
-
-            if (user.password != password) {
-                return done(null, false);
-            }
-            return done(null, user);
-        });
-    }
-));
-passport.serializeUser(function(user, cb) {
-    cb(null, user.id);
-});
-
-passport.deserializeUser(function(id, cb) {
-    User.findById(id, function (err, user) {
-        cb(err, user);
-    });
-})
-
 var userController = {};
 
 // Restrict access to root page
 userController.home = function(req, res) {
-    console.log(req.user);
     twing.render('index.html.twig', {user: req.user}).then((output) => {
         res.end(output);
     });
@@ -57,7 +24,7 @@ userController.register = function(req, res) {
 
 // Post registration
 userController.doRegister = function(req, res) {
-    User.register(new User({ email : req.body.email, username : req.body.username, name: req.body.name, password: req.body.password }), req.body.password, function(err, user) {
+    User.register(new User({ email : req.body.email, username : req.body.username, name: req.body.name }), req.body.password, function(err, user) {
         if (err) {
             return twing.render('register.html.twig', {}).then((output) => {
                 res.end(output);

@@ -27,11 +27,5 @@ router.post('/login', auth.doLogin);
 // route for logout action
 router.get('/logout', auth.logout);
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  twing.render('index.html.twig', {'name': 'World'}).then((output) => {
-    res.end(output);
-  });
-});
 
 module.exports = router;

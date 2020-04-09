@@ -1,9 +1,9 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
-    {{ dump(user) }}
-    {% if user   %}
+    {% if user %}
     {{ user.username }} zedzed
+        <a href="/logout">Se déconnecter</a>
         {% else %}
         <a href="/login">Se connecter</a>
         <a href="/register">S'inscrire</a>
