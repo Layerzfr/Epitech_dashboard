@@ -105,53 +105,12 @@ app.get('/spotify/sessions/callback', function(req, res){
     url:     'https://accounts.spotify.com/api/token',
     body:    "grant_type=authorization_code&code="+req.query.code+"&redirect_uri=http://127.0.0.1:3000/spotify/sessions/callback"
   }, function(error, response, body){
-    // if(error) {
-    //   console.log(error);
-    // }
-    // console.log(response);
-    // console.log(response);
     User.find({username: req.user.username}).updateOne({oauthSpotify: JSON.parse(response.body).access_token}, function(err, todo){
       if (err) return res.status(500).send(err);
       res.redirect('/');
     })
     console.log(JSON.parse(response.body).access_token)
   });
-  // const options = {
-  //   hostname: 'accounts.spotify.com',
-  //   path: '/api/token',
-  //   method: 'POST',
-  //   body: "grant_type=authorization_code",
-  //   headers: {
-  //     'Content-Type': 'application/x-www-form-urlencoded'
-  //   },
-  //
-  // }
-  //
-  // var reqSpotify = https.request(options, res => {
-  //   console.log(`statusCode: ${res.statusCode}`)
-  //
-  //   res.on('data', d => {
-  //     process.stdout.write(d)
-  //   })
-  // })
-  //
-  // reqSpotify.on('error', error => {
-  //   console.error(error)
-  // })
-  //
-  // reqSpotify.end();
-  // consumerSpotify().getOAuthAccessToken(req.session.oauthRequestToken, req.session.oauthRequestTokenSecret, req.query.oauth_verifier, function(error, oauthAccessToken, oauthAccessTokenSecret, results) {
-  //   if (error) {
-  //     res.send("Error getting OAuth access token : " + sys.inspect(error) + "["+oauthAccessToken+"]"+ "["+oauthAccessTokenSecret+"]"+ "["+sys.inspect(results)+"]", 500);
-  //   } else {
-  //     req.session.oauthAccessToken = oauthAccessToken;
-  //     req.session.oauthAccessTokenSecret = oauthAccessTokenSecret;
-  //     User.find({username: req.user.username}).updateOne({oauthSpotify: oauthAccessToken, oauthSpotifyAccessSecret: oauthAccessTokenSecret}, function(err, todo){
-  //       if (err) return res.status(500).send(err);
-  //       res.redirect('/');
-  //     })
-  //   }
-  // });
 });
 
 // catch 404 and forward to error handler
