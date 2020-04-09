@@ -1,8 +1,39 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  background-color: #cacaca;
 }
 
-a {
-  color: #00B7FF;
+.side-bar {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 5%;
+  background-color: white;
+}
+
+.icon {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+.icon path {
+  fill: #b8b4cc;
+}
+
+.icon path:hover {
+  fill: #007cfd;
+  cursor: pointer;
+}
+
+.active {
+  fill: #007cfd;
+  cursor: pointer;
+}
+
+.contain {
+  display: flex;
+  flex-direction: row;
 }
