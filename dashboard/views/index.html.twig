@@ -18,6 +18,7 @@
 
         {% if user.oauthYoutube %}
             Youtube: connecté {#TODO AFFICHER LES INFORMATIONS PROFILE EN ATTENDANT#}
+            <a href="/youtube/channel">Channel Informations</a>
             {% else %}
                 <a href="/youtube/sessions/connect">Connecter mon compte Youtube</a>
         {% endif %}

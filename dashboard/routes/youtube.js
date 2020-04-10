@@ -2,14 +2,44 @@ var express = require('express');
 var router = express.Router();
 var request = require('request-promise');
 var User = require('../model/User');
+const {TwingEnvironment, TwingLoaderFilesystem} = require('twing');
+let loader = new TwingLoaderFilesystem('./views/');
+let twing = new TwingEnvironment(loader);
 
-var _youtubeConsumerKey = "482608527715-8fpkr88gaq0chr2rngoer02i8240baib.apps.googleusercontent.com\n";
+var _youtubeConsumerKey = "482608527715-8fpkr88gaq0chr2rngoer02i8240baib.apps.googleusercontent.com";
 var _youtubeConsumerSecret = "7ywN-C1VKkvURTRzWXKaGw2M";
+var _youtubeApiKey = "AIzaSyA4xXnPqBQaJfzzYpMn3RBTFBYZT206Qas";
 
 
 router.get('/sessions/connect', function(req, res){
-    res.redirect("https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube.readonly&response_type=code&state=security_token%3D138r5719ru3e1%26url%3Dhttps%3A%2F%2Foauth2.example.com%2Ftoken&redirect_uri=http%3A//127.0.0.1:3000/youtube/services/callback&client_id=482608527715-8fpkr88gaq0chr2rngoer02i8240baib.apps.googleusercontent.com");
+    res.redirect("https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/youtube&response_type=code&state=security_token%3D138r5719ru3e1%26url%3Dhttps%3A%2F%2Foauth2.example.com%2Ftoken&redirect_uri=http%3A//127.0.0.1:3000/youtube/services/callback&client_id=482608527715-8fpkr88gaq0chr2rngoer02i8240baib.apps.googleusercontent.com");
 });
+
+router.get('/channel', function (req, res) {
+    request.get({
+        headers: {'Authorization' : 'Bearer '+req.user.oauthYoutube,
+            'Accept': 'application/json'
+        },
+        url:     "https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&mine=true&key="+_youtubeApiKey,
+    }, function(error, response, body){
+       // console.log(JSON.parse(response.body).items[0].statistics.viewCount)
+       // console.log(JSON.parse(response.body).items[0].statistics.subscriberCount)
+       // console.log(JSON.parse(response.body).items[0].snippet.title)
+       // console.log(JSON.parse(response.body).items[0].snippet.publishedAt)
+        return twing.render('youtube/channel.html.twig', {
+            'channelName': JSON.parse(response.body).items[0].snippet.title,
+            'viewsCount': JSON.parse(response.body).items[0].statistics.viewCount,
+            'subscribersCount': JSON.parse(response.body).items[0].statistics.subscriberCount,
+            'createdAt' : JSON.parse(response.body).items[0].snippet.publishedAt
+        }).then((output) => {
+            res.end(output);
+        });
+
+
+        // console.log(JSON.parse(response.body).items)
+    });
+
+})
 
 router.get('/services/callback', function(req, res){
     console.log(req.query.code);
