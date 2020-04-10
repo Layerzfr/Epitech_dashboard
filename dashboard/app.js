@@ -11,6 +11,7 @@ var http = require('http');
 const https = require('https');
 var querystring = require('querystring');
 const LocalStrategy = require('passport-local').Strategy;
+var request = require('request');
 mongoose.Promise = global.Promise;
 
 mongoose.connect('mongodb://localhost:27017/dashboard')
@@ -28,6 +29,10 @@ var _twitterConsumerSecret = "ppY9iUnH5uEL5QABgd1hEwZMt8cPUHrcCoqqhIwNUR2zl2xr0w
 
 var _spotifyConsumerKey = "2847f09c105d4a07aec94c448957fe60";
 var _spotifyConsumerSecret = "860cf137d5544e56a0548b1b65fd0908";
+
+var _youtubeConsumerKey = "482608527715-8fpkr88gaq0chr2rngoer02i8240baib.apps.googleusercontent.com\n";
+var _youtubeConsumerSecret = "7ywN-C1VKkvURTRzWXKaGw2M";
+//https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube.readonly&response_type=code&state=security_token%3D138r5719ru3e1%26url%3Dhttps%3A%2F%2Foauth2.example.com%2Ftoken&redirect_uri=http%3A//127.0.0.1:3000/youtube/services/callback&client_id=482608527715-8fpkr88gaq0chr2rngoer02i8240baib.apps.googleusercontent.com
 
 function consumer() {
   return new oauth.OAuth(
@@ -97,7 +102,7 @@ app.get('/spotify/sessions/callback', function(req, res){
   console.log(req.query.code);
   console.log(req.query);
 
-  var request = require('request');
+
   request.post({
     headers: {'Authorization' : 'Basic Mjg0N2YwOWMxMDVkNGEwN2FlYzk0YzQ0ODk1N2ZlNjA6ODYwY2YxMzdkNTU0NGU1NmEwNTQ4YjFiNjVmZDA5MDg=',
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -111,6 +116,43 @@ app.get('/spotify/sessions/callback', function(req, res){
     })
     console.log(JSON.parse(response.body).access_token)
   });
+});
+
+app.get('/youtube/sessions/connect', function(req, res){
+  res.redirect("https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube.readonly&response_type=code&state=security_token%3D138r5719ru3e1%26url%3Dhttps%3A%2F%2Foauth2.example.com%2Ftoken&redirect_uri=http%3A//127.0.0.1:3000/youtube/services/callback&client_id=482608527715-8fpkr88gaq0chr2rngoer02i8240baib.apps.googleusercontent.com");
+});
+
+app.get('/youtube/services/callback', function(req, res){
+  console.log(req.query.code);
+  console.log(req.query);
+
+  request.post({
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    url:     'https://oauth2.googleapis.com/token',
+    body:    "code="+req.query.code+"&client_id=482608527715-8fpkr88gaq0chr2rngoer02i8240baib.apps.googleusercontent.com&client_secret=7ywN-C1VKkvURTRzWXKaGw2M&redirect_uri=http://127.0.0.1:3000/youtube/services/callback&grant_type=authorization_code"
+  }, function(error, response, body){
+    User.find({username: req.user.username}).updateOne({oauthYoutube: JSON.parse(response.body).access_token}, function(err, todo){
+      if (err) return res.status(500).send(err);
+      res.redirect('/');
+    });
+    console.log((response.body))
+  });
+
+  // var request = require('request');
+  // request.post({
+  //   headers: {'Authorization' : 'Basic Mjg0N2YwOWMxMDVkNGEwN2FlYzk0YzQ0ODk1N2ZlNjA6ODYwY2YxMzdkNTU0NGU1NmEwNTQ4YjFiNjVmZDA5MDg=',
+  //     'Content-Type': 'application/x-www-form-urlencoded',
+  //   },
+  //   url:     'https://accounts.spotify.com/api/token',
+  //   body:    "grant_type=authorization_code&code="+req.query.code+"&redirect_uri=http://127.0.0.1:3000/spotify/sessions/callback"
+  // }, function(error, response, body){
+  //   User.find({username: req.user.username}).updateOne({oauthSpotify: JSON.parse(response.body).access_token}, function(err, todo){
+  //     if (err) return res.status(500).send(err);
+  //     res.redirect('/');
+  //   })
+  //   console.log(JSON.parse(response.body).access_token)
+  // });
 });
 
 // catch 404 and forward to error handler

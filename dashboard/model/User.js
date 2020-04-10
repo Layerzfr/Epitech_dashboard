@@ -9,6 +9,7 @@ var UserSchema = new Schema({
     oauthTwitter: String,
     oauthAccessSecret: String,
     oauthSpotify: String,
+    oauthYoutube: String,
 });
 
 UserSchema.plugin(passportLocalMongoose);

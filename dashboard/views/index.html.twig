@@ -14,7 +14,13 @@
             Spotify: connecté {#TODO AFFICHER LES INFORMATIONS PROFILE EN ATTENDANT#}
             {% else %}
                 <a href="/spotify/sessions/connect">Connecter mon compte Spotify</a>
-                {% endif %}
+        {% endif %}
+
+        {% if user.oauthYoutube %}
+            Youtube: connecté {#TODO AFFICHER LES INFORMATIONS PROFILE EN ATTENDANT#}
+            {% else %}
+                <a href="/youtube/sessions/connect">Connecter mon compte Youtube</a>
+        {% endif %}
     {% else %}
         <a href="/login">Se connecter</a>
         <a href="/register">S'inscrire</a>
