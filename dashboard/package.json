@@ -14,6 +14,7 @@
     "http-errors": "~1.6.3",
     "mongoose": "^5.9.7",
     "morgan": "~1.9.1",
+    "node-fetch": "^2.6.0",
     "oauth": "^0.9.15",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
@@ -21,6 +22,7 @@
     "passport-openid": "^0.4.0",
     "pug": "2.0.0-beta11",
     "request": "^2.88.2",
+    "request-promise": "^4.2.5",
     "sys": "0.0.1",
     "twing": "^4.0.3"
   }

@@ -11,7 +11,8 @@ var http = require('http');
 const https = require('https');
 var querystring = require('querystring');
 const LocalStrategy = require('passport-local').Strategy;
-var request = require('request');
+var request = require('request-promise');
+const fetch = require('node-fetch');
 mongoose.Promise = global.Promise;
 
 mongoose.connect('mongodb://localhost:27017/dashboard')
@@ -170,9 +171,49 @@ app.get('/steam/getusername', function (req, res) {
   })
 })
 
-app.get('/steam/getgames', function (req, res) {
-  request.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=5BED62BD82D03D000189824F0AE1E79E&steamid='+req.user.oauthSteam, function (error, response, body) {
-    console.log(JSON.parse(body).response);
+function wait(ms)
+{
+  var d = new Date();
+  var d2 = null;
+  do { d2 = new Date(); }
+  while(d2-d < ms);
+}
+
+app.get('/steam/getgamesPrice', async function (req, res) {
+  var apps = [];
+  await request.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=5BED62BD82D03D000189824F0AE1E79E&steamid='+req.user.oauthSteam,await async function (error, response, body) {
+    var i = 1;
+    var price = 0;
+
+    JSON.parse(body).response.games.forEach(await async function (games) {
+      apps.push(games.appid);
+    });
+    const forLoop = async _ => {
+      console.log('Start')
+      console.log('Temps max estimé : ~' + ((apps.length +1) / 60) + ' minutes');
+
+      for (let element in apps) {
+        console.log(apps[element]);
+        const response = await fetch("https://store.steampowered.com/api/appdetails/?appids=" + apps[element] + "&cc=EE&l=english&v=1");
+        const json = await response.json();
+        try {
+          if(json[apps[element]].data.price_overview) {
+            price += (json[apps[element]].data.price_overview.initial);
+          }
+        } catch (e) {
+          console.log(e)
+        }
+        await wait(1000);
+        console.log(price/100 +' €')
+      }
+
+      console.log('End')
+    }
+
+    await forLoop();
+
+
+    console.log('final price: '+ price/100 +' €')
   })
 });
 
