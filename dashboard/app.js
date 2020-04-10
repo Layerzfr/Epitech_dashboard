@@ -128,18 +128,7 @@ var SteamStrategy = new OpenIDStrategy({
       });
     });
 passport.use(SteamStrategy);
-app.get('/steam/sessions/connect', passport.authenticate('openid'));
 
-app.get('/steam/sessions/callback', function(req, res){
-  if (req.user) {
-    User.find({username: req.user.username}).updateOne({oauthSteam: req.query["openid.identity"].substring(37)}, function(err, todo){
-      if (err) return res.status(500).send(err);
-      res.redirect('/');
-    })
-  } else {
-    res.redirect('/?failed');
-  }
-});
 
 
 app.get('/spotify/sessions/callback', function(req, res){

@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var request = require('request-promise');
 const fetch = require('node-fetch');
+var passport = require('passport');
+var User = require('../model/User');
 
 function wait(ms)
 {
@@ -69,6 +71,19 @@ router.get('/getfriendlist', function (req, res) {
             console.log(user.steamid);
         })
     })
+});
+
+router.get('/sessions/connect', passport.authenticate('openid'));
+
+router.get('/sessions/callback', function(req, res){
+    if (req.user) {
+        User.find({username: req.user.username}).updateOne({oauthSteam: req.query["openid.identity"].substring(37)}, function(err, todo){
+            if (err) return res.status(500).send(err);
+            res.redirect('/');
+        })
+    } else {
+        res.redirect('/?failed');
+    }
 });
 
 module.exports = router;
