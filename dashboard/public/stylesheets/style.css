@@ -1,39 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {
-  font-family: "Roboto", sans-serif;
-  font-size: 15px;
-  font-weight: 400;
-  background-color: #cacaca;
+    font-family: "Roboto", sans-serif;
+    color: #f4f6f7;
+    font-size: 15px;
+    font-weight: 400;
+    background-color: #151724;
 }
 
 .side-bar {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  width: 5%;
-  background-color: white;
+    display: flex;
+    flex-direction: row;
+}
+
+.side-button {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 60px;
+    background-color: #1f212d;
+    justify-content: flex-start;
+}
+
+.side-content {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: auto;
+    background-color: #1e212d;
+    justify-content: flex-start;
 }
 
 .icon {
-  display: flex;
-  flex-direction: column;
-  align-self: center;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
 }
 
-.icon path {
-  fill: #b8b4cc;
+.icon:hover {
+    cursor: pointer;
 }
 
-.icon path:hover {
-  fill: #007cfd;
-  cursor: pointer;
+.path {
+    fill: #b8b4cc;
 }
 
-.active {
-  fill: #007cfd;
-  cursor: pointer;
+.path:hover {
+    fill:  #ebe6ff;
+    cursor: pointer;
+}
+
+.path-active {
+    fill: #1b9dec;
 }
 
 .contain {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
+}
+
+.button-icon {
+    display: flex;
+    flex-direction: row;
+    margin: 30% 0 30% 0;
+}
+
+.button-icon:hover .path{
+    fill:  #ebe6ff;
+    cursor: pointer;
+}
+
+.trait-active {
+    height: 100%;
+    width: 5px;
+    background-color: #1b9dec;
+}
+
+.trait-content {
+    height: 100vh;
+    width: 1px;
+    background-color: #3f3e45;
+}
+
+.trait-none {
+  display: none;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+}
+
+.hide {
+    display: none;
 }
