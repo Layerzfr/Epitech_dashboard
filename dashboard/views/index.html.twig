@@ -1,5 +1,35 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
-    <p>Coucou</p>
+    {% if user %}
+    {{ user.username }} zedzed
+        <a href="/logout">Se déconnecter</a>
+        {% if twitterDatas is not same as(null) %}
+            Twitter : Connecté sous l'utilisateur @{{ twitterDatas.screen_name }} <img src="{{ twitterDatas.profile_image_url }}"> {{ twitterDatas.followers_count }} followers
+        {% else %}
+            <a href="/twitter/sessions/connect">Connecter mon compte Twitter</a>
+        {% endif %}
+
+        {% if user.oauthSpotify %}
+            Spotify: connecté {#TODO AFFICHER LES INFORMATIONS PROFILE EN ATTENDANT#}
+            {% else %}
+                <a href="/spotify/sessions/connect">Connecter mon compte Spotify</a>
+        {% endif %}
+
+        {% if user.oauthYoutube %}
+            Youtube: connecté {#TODO AFFICHER LES INFORMATIONS PROFILE EN ATTENDANT#}
+            {% else %}
+                <a href="/youtube/sessions/connect">Connecter mon compte Youtube</a>
+        {% endif %}
+
+        {% if user.oauthSteam %}
+            Steam: Connecté
+            {% else %}
+                <a href="/steam/sessions/connect">Connecter mon compte Steam</a>
+        {% endif %}
+    {% else %}
+        <a href="/login">Se connecter</a>
+        <a href="/register">S'inscrire</a>
+    {% endif %}
+{#    <p>Coucou</p>#}
 {% endblock %}
