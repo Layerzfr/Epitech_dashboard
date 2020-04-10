@@ -1,11 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request-promise');
-const fetch = require('node-fetch');
-var passport = require('passport');
 var User = require('../model/User');
 var oauth = require('oauth');
-var sys = require('sys');
 
 var _spotifyConsumerKey = "2847f09c105d4a07aec94c448957fe60";
 var _spotifyConsumerSecret = "860cf137d5544e56a0548b1b65fd0908";
