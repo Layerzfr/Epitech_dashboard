@@ -21,6 +21,12 @@
             {% else %}
                 <a href="/youtube/sessions/connect">Connecter mon compte Youtube</a>
         {% endif %}
+
+        {% if user.oauthSteam %}
+            Steam: Connecté
+            {% else %}
+                <a href="/steam/sessions/connect">Connecter mon compte Steam</a>
+        {% endif %}
     {% else %}
         <a href="/login">Se connecter</a>
         <a href="/register">S'inscrire</a>

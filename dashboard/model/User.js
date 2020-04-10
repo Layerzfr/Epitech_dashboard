@@ -10,6 +10,7 @@ var UserSchema = new Schema({
     oauthAccessSecret: String,
     oauthSpotify: String,
     oauthYoutube: String,
+    oauthSteam: String,
 });
 
 UserSchema.plugin(passportLocalMongoose);

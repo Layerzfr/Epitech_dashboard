@@ -92,11 +92,53 @@ app.get('/twitter/sessions/callback', function(req, res){
     }
   });
 });
+var OpenIDStrategy = require('passport-openid').Strategy;
+var SteamStrategy = new OpenIDStrategy({
+      // OpenID provider configuration
+      providerURL: 'http://steamcommunity.com/openid',
+      stateless: true,
+      // How the OpenID provider should return the client to us
+      returnURL: 'http://localhost:3000/steam/sessions/callback',
+      realm: 'http://localhost:3000/',
+    },
+    // This is the "validate" callback, which returns whatever object you think
+    // should represent your user when OpenID authentication succeeds.  You
+    // might need to create a user record in your database at this point if
+    // the user doesn't already exist.
+    function(identifier, done) {
+      // The done() function is provided by passport.  It's how we return
+      // execution control back to passport.
+      // Your database probably has its own asynchronous callback, so we're
+      // faking that with nextTick() for demonstration.
+      process.nextTick(function () {
+        // Retrieve user from Firebase and return it via done().
+        var user = {
+          identifier: identifier,
+          // Extract the Steam ID from the Claimed ID ("identifier")
+          steamId: identifier.match(/\d+$/)[0]
+        };
+        // In case of an error, we invoke done(err).
+        // If we cannot find or don't like the login attempt, we invoke
+        // done(null, false).
+        // If everything went fine, we invoke done(null, user).
+        console.log(user);
+        return done(null, user);
+      });
+    });
+passport.use(SteamStrategy);
+app.get('/steam/sessions/connect', passport.authenticate('openid'));
 
-
-app.get('/spotify/sessions/connect', function(req, res){
-  res.redirect("https://accounts.spotify.com/fr/authorize?client_id=2847f09c105d4a07aec94c448957fe60&response_type=code&redirect_uri=http://127.0.0.1:3000/spotify/sessions/callback");
+app.get('/steam/sessions/callback', function(req, res){
+  if (req.user) {
+    User.find({username: req.user.username}).updateOne({oauthSteam: req.query["openid.identity"].substring(37)}, function(err, todo){
+      if (err) return res.status(500).send(err);
+      res.redirect('/');
+    })
+  } else {
+    res.redirect('/?failed');
+  }
 });
+
 
 app.get('/spotify/sessions/callback', function(req, res){
   console.log(req.query.code);
