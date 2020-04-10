@@ -22,11 +22,11 @@ mongoose.connect('mongodb://localhost:27017/dashboard')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var steamRouter = require('./routes/steam');
+var twitterRouter = require('./routes/twitter');
 
 var app = express();
 
-var _twitterConsumerKey = "rfivln94JNkVoPVKoBn79crdc";
-var _twitterConsumerSecret = "ppY9iUnH5uEL5QABgd1hEwZMt8cPUHrcCoqqhIwNUR2zl2xr0w";
+
 
 var _spotifyConsumerKey = "2847f09c105d4a07aec94c448957fe60";
 var _spotifyConsumerSecret = "860cf137d5544e56a0548b1b65fd0908";
@@ -35,11 +35,6 @@ var _youtubeConsumerKey = "482608527715-8fpkr88gaq0chr2rngoer02i8240baib.apps.go
 var _youtubeConsumerSecret = "7ywN-C1VKkvURTRzWXKaGw2M";
 //https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube.readonly&response_type=code&state=security_token%3D138r5719ru3e1%26url%3Dhttps%3A%2F%2Foauth2.example.com%2Ftoken&redirect_uri=http%3A//127.0.0.1:3000/youtube/services/callback&client_id=482608527715-8fpkr88gaq0chr2rngoer02i8240baib.apps.googleusercontent.com
 
-function consumer() {
-  return new oauth.OAuth(
-      "https://twitter.com/oauth/request_token", "https://twitter.com/oauth/access_token",
-      _twitterConsumerKey, _twitterConsumerSecret, "1.0A", "http://127.0.0.1:3000/twitter/sessions/callback", "HMAC-SHA1");
-}
 
 function consumerSpotify() {
   return new oauth.OAuth(
@@ -67,33 +62,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/steam', steamRouter);
+app.use('/twitter', twitterRouter);
 
-app.get('/twitter/sessions/connect', function(req, res){
-  consumer().getOAuthRequestToken(function(error, oauthToken, oauthTokenSecret, results){
-    if (error) {
-      res.send("Error getting OAuth request token : " + sys.inspect(error), 500);
-    } else {
-      req.session.oauthRequestToken = oauthToken;
-      req.session.oauthRequestTokenSecret = oauthTokenSecret;
-      res.redirect("https://twitter.com/oauth/authorize?oauth_token="+req.session.oauthRequestToken);
-    }
-  });
-});
-
-app.get('/twitter/sessions/callback', function(req, res){
-  consumer().getOAuthAccessToken(req.session.oauthRequestToken, req.session.oauthRequestTokenSecret, req.query.oauth_verifier, function(error, oauthAccessToken, oauthAccessTokenSecret, results) {
-    if (error) {
-      res.send("Error getting OAuth access token : " + sys.inspect(error) + "["+oauthAccessToken+"]"+ "["+oauthAccessTokenSecret+"]"+ "["+sys.inspect(results)+"]", 500);
-    } else {
-      req.session.oauthAccessToken = oauthAccessToken;
-      req.session.oauthAccessTokenSecret = oauthAccessTokenSecret;
-      User.find({username: req.user.username}).updateOne({oauthTwitter: oauthAccessToken, oauthAccessSecret: oauthAccessTokenSecret}, function(err, todo){
-        if (err) return res.status(500).send(err);
-        res.redirect('/');
-    })
-    }
-  });
-});
 var OpenIDStrategy = require('passport-openid').Strategy;
 var SteamStrategy = new OpenIDStrategy({
       // OpenID provider configuration
