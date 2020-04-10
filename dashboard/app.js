@@ -170,6 +170,28 @@ app.get('/steam/getusername', function (req, res) {
   })
 })
 
+app.get('/steam/getgames', function (req, res) {
+  request.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=5BED62BD82D03D000189824F0AE1E79E&steamid='+req.user.oauthSteam, function (error, response, body) {
+    console.log(JSON.parse(body).response);
+  })
+});
+
+// Return les X derniers jeux joués avec le nom du jeu ,  le logo du jeu et le nombre de minutes jouées.
+app.get('/steam/getrecentplayedgames', function (req, res) {
+  request.get('http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=5BED62BD82D03D000189824F0AE1E79E&steamid='+req.user.oauthSteam, function (error, response, body) {
+    console.log(JSON.parse(body).response);
+  })
+});
+
+//Return les ID ( dans la console ) des amis Steam.
+app.get('/steam/getfriendlist', function (req, res) {
+  request.get('http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=5BED62BD82D03D000189824F0AE1E79E&steamid='+req.user.oauthSteam+'&relationship=friend', function (error, response, body) {
+   JSON.parse(body).friendslist.friends.forEach(function (user) {
+      console.log(user.steamid);
+   })
+  })
+});
+
 app.get('/youtube/services/callback', function(req, res){
   console.log(req.query.code);
   console.log(req.query);
