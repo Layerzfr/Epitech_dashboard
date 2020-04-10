@@ -3,6 +3,9 @@ var router = express.Router();
 var User = require('../model/User');
 var oauth = require('oauth');
 var sys = require('sys');
+const {TwingEnvironment, TwingLoaderFilesystem} = require('twing');
+let loader = new TwingLoaderFilesystem('./views/');
+let twing = new TwingEnvironment(loader);
 
 var _twitterConsumerKey = "rfivln94JNkVoPVKoBn79crdc";
 var _twitterConsumerSecret = "ppY9iUnH5uEL5QABgd1hEwZMt8cPUHrcCoqqhIwNUR2zl2xr0w";
@@ -41,5 +44,19 @@ router.get('/sessions/callback', function(req, res){
         }
     });
 });
+
+router.get('/account/tweets', function (req, res) {
+        consumer().get("https://api.twitter.com/1.1/account/verify_credentials.json", req.user.oauthTwitter, req.user.oauthAccessSecret, function (error, data, response) {
+            if (error) {
+                console.log(error);
+            } else {
+                return twing.render('twitter/account.html.twig', {
+                    'username': JSON.parse(data).screen_name,
+                }).then((output) => {
+                    res.end(output);
+                });
+            }
+        });
+})
 
 module.exports = router;

@@ -5,7 +5,7 @@
     {{ user.username }} zedzed
         <a href="/logout">Se déconnecter</a>
         {% if twitterDatas is not same as(null) %}
-            Twitter : Connecté sous l'utilisateur @{{ twitterDatas.screen_name }} <img src="{{ twitterDatas.profile_image_url }}"> {{ twitterDatas.followers_count }} followers
+            <a href="/twitter/account/tweets">Mes tweets</a>
         {% else %}
             <a href="/twitter/sessions/connect">Connecter mon compte Twitter</a>
         {% endif %}
