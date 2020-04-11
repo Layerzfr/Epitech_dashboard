@@ -4,6 +4,10 @@ var request = require('request-promise');
 const fetch = require('node-fetch');
 var passport = require('passport');
 var User = require('../model/User');
+var Steam = require('../model/SteamGame');
+const {TwingEnvironment, TwingLoaderFilesystem} = require('twing');
+let loader = new TwingLoaderFilesystem('./views/');
+let twing = new TwingEnvironment(loader);
 
 function wait(ms)
 {
@@ -57,12 +61,58 @@ router.get('/getgamesPrice', async function (req, res) {
     })
 });
 
+router.get('/getPlayerCount', function (req, res) {
+    request.get('https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid='+req.query.appid, function (error, response, body) {
+        return res.json(JSON.parse(body).response);
+    })
+});
+
 // Return les X derniers jeux joués avec le nom du jeu ,  le logo du jeu et le nombre de minutes jouées.
 router.get('/getrecentplayedgames', function (req, res) {
     request.get('http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=5BED62BD82D03D000189824F0AE1E79E&steamid='+req.user.oauthSteam, function (error, response, body) {
         console.log(JSON.parse(body).response);
     })
 });
+router.get('/putgameindb', function (req, res) {
+    request.get('https://api.steampowered.com/ISteamApps/GetAppList/v2/', function (error, response, body) {
+        JSON.parse(body).applist.apps.forEach(function (game) {
+            var newGame = new Steam({ appId : game.appid, appName : game.name });
+            newGame.save(function (err) {
+                if (err){
+                    console.log(err);
+                }
+                // saved!
+            });
+        })
+        console.log("done");
+    })
+});
+
+router.get('/getCurrentPlayerForGame', function (req,res) {
+    Steam.find({}, function(err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(JSON.parse(JSON.stringify(result)));
+            return twing.render('steam/current_player_for_game.html.twig', {
+                'games': result,
+            }).then((output) => {
+                res.end(output);
+            });
+        }
+    });
+})
+
+router.get('/getAllGames', function (req,res) {
+    Steam.find({}, function(err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(result)
+            return res.json(result);
+        }
+    });
+})
 
 //Return les ID ( dans la console ) des amis Steam.
 router.get('/getfriendlist', function (req, res) {
