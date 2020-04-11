@@ -4,31 +4,40 @@
     {% if user %}
     {{ user.username }} zedzed
         <a href="/logout">Se déconnecter</a>
+
+        <div>
         {% if twitterDatas is not same as(null) %}
             <a href="/twitter/account/tweets">Mes tweets</a>
         {% else %}
             <a href="/twitter/sessions/connect">Connecter mon compte Twitter</a>
         {% endif %}
+        </div>
 
+        <div>
         {% if user.oauthSpotify %}
-            Spotify: connecté {#TODO AFFICHER LES INFORMATIONS PROFILE EN ATTENDANT#}
+            Spotify: connecté
+            <a href="/spotify/getUserPlaylist">Ecouter une de mes playlists</a>
             {% else %}
                 <a href="/spotify/sessions/connect">Connecter mon compte Spotify</a>
         {% endif %}
+        </div>
 
+        <div>
         {% if user.oauthYoutube %}
-            Youtube: connecté {#TODO AFFICHER LES INFORMATIONS PROFILE EN ATTENDANT#}
+            Youtube: connecté
             <a href="/youtube/channel">Channel Informations</a>
             {% else %}
                 <a href="/youtube/sessions/connect">Connecter mon compte Youtube</a>
         {% endif %}
+        </div>
 
+        <div>
         {% if user.oauthSteam %}
             Steam: Connecté
             {% else %}
                 <a href="/steam/sessions/connect">Connecter mon compte Steam</a>
         {% endif %}
-
+        </div>
 
         <div>
             <a href="/steam/getCurrentPlayerForGame">Widget nombre de joueur pour un jeu</a>
