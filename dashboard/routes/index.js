@@ -1,16 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const {TwingEnvironment, TwingLoaderFilesystem} = require('twing');
-let loader = new TwingLoaderFilesystem('./views/');
-let twing = new TwingEnvironment(loader);
-
 var auth = require("../controllers/AuthControllers");
 
-// restrict index for logged in user only
 router.get('/', auth.home);
-
-//chat for loged user
-// router.get('/chat', auth.chat);
 
 // route to register page
 router.get('/register', auth.register);
@@ -26,6 +18,5 @@ router.post('/login', auth.doLogin);
 
 // route for logout action
 router.get('/logout', auth.logout);
-
 
 module.exports = router;
