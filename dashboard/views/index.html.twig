@@ -6,7 +6,7 @@
         <a href="/logout">Se déconnecter</a>
 
         <div>
-        {% if twitterDatas is not same as(null) %}
+        {% if user.oauthTwitter %}
             <a href="/twitter/account/tweets">Mes tweets</a>
         {% else %}
             <a href="/twitter/sessions/connect">Connecter mon compte Twitter</a>
@@ -34,14 +34,14 @@
         <div>
         {% if user.oauthSteam %}
             Steam: Connecté
+            <div>
+                <a href="/steam/getCurrentPlayerForGame">Widget nombre de joueur pour un jeu</a>
+            </div>
             {% else %}
                 <a href="/steam/sessions/connect">Connecter mon compte Steam</a>
         {% endif %}
         </div>
-
-        <div>
-            <a href="/steam/getCurrentPlayerForGame">Widget nombre de joueur pour un jeu</a>
-        </div>
+        
     {% else %}
         <a href="/login">Se connecter</a>
         <a href="/register">S'inscrire</a>
