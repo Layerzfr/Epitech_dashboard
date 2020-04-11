@@ -59,7 +59,7 @@ router.get('/getUserPlaylist', function(req, res){
         var max=playlists.length;
         var random = Math.floor(Math.random() * (+max - +min)) + +min;
 
-        return twing.render('playlist.html.twig', {'playlist': playlists[random]}).then((output) => {
+        return twing.render('spotify/playlist.html.twig', {'playlist': playlists[random]}).then((output) => {
             res.end(output);
         });
 
