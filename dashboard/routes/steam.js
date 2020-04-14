@@ -6,7 +6,7 @@ var steamController = require('../controllers/SteamController');
 
 router.get('/getusername', steamController.getUserName);
 
-router.get('/getgamesPrice', steamController.getGamesPrice);
+// router.get('/getgamesPrice', steamController.getGamesPrice);
 
 router.get('/getPlayerCount', steamController.getPlayerCount);
 
@@ -23,5 +23,9 @@ router.get('/getfriendlist', steamController.getFriendList);
 router.get('/sessions/connect', passport.authenticate('openid'));
 
 router.get('/sessions/callback', steamController.callback);
+
+router.get('/test', steamController.getAllGamesFromSteam);
+
+router.get('/myLibraryPrice', steamController.getLibraryPrice);
 
 module.exports = router;

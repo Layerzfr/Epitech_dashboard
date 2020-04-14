@@ -36,6 +36,139 @@ steamController.getFriendList = function(req, res) {
     })
 };
 
+steamController.getAllGamesFromSteam = async function(req, res) {
+    Steam.find({}).then(async function (items) {
+
+        const forLoop = async _ => {
+            var item = 0;
+            console.log('Start')
+            console.log('Temps max estimé : ~' + ((items.length +1) / 60) + ' minutes');
+
+
+            for (let element in items) {
+                if(items[element].price == "null") {
+                    items[element].price = null;
+                    items[element].save();
+                    continue;
+                }
+                console.log(item + " / " + items.length);
+                if(items[element].price) {
+                    item++;
+                    console.log("skipped");
+                    continue;
+                }
+                const response = await fetch("https://store.steampowered.com/api/appdetails/?appids=" + items[element].appId + "&cc=EE&l=english&v=1");
+                const json = await response.json();
+
+                try {
+                    if(json[items[element].appId].success == false) {
+                        console.log("no data for this item");
+                        item++;
+                        items[element].price = "0";
+                        items[element].save();
+
+                        await wait(1500);
+                        continue;
+                    }
+                    // console.log(json[items[element].appId].data);
+                    if(json[items[element].appId].data.price_overview) {
+                        items[element].price = json[items[element].appId].data.price_overview.initial;
+                        items[element].save()
+                        console.log('item saved');
+                    } else {
+                        items[element].price = "0";
+                        items[element].save();
+                        console.log('item saved with 0');
+                    }
+                } catch (e) {
+                    console.log(e)
+                }
+                await wait(1500);
+                item++;
+                console.log("finish item")
+            }
+
+            console.log('End')
+        };
+
+        await forLoop();
+
+
+        console.log('final price: '+ price/100 +' €')
+        // items.forEach(function (item) {
+        //
+        //     request.get('https://store.steampowered.com/api/appdetails/?appids=' + item.appId + '&cc=EE&l=english&v=1', function (error, response, body) {
+        //         item["price"] = JSON.parse(body)[item.appId].data.price_overview.initial;
+        //         item.save();
+        //         console.log(item.appId + " => Done")
+        //     });
+        //     wait(2000);
+        // })
+    })
+
+    var apps = [];
+    await request.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=5BED62BD82D03D000189824F0AE1E79E&steamid='+req.user.oauthSteam,await async function (error, response, body) {
+        var i = 1;
+        var price = 0;
+
+        JSON.parse(body).response.games.forEach(await async function (games) {
+            apps.push(games.appid);
+        });
+        const forLoop = async _ => {
+            console.log('Start')
+            console.log('Temps max estimé : ~' + ((apps.length +1) / 60) + ' minutes');
+
+            for (let element in apps) {
+                console.log(apps[element]);
+                const response = await fetch("https://store.steampowered.com/api/appdetails/?appids=" + apps[element] + "&cc=EE&l=english&v=1");
+                const json = await response.json();
+                try {
+                    if(json[apps[element]].data.price_overview) {
+                        price += (json[apps[element]].data.price_overview.initial);
+                    }
+                } catch (e) {
+                    console.log(e)
+                }
+                await wait(1000);
+                console.log(price/100 +' €')
+            }
+
+            console.log('End')
+        };
+
+        await forLoop();
+
+
+        console.log('final price: '+ price/100 +' €')
+    })
+};
+
+steamController.getLibraryPrice = async function(req, res) {
+    var price = 0;
+    var gameCount = 0;
+
+    await request.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=5BED62BD82D03D000189824F0AE1E79E&steamid='+req.user.oauthSteam,await async function (error, response, body) {
+        const forLoop = async _ => {
+            var games = JSON.parse(body).response.games;
+            gameCount = JSON.parse(body).response.game_count;
+            for (element in games ) {
+                    await Steam.find({appId: games[element].appid}).then(async function (item) {
+                        price += parseInt(item[0].price);
+                        // console.log('bblblbl ', price);
+                    });
+            }
+        };
+        await forLoop();
+        console.log('final price: '+ price/100 +' €')
+        return twing.render('steam/library_price.html.twig', {
+            'game_count': gameCount,
+            'price': price/100
+        }).then((output) => {
+            res.end(output);
+        });
+    })
+};
+
 steamController.getAllGames = function(req, res) {
     Steam.find({}, function(err, result) {
         if (err) {
@@ -90,43 +223,43 @@ steamController.getPlayerCount = function(req, res) {
     })
 };
 
-steamController.getGamesPrice = async function(req, res) {
-    var apps = [];
-    await request.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=5BED62BD82D03D000189824F0AE1E79E&steamid='+req.user.oauthSteam,await async function (error, response, body) {
-        var i = 1;
-        var price = 0;
-
-        JSON.parse(body).response.games.forEach(await async function (games) {
-            apps.push(games.appid);
-        });
-        const forLoop = async _ => {
-            console.log('Start')
-            console.log('Temps max estimé : ~' + ((apps.length +1) / 60) + ' minutes');
-
-            for (let element in apps) {
-                console.log(apps[element]);
-                const response = await fetch("https://store.steampowered.com/api/appdetails/?appids=" + apps[element] + "&cc=EE&l=english&v=1");
-                const json = await response.json();
-                try {
-                    if(json[apps[element]].data.price_overview) {
-                        price += (json[apps[element]].data.price_overview.initial);
-                    }
-                } catch (e) {
-                    console.log(e)
-                }
-                await wait(1000);
-                console.log(price/100 +' €')
-            }
-
-            console.log('End')
-        };
-
-        await forLoop();
-
-
-        console.log('final price: '+ price/100 +' €')
-    })
-};
+// steamController.getGamesPrice = async function(req, res) {
+//     var apps = [];
+//     await request.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=5BED62BD82D03D000189824F0AE1E79E&steamid='+req.user.oauthSteam,await async function (error, response, body) {
+//         var i = 1;
+//         var price = 0;
+//
+//         JSON.parse(body).response.games.forEach(await async function (games) {
+//             apps.push(games.appid);
+//         });
+//         const forLoop = async _ => {
+//             console.log('Start')
+//             console.log('Temps max estimé : ~' + ((apps.length +1) / 60) + ' minutes');
+//
+//             for (let element in apps) {
+//                 console.log(apps[element]);
+//                 const response = await fetch("https://store.steampowered.com/api/appdetails/?appids=" + apps[element] + "&cc=EE&l=english&v=1");
+//                 const json = await response.json();
+//                 try {
+//                     if(json[apps[element]].data.price_overview) {
+//                         price += (json[apps[element]].data.price_overview.initial);
+//                     }
+//                 } catch (e) {
+//                     console.log(e)
+//                 }
+//                 await wait(1000);
+//                 console.log(price/100 +' €')
+//             }
+//
+//             console.log('End')
+//         };
+//
+//         await forLoop();
+//
+//
+//         console.log('final price: '+ price/100 +' €')
+//     })
+// };
 
 steamController.getUserName = function(req, res) {
     request.get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=5BED62BD82D03D000189824F0AE1E79E&steamids='+req.user.oauthSteam, function (error, response, body) {
