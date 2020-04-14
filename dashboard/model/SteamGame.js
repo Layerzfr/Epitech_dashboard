@@ -3,7 +3,8 @@ var Schema = mongoose.Schema;
 
 var SteamSchema = new Schema({
     appId: String,
-    appName: String
+    appName: String,
+    price: String,
 });
 
 
