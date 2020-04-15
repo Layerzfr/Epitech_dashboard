@@ -2,11 +2,14 @@
 
 {% block body %}
     {% if user %}
-    {{ user.username }} zedzed
+        <div>
+            {{ user.username }}
+        </div>
         <a href="/logout">Se déconnecter</a>
 
         <div>
         {% if user.oauthTwitter %}
+            Twitter: Connecté
             <a href="/twitter/account/tweets">Mes tweets</a>
         {% else %}
             <a href="/twitter/sessions/connect">Connecter mon compte Twitter</a>

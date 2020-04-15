@@ -11,11 +11,11 @@
     </div>
 
     <div id="lecteur">
-
+        <iframe src="https://open.spotify.com/embed/playlist/" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
     </div>
     <script>
         $.ajax({
-            url: "http://localhost:3000/spotify/api/getUserPlaylist",
+            url: "/spotify/api/getUserPlaylist",
             dataType: "json",
             type: "GET",
             success: function(data){
