@@ -16,6 +16,19 @@ function wait(ms)
     while(d2-d < ms);
 }
 
+function timeConverter(UNIX_timestamp){
+    var a = new Date(UNIX_timestamp * 1000);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    var hour = a.getHours();
+    var min = a.getMinutes();
+    var sec = a.getSeconds();
+    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+    return time;
+}
+
 steamController.callback = function(req, res) {
     if (req.user) {
         User.find({username: req.user.username}).updateOne({oauthSteam: req.query["openid.identity"].substring(37)}, function(err, todo){
@@ -28,11 +41,24 @@ steamController.callback = function(req, res) {
 };
 
 //Return les ID ( dans la console ) des amis Steam.
-steamController.getFriendList = function(req, res) {
-    request.get('http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=5BED62BD82D03D000189824F0AE1E79E&steamid='+req.user.oauthSteam+'&relationship=friend', function (error, response, body) {
-        JSON.parse(body).friendslist.friends.forEach(function (user) {
-            console.log(user.steamid);
-        })
+steamController.getFriendList = async function(req, res) {
+    await request.get('http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=5BED62BD82D03D000189824F0AE1E79E&steamid='+req.user.oauthSteam+'&relationship=friend', await async function (error, response, body) {
+        var friends = [];
+        const forLoop = async _ => {
+            for (let element in JSON.parse(body).friendslist.friends) {
+                let since = timeConverter(JSON.parse(body).friendslist.friends[element].friend_since);
+                await request.get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=5BED62BD82D03D000189824F0AE1E79E&steamids='+JSON.parse(body).friendslist.friends[element].steamid, function (error, response, body) {
+                    friends.push([JSON.parse(body).response.players[0].personaname, since,JSON.parse(body).response.players[0].avatar])
+                });
+            }
+        };
+
+        await forLoop();
+        return twing.render('steam/friends.html.twig', {
+            'friends': friends,
+        }).then((output) => {
+            res.end(output);
+        });
     })
 };
 
