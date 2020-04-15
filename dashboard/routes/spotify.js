@@ -9,4 +9,6 @@ router.get('/sessions/callback', spotifyController.callback);
 
 router.get('/getUserPlaylist', spotifyController.getUserPlaylist);
 
+router.get('/api/getUserPlaylist', spotifyController.getUserPlaylistApi);
+
 module.exports = router;

@@ -14,6 +14,7 @@ spotifyController.connect = function(req, res) {
 };
 
 spotifyController.callback = function(req, res) {
+    console.log(req.user);
     request.post({
         headers: {'Authorization' : 'Basic Mjg0N2YwOWMxMDVkNGEwN2FlYzk0YzQ0ODk1N2ZlNjA6ODYwY2YxMzdkNTU0NGU1NmEwNTQ4YjFiNjVmZDA5MDg=',
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -29,7 +30,8 @@ spotifyController.callback = function(req, res) {
     });
 };
 
-spotifyController.getUserPlaylist = function(req, res) {
+spotifyController.getUserPlaylistApi = function(req, res) {
+    var playlists = [];
     request.get({
         headers: {'Authorization' : 'Bearer '+req.user.oauthSpotify,
             'Accept': 'application/json',
@@ -37,17 +39,17 @@ spotifyController.getUserPlaylist = function(req, res) {
         },
         url:     'https://api.spotify.com/v1/me/playlists',
     }, function(error, response, body){
-        var playlists = [];
         JSON.parse(response.body).items.forEach(function (item) {
-            playlists.push(item.id);
+            playlists.push([item.id, item.name]);
         });
-        var min=0;
-        var max=playlists.length;
-        var random = Math.floor(Math.random() * (+max - +min)) + +min;
+        return res.json(playlists);
+    });
+};
 
-        return twing.render('spotify/playlist.html.twig', {'playlist': playlists[random]}).then((output) => {
-            res.end(output);
-        });
+spotifyController.getUserPlaylist = function(req, res) {
+
+    return twing.render('spotify/playlist.html.twig').then((output) => {
+        res.end(output);
     });
 };
 
