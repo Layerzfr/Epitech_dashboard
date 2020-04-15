@@ -48,4 +48,98 @@ youtubeController.getChannel = function(req,res) {
     });
 };
 
+youtubeController.getLastStats = function(req, res) {
+
+    var current_date = new Date();
+    var cmonth = current_date.getMonth().toString();
+    var zero = '0';
+    if(cmonth < 10) {
+        cmonth = zero.concat('', cmonth);
+    }
+    var lastMonth = current_date.getMonth() - 1;
+    if(lastMonth < 10) {
+        lastMonth = zero.concat('', lastMonth);
+    }
+
+    request.get({
+        headers: {'Authorization' : 'Bearer '+req.user.oauthYoutube,
+            'Accept': 'application/json'
+        },
+        url:     "https://youtubeanalytics.googleapis.com/v2/reports?dimensions=month&endDate=2020-"+cmonth+"-01&ids=channel%3D%3DMINE&metrics=views%2CsubscribersGained%2CsubscribersLost%2Clikes%2Cdislikes&startDate=2020-"+lastMonth+"-01&key="+_youtubeApiKey,
+    }, function(error, response, body){
+        console.log(JSON.parse(response.body));
+        var data = JSON.parse(response.body).rows;
+        var views = {};
+        views.currentMonth = data[1][1];
+        if(data[0][1] == data[1][1]) {
+            views.stats = 0;
+        }else {
+            if(data[0][1] == 0 ) {
+                views.stats = 1000;
+            } else if(data[1][1] == 0) {
+                views.stats = -1000;
+            }
+            else {
+                views.stats = ((data[1][1] * 100) / data[0][1]);
+                views.stats = views.stats.toFixed(2);
+            }
+        }
+
+        var subsGain = {};
+        subsGain.currentMonth = data[1][2] - data[1][3];
+        if((data[0][2] - data[0][3]) == ((data[1][2] - data[1][3]))) {
+            subsGain.stats = 0;
+        }else {
+            if((data[0][2] - data[0][3] )== 0) {
+                subsGain.stats = 1000;
+            } else if ( (data[1][2] - data[1][3]) == 0) {
+                subsGain.stats = -1000;
+            } else {
+                subsGain.stats = (( (data[1][2] - data[1][3]) * 100) / (data[0][2] - data[0][3]) );
+                subsGain.stats = subsGain.stats.toFixed(2);
+            }
+        }
+
+        var likes = {};
+        likes.currentMonth = data[1][4];
+        if(data[0][4] == data[1][4]) {
+            likes.stats = 0
+        } else {
+            if (data[0][4] == 0) {
+                likes.stats = 1000;
+            } else if (data[1][4] == 0) {
+                likes.stats = -1000;
+            } else {
+                likes.stats = ((data[1][4] * 100) / data[0][4]);
+                likes.stats = likes.stats.toFixed(2);
+            }
+        }
+
+        var dislikes = {};
+        dislikes.currentMonth = data[1][5];
+        if(data[0][5] == data[1][5]) {
+            dislikes.stats = 0;
+        } else {
+            if(data[0][5] == 0 ) {
+                dislikes.stats = 1000;
+            } else if(data[1][5] == 0) {
+                dislikes.stats = -1000;
+            } else {
+                dislikes.stats = ((data[1][5] * 100) / data[0][5]);
+                dislikes.stats = dislikes.stats.toFixed(2);
+            }
+        }
+
+        console.log(views, subsGain, likes, dislikes);
+        return twing.render('youtube/last_stats.html.twig', {
+            'views': views,
+            'subs': subsGain,
+            'likes': likes,
+            'dislikes': dislikes
+        }).then((output) => {
+            res.end(output);
+        });
+    });
+};
+
 module.exports = youtubeController;
