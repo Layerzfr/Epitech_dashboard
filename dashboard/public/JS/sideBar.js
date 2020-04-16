@@ -38,10 +38,3 @@ for (let i = 0; i < all.length; i++) {
 
     })
 }
-
-
-
-/// Supprimer path-active de l'onglet Actif
-/// Remplacer path par path-active sur l'onglet cliqué
-/// Remplacer trait-active par trait-none sur l'onglet Actif
-/// Remplacer trait-none par trait-actif sur l'onglet cliqué

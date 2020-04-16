@@ -1,0 +1,113 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.connexion {
+    display: flex;
+    flex-direction: row;
+    width: 300px;
+}
+
+.icon-reseaux {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    width: auto;
+    color: white;
+    border-radius: 25px 0px 0px 25px;
+}
+
+.container-connexion {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/*      SPOTIFY    */
+
+.spotify-connexion {
+    fill: #20d05d;
+}
+
+.text-reseaux-container-spotify {
+    background-color: #20d05d;
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    width: auto;
+    color: white;
+    border-radius: 0px 25px 25px 0px;
+    cursor: pointer;
+}
+
+.text-reseaux-container-spotify:hover{
+    background-color: #20bd5d;
+}
+
+/*      TWITTER    */
+
+.twitter-connexion {
+    fill: #1b9dec;
+}
+
+.text-reseaux-container-twitter {
+    background-color: #1b9dec;
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    width: auto;
+    color: white;
+    border-radius: 0px 25px 25px 0px;
+    cursor: pointer;
+}
+
+.text-reseaux-container-twitter:hover{
+    background-color: #1b77c1;
+}
+
+/*      YOUTUBE    */
+
+.youtube-connexion {
+    fill: #f80400;
+}
+
+.text-reseaux-container-youtube {
+    background-color: #f80400;
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    width: auto;
+    color: white;
+    border-radius: 0px 25px 25px 0px;
+    cursor: pointer;
+}
+
+.text-reseaux-container-youtube:hover{
+    background-color: #c70400;
+}
+
+/*      STEAM    */
+
+.steam-connexion {
+    fill: #3459a6;
+}
+
+.text-reseaux-container-steam {
+    background-color: #3459a6;
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    width: auto;
+    color: white;
+    border-radius: 0px 25px 25px 0px;
+    cursor: pointer;
+}
+
+.text-reseaux-container-steam:hover{
+    background-color: #2e4385;
+}
