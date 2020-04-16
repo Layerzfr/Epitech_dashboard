@@ -39,6 +39,9 @@ spotifyController.getUserPlaylistApi = function(req, res) {
         },
         url:     'https://api.spotify.com/v1/me/playlists',
     }, function(error, response, body){
+        if(JSON.parse(response.body).error) {
+            return res.json({error: 401});
+        }
         JSON.parse(response.body).items.forEach(function (item) {
             playlists.push([item.id, item.name]);
         });
