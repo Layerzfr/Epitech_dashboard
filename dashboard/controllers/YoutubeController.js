@@ -37,6 +37,16 @@ youtubeController.getChannel = function(req,res) {
         },
         url:     "https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&mine=true&key="+_youtubeApiKey,
     }, function(error, response, body){
+        if(JSON.parse(response.body).pageInfo.totalResults == 0) {
+            return twing.render('youtube/channel.html.twig', {
+                'channelName': 'Pas de chaîne',
+                'viewsCount': 0,
+                'subscribersCount': 0,
+                'createdAt' : 0
+            }).then((output) => {
+                res.end(output);
+            });
+        }
         return twing.render('youtube/channel.html.twig', {
             'channelName': JSON.parse(response.body).items[0].snippet.title,
             'viewsCount': JSON.parse(response.body).items[0].statistics.viewCount,
@@ -69,6 +79,17 @@ youtubeController.getLastStats = function(req, res) {
     }, function(error, response, body){
         console.log(JSON.parse(response.body));
         var data = JSON.parse(response.body).rows;
+        if(data.length == 0) {
+            return twing.render('youtube/last_stats.html.twig', {
+                'views': null,
+                'subs': null,
+                'likes': null,
+                'dislikes': null,
+                'empty_channel': 1,
+            }).then((output) => {
+                res.end(output);
+            });
+        }
         var views = {};
         views.currentMonth = data[1][1];
         if(data[0][1] == data[1][1]) {
@@ -135,7 +156,8 @@ youtubeController.getLastStats = function(req, res) {
             'views': views,
             'subs': subsGain,
             'likes': likes,
-            'dislikes': dislikes
+            'dislikes': dislikes,
+            'empty_channel': 0
         }).then((output) => {
             res.end(output);
         });
