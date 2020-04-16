@@ -3,6 +3,7 @@ const {TwingEnvironment, TwingLoaderFilesystem} = require('twing');
 let loader = new TwingLoaderFilesystem('./views/');
 let twing = new TwingEnvironment(loader);
 var request = require('request-promise');
+var authController = require('./AuthControllers');
 
 var youtubeController = {};
 
@@ -31,12 +32,26 @@ youtubeController.callback = function(req,res) {
 };
 
 youtubeController.getChannel = function(req,res) {
+    authController.checkIfLogged(req, res);
     request.get({
         headers: {'Authorization' : 'Bearer '+req.user.oauthYoutube,
             'Accept': 'application/json'
         },
         url:     "https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&mine=true&key="+_youtubeApiKey,
     }, function(error, response, body){
+        if(JSON.parse(response.body).error) {
+            return res.redirect('https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/youtube&response_type=code&state=security_token%3D138r5719ru3e1%26url%3Dhttps%3A%2F%2Foauth2.example.com%2Ftoken&redirect_uri=http%3A//127.0.0.1:3000/youtube/services/callback&client_id=482608527715-8fpkr88gaq0chr2rngoer02i8240baib.apps.googleusercontent.com');
+        }
+        if(JSON.parse(response.body).pageInfo.totalResults == 0) {
+            return twing.render('youtube/channel.html.twig', {
+                'channelName': 'Pas de chaîne',
+                'viewsCount': 0,
+                'subscribersCount': 0,
+                'createdAt' : 0
+            }).then((output) => {
+                res.end(output);
+            });
+        }
         return twing.render('youtube/channel.html.twig', {
             'channelName': JSON.parse(response.body).items[0].snippet.title,
             'viewsCount': JSON.parse(response.body).items[0].statistics.viewCount,
@@ -49,7 +64,7 @@ youtubeController.getChannel = function(req,res) {
 };
 
 youtubeController.getLastStats = function(req, res) {
-
+    authController.checkIfLogged(req, res);
     var current_date = new Date();
     var cmonth = current_date.getMonth().toString();
     var zero = '0';
@@ -69,6 +84,20 @@ youtubeController.getLastStats = function(req, res) {
     }, function(error, response, body){
         console.log(JSON.parse(response.body));
         var data = JSON.parse(response.body).rows;
+        if(JSON.parse(response.body).error) {
+            return res.redirect('https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/youtube&response_type=code&state=security_token%3D138r5719ru3e1%26url%3Dhttps%3A%2F%2Foauth2.example.com%2Ftoken&redirect_uri=http%3A//127.0.0.1:3000/youtube/services/callback&client_id=482608527715-8fpkr88gaq0chr2rngoer02i8240baib.apps.googleusercontent.com');
+        }
+        if(data.length == 0) {
+            return twing.render('youtube/last_stats.html.twig', {
+                'views': null,
+                'subs': null,
+                'likes': null,
+                'dislikes': null,
+                'empty_channel': 1,
+            }).then((output) => {
+                res.end(output);
+            });
+        }
         var views = {};
         views.currentMonth = data[1][1];
         if(data[0][1] == data[1][1]) {
@@ -135,7 +164,8 @@ youtubeController.getLastStats = function(req, res) {
             'views': views,
             'subs': subsGain,
             'likes': likes,
-            'dislikes': dislikes
+            'dislikes': dislikes,
+            'empty_channel': 0
         }).then((output) => {
             res.end(output);
         });

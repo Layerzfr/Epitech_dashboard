@@ -5,6 +5,9 @@ var oauth = require('oauth');
 const {TwingEnvironment, TwingLoaderFilesystem} = require('twing');
 let loader = new TwingLoaderFilesystem('./views/');
 let twing = new TwingEnvironment(loader);
+var Twitter = require('twitter');
+
+var authController = require('./AuthControllers');
 
 
 var twitterController = {};
@@ -47,6 +50,7 @@ twitterController.callback = function(req, res) {
 }
 
 twitterController.getTweets = function(req, res) {
+    authController.checkIfLogged(req, res);
     consumer().get("https://api.twitter.com/1.1/account/verify_credentials.json", req.user.oauthTwitter, req.user.oauthAccessSecret, function (error, data, response) {
         if (error) {
             console.log(error);
@@ -59,5 +63,27 @@ twitterController.getTweets = function(req, res) {
         }
     });
 }
+
+twitterController.postTweets = function(req, res) {
+    authController.checkIfLogged(req, res);
+    return twing.render('twitter/post_tweets.html.twig').then((output) => {
+        res.end(output);
+    });
+};
+
+twitterController.apiPostTweets = function(req, res) {
+    var client = new Twitter({
+        consumer_key: _twitterConsumerKey,
+        consumer_secret: _twitterConsumerSecret,
+        access_token_key: req.user.oauthTwitter,
+        access_token_secret: req.user.oauthAccessSecret
+    });
+    var text = req.body.content;
+    client.post('statuses/update', {status: text}, function (error, tweet, response) {
+        if (!error) {
+            console.log(tweet);
+        }
+    });
+};
 
 module.exports = twitterController;

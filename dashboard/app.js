@@ -8,7 +8,9 @@ var passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost:27017/dashboard')
+// Change to mongodb://127.0.0.1:27017/dashboard if error
+
+mongoose.connect('mongodb://mongo:27017/dashboard')
     .then(() =>  console.log('connection succesful'))
     .catch((err) => console.error(err));
 

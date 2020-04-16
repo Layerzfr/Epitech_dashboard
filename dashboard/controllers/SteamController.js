@@ -5,6 +5,7 @@ let loader = new TwingLoaderFilesystem('./views/');
 let twing = new TwingEnvironment(loader);
 var request = require('request-promise');
 const fetch = require('node-fetch');
+var authController = require('./AuthControllers');
 
 var steamController = {};
 
@@ -42,6 +43,7 @@ steamController.callback = function(req, res) {
 
 //Return les ID ( dans la console ) des amis Steam.
 steamController.getFriendList = async function(req, res) {
+    authController.checkIfLogged(req, res);
     await request.get('http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=5BED62BD82D03D000189824F0AE1E79E&steamid='+req.user.oauthSteam+'&relationship=friend', await async function (error, response, body) {
         var friends = [];
         const forLoop = async _ => {
@@ -170,6 +172,7 @@ steamController.getAllGamesFromSteam = async function(req, res) {
 };
 
 steamController.getLibraryPrice = async function(req, res) {
+    authController.checkIfLogged(req, res);
     var price = 0;
     var gameCount = 0;
 
@@ -238,6 +241,7 @@ steamController.putSteamGamesInDB = function(req, res) {
 
 // Return les X derniers jeux joués avec le nom du jeu ,  le logo du jeu et le nombre de minutes jouées.
 steamController.getRecentPlayedGames = function(req, res) {
+    authController.checkIfLogged(req, res);
     request.get('http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=5BED62BD82D03D000189824F0AE1E79E&steamid='+req.user.oauthSteam, function (error, response, body) {
         console.log(JSON.parse(body).response);
     })
@@ -288,6 +292,7 @@ steamController.getPlayerCount = function(req, res) {
 // };
 
 steamController.getUserName = function(req, res) {
+    authController.checkIfLogged(req, res);
     request.get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=5BED62BD82D03D000189824F0AE1E79E&steamids='+req.user.oauthSteam, function (error, response, body) {
         console.log(JSON.parse(body).response.players[0].personaname);
     })

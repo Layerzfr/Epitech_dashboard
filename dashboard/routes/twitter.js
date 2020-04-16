@@ -8,4 +8,8 @@ router.get('/sessions/callback', twitterController.callback);
 
 router.get('/account/tweets', twitterController.getTweets);
 
+router.get('/sendTweet', twitterController.postTweets);
+
+router.post('/api/sendTweet', twitterController.apiPostTweets);
+
 module.exports = router;
