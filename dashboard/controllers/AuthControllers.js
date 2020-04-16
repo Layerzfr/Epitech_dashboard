@@ -52,6 +52,12 @@ userController.doLogin = function(req, res, next) {
     });
 };
 
+userController.checkIfLogged = function(req, res) {
+    if(!req.user) {
+        res.redirect('/')
+    }
+};
+
 userController.logout = function(req, res) {
     req.logout();
     res.redirect('/');

@@ -3,6 +3,7 @@ const {TwingEnvironment, TwingLoaderFilesystem} = require('twing');
 let loader = new TwingLoaderFilesystem('./views/');
 let twing = new TwingEnvironment(loader);
 var request = require('request-promise');
+var authController = require('./AuthControllers');
 
 var spotifyController = {};
 
@@ -50,7 +51,7 @@ spotifyController.getUserPlaylistApi = function(req, res) {
 };
 
 spotifyController.getUserPlaylist = function(req, res) {
-
+    authController.checkIfLogged(req, res);
     return twing.render('spotify/playlist.html.twig').then((output) => {
         res.end(output);
     });

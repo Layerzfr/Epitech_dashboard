@@ -3,6 +3,7 @@ const {TwingEnvironment, TwingLoaderFilesystem} = require('twing');
 let loader = new TwingLoaderFilesystem('./views/');
 let twing = new TwingEnvironment(loader);
 var request = require('request-promise');
+var authController = require('./AuthControllers');
 
 var youtubeController = {};
 
@@ -31,6 +32,7 @@ youtubeController.callback = function(req,res) {
 };
 
 youtubeController.getChannel = function(req,res) {
+    authController.checkIfLogged(req, res);
     request.get({
         headers: {'Authorization' : 'Bearer '+req.user.oauthYoutube,
             'Accept': 'application/json'
@@ -59,7 +61,7 @@ youtubeController.getChannel = function(req,res) {
 };
 
 youtubeController.getLastStats = function(req, res) {
-
+    authController.checkIfLogged(req, res);
     var current_date = new Date();
     var cmonth = current_date.getMonth().toString();
     var zero = '0';
