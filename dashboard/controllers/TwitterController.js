@@ -7,6 +7,8 @@ let loader = new TwingLoaderFilesystem('./views/');
 let twing = new TwingEnvironment(loader);
 var Twitter = require('twitter');
 
+var authController = require('./AuthControllers');
+
 
 var twitterController = {};
 
@@ -48,6 +50,7 @@ twitterController.callback = function(req, res) {
 }
 
 twitterController.getTweets = function(req, res) {
+    authController.checkIfLogged(req, res);
     consumer().get("https://api.twitter.com/1.1/account/verify_credentials.json", req.user.oauthTwitter, req.user.oauthAccessSecret, function (error, data, response) {
         if (error) {
             console.log(error);
@@ -62,6 +65,7 @@ twitterController.getTweets = function(req, res) {
 }
 
 twitterController.postTweets = function(req, res) {
+    authController.checkIfLogged(req, res);
     return twing.render('twitter/post_tweets.html.twig').then((output) => {
         res.end(output);
     });
