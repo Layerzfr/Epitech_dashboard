@@ -243,7 +243,11 @@ steamController.putSteamGamesInDB = function(req, res) {
 steamController.getRecentPlayedGames = function(req, res) {
     authController.checkIfLogged(req, res);
     request.get('http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=5BED62BD82D03D000189824F0AE1E79E&steamid='+req.user.oauthSteam, function (error, response, body) {
-        console.log(JSON.parse(body).response);
+        return twing.render('steam/recent_played_games.html.twig', {
+            'games': JSON.parse(body).response
+        }).then((output) => {
+            res.end(output);
+        });
     })
 };
 

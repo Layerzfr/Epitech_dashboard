@@ -11,4 +11,8 @@ router.get('/getUserPlaylist', spotifyController.getUserPlaylist);
 
 router.get('/api/getUserPlaylist', spotifyController.getUserPlaylistApi);
 
+router.get('/top', spotifyController.getTopTrackAndPlaylist);
+
+router.get('/api/top', spotifyController.apiGetTops);
+
 module.exports = router;
