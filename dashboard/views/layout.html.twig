@@ -125,6 +125,20 @@
                         <input id="playlist" type="text">
                     </div>
                 </div>
+
+                <div>
+                    <p>Ajouter une playlist ou un artiste préféré</p>
+                    <div>
+                        <select id="select-track">
+                            <option value="artists" selected>Artiste</option>
+                            <option value="tracks">Track</option>
+                        </select>
+                        <button type="button" onclick='searchTop($("#select-track").val())'>Ok</button>
+                        <div id="results">
+
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="hide content" id="youtube">
                 <div>

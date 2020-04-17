@@ -23,6 +23,15 @@
                 </div>
             </div>
 
+            <div class="grid-stack-item" data-gs-x="4" data-gs-y="0" data-gs-width="4" data-gs-height="4">
+                <div id="playlist-container-top" style="display: none">
+                    <div class="grid-stack-item-content">
+                        <div id="lecteur-top">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
 {#            </div>#}
         </div>
@@ -102,6 +111,42 @@
 
             function displayLecteur(id) {
                 $('#lecteur').html('<iframe src="https://open.spotify.com/embed/playlist/'+id+'" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>')
+            }
+        </script>
+
+
+{#        //spotify lecteur top#}
+        <script>
+            function displayLecteurTop(id, type) {
+                if(type == "tracks") {
+                    $('#lecteur-top').html('<iframe src="https://open.spotify.com/embed/track/'+id+'" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>')
+                }else {
+                    $('#lecteur-top').html('<iframe src="https://open.spotify.com/embed/artist/'+id+'" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>')
+                }
+                $('#playlist-container-top').show();
+            }
+
+            function searchTop(type){
+                $.ajax({
+                    url: "/spotify/api/top",
+                    dataType: "json",
+                    data: "type="+type,
+                    type: "GET",
+                    success: function(data){
+                        if(data.error == 401) {
+                            window.location.href = "https://accounts.spotify.com/fr/authorize?client_id=2847f09c105d4a07aec94c448957fe60&response_type=code&redirect_uri=http://127.0.0.1:3000/spotify/sessions/callback&&scope=user-read-private%20user-read-email%20playlist-read-private%20user-top-read";
+                        }
+                        var data = JSON.parse(data);
+                        $("#results").html('');
+                        let i = 1;
+                        data.items.forEach(function (item) {
+                            let p = "'";
+                            $("#results").append('<div>'+i+' - <span onclick="displayLecteurTop(\'+p+item.id+p+\', '+p+type+p+')" >'+item.name+'</span></div>')
+                            i++;
+                        })
+                    }
+
+                });
             }
         </script>
     {% else %}
