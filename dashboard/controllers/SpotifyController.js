@@ -73,8 +73,8 @@ spotifyController.apiGetTops = function(req, res) {
         },
         url:     'https://api.spotify.com/v1/me/top/'+req.query.type+'?limit=10',
     }, function(error, response, body){
-        if(error) {
-            console.log('error', error);
+        if(JSON.parse(response.body).error) {
+            return res.json({error: 401});
         }
         return res.json(response.body);
     });
