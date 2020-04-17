@@ -8,6 +8,15 @@
     margin: auto;
 }
 
+.doted {
+    display: flex;
+    width: 100%;
+    border-style: dotted;
+    margin: 10px;
+    border-color: rgba(204, 204, 204, 0.4);
+    border-radius: 15px;
+}
+
 .name {
     display: flex;
     justify-content: left;

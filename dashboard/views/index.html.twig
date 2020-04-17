@@ -4,8 +4,9 @@
 {% block body %}
     <link href="/stylesheets/reseaux.css" rel="stylesheet"/>
     {% if user %}
-
-        <p style="display: flex;margin: auto">DASHBOARD</p>
+        <div class="doted">
+            <p style="display: flex;margin: auto">DASHBOARD</p>
+        </div>
 
     {% else %}
         {% block Connexion %}
