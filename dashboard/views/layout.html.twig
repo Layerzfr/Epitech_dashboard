@@ -6,6 +6,9 @@
     <title>This is the title of the webpage!</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gridstack@1.1.1/dist/gridstack.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/gridstack@1.1.1/dist/gridstack.all.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
 
@@ -13,6 +16,7 @@
     <div class="side-bar">
         <div class="side-button">
             {% if currentPage is not defined %}
+
                 <div class="button-icon">
                     <a href="#dashboard" style="display: flex">
                         <div class="trait trait-active"></div>
@@ -134,8 +138,10 @@
             </div>
         </div>
     </div>
+    <div><a class="btn btn-default" onClick="addNewWidget()" href="#">Add Widget</a></div>
+    <div class="trash ui-droppable" style="background-color: red; height: 50px;">
 
-
+    </div>
     {% block body %}
 
     {% endblock %}
@@ -152,6 +158,8 @@
 </div>
 
 <script src="/JS/sideBar.js"></script>
+    <script>
 
+    </script>
 </body>
 </html>

@@ -10,16 +10,32 @@
                 <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4" data-gs-height="2">
                     <div class="grid-stack-item-content">my first widget</div>
                 </div>
-                <div class="grid-stack-item" data-gs-x="4" data-gs-y="0" data-gs-width="4" data-gs-height="4">
-                    <div class="grid-stack-item-content">another widget!</div>
+
+            <div class="grid-stack-item" data-gs-x="4" data-gs-y="0" data-gs-width="4" data-gs-height="4">
+                <div id="playlist-container" style="display: none">
+                    <div class="grid-stack-item-content">
+                        <div>
+                            <label for="playlist">Nom de la playlist</label>
+                            <input id="playlist" type="text">
+                        </div>
+
+                        <div id="lecteur">
+                            <iframe src="https://open.spotify.com/embed/playlist/" width="300" height="380"
+                                    frameborder="0"
+                                    allowtransparency="true" allow="encrypted-media"></iframe>
+                        </div>
+                    </div>
                 </div>
+            </div>
+
+
 {#            </div>#}
         </div>
 
             <script type="text/javascript">
     $(document).ready(function () {
 
-
+            let count = 0;
             var grid = GridStack.init({
                 alwaysShowResizeHandle: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
                     navigator.userAgent
@@ -27,14 +43,25 @@
                 resizable: {
                     handles: 'e, se, s, sw, w'
                 },
-                removable: '#trash',
+                removable: '.trash',
                 removeTimeout: 100,
                 acceptWidgets: '.newWidget'
             });
-
+        addNewWidget = function () {
+            // var node = {
+            //     x: Math.round(12 * Math.random()),
+            //     y: Math.round(5 * Math.random()),
+            //     width: Math.round(1 + 3 * Math.random()),
+            //     height: Math.round(1 + 3 * Math.random())
+            // };
+            $("#playlist-container").show();
+            // grid.addWidget("", node);
+            return false;
+        };
             grid.on('added', function(e, items) { log('added ', items) });
             grid.on('removed', function(e, items) { log('removed ', items) });
             grid.on('change', function(e, items) { log('change ', items) });
+            grid.on('dropped', function(e, items) { console.log('change ', e) });
             function log(type, items) {
                 var str = '';
                 items.forEach(function(item) { str += ' (x,y)=' + item.x + ',' + item.y; });
@@ -49,8 +76,44 @@
                 helper: 'clone'
             });
     })
+
         </script>
 
+
+{#        Script playlist#}
+        <script>
+            $.ajax({
+                url: "/spotify/api/getUserPlaylist",
+                dataType: "json",
+                type: "GET",
+                success: function(data){
+                    console.log(data);
+                    if(data.error == 401) {
+                        window.location.href = "https://accounts.spotify.com/fr/authorize?client_id=2847f09c105d4a07aec94c448957fe60&response_type=code&redirect_uri=http://127.0.0.1:3000/spotify/sessions/callback&&scope=user-read-private%20user-read-email%20playlist-read-private%20user-top-read";
+                    }
+                    var dataArr = [];
+                    $( function() {
+                        data.forEach(function (element) {
+                            dataArr.push({label: element[1], value: element[1], id: element[0]});
+                        });
+                        $( "#playlist" ).autocomplete({
+                            select: function( event, ui ) {
+                                displayLecteur(ui.item.id)
+
+                            },
+                            max:10,
+                            minLength: 4,
+                            source: dataArr
+                        });
+                    } );
+                }
+
+            });
+
+            function displayLecteur(id) {
+                $('#lecteur').html('<iframe src="https://open.spotify.com/embed/playlist/'+id+'" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>')
+            }
+        </script>
     {% else %}
         {% block Connexion %}
             <link href="/stylesheets/connexion.css" rel="stylesheet"/>
