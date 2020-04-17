@@ -4,9 +4,52 @@
 {% block body %}
     <link href="/stylesheets/reseaux.css" rel="stylesheet"/>
     {% if user %}
-        <div class="doted">
-            <p style="display: flex;margin: auto">DASHBOARD</p>
+        <div class="doted grid-stack">
+{#            <p style="display: flex;margin: auto">DASHBOARD</p>#}
+{#            <div class="grid-stack">#}
+                <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4" data-gs-height="2">
+                    <div class="grid-stack-item-content">my first widget</div>
+                </div>
+                <div class="grid-stack-item" data-gs-x="4" data-gs-y="0" data-gs-width="4" data-gs-height="4">
+                    <div class="grid-stack-item-content">another widget!</div>
+                </div>
+{#            </div>#}
         </div>
+
+            <script type="text/javascript">
+    $(document).ready(function () {
+
+
+            var grid = GridStack.init({
+                alwaysShowResizeHandle: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+                    navigator.userAgent
+                ),
+                resizable: {
+                    handles: 'e, se, s, sw, w'
+                },
+                removable: '#trash',
+                removeTimeout: 100,
+                acceptWidgets: '.newWidget'
+            });
+
+            grid.on('added', function(e, items) { log('added ', items) });
+            grid.on('removed', function(e, items) { log('removed ', items) });
+            grid.on('change', function(e, items) { log('change ', items) });
+            function log(type, items) {
+                var str = '';
+                items.forEach(function(item) { str += ' (x,y)=' + item.x + ',' + item.y; });
+                console.log(type + items.length + ' items.' + str );
+            }
+
+            // TODO: switch jquery-ui out
+            $('.newWidget').draggable({
+                revert: 'invalid',
+                scroll: false,
+                appendTo: 'body',
+                helper: 'clone'
+            });
+    })
+        </script>
 
     {% else %}
         {% block Connexion %}
