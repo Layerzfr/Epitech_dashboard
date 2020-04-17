@@ -63,4 +63,10 @@ userController.logout = function(req, res) {
     res.redirect('/');
 };
 
+userController.parameter = function(req, res) {
+    return twing.render('parameter.html.twig', {user: req.user, currentPage: 'parameter'}).then((output) => {
+        res.end(output);
+    });
+};
+
 module.exports = userController;
