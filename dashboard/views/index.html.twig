@@ -14,11 +14,6 @@
             <div class="grid-stack-item" data-gs-x="4" data-gs-y="0" data-gs-width="4" data-gs-height="4">
                 <div id="playlist-container" style="display: none">
                     <div class="grid-stack-item-content">
-                        <div>
-                            <label for="playlist">Nom de la playlist</label>
-                            <input id="playlist" type="text">
-                        </div>
-
                         <div id="lecteur">
                             <iframe src="https://open.spotify.com/embed/playlist/" width="300" height="380"
                                     frameborder="0"
@@ -92,7 +87,8 @@
                         });
                         $( "#playlist" ).autocomplete({
                             select: function( event, ui ) {
-                                displayLecteur(ui.item.id)
+                                displayLecteur(ui.item.id);
+                                $("#playlist-container").show();
 
                             },
                             max:10,
