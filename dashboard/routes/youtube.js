@@ -17,4 +17,6 @@ router.get('/api/channel', youtubeController.apiGetChannel);
 
 router.get('/lastStats', youtubeController.getLastStats);
 
+router.get('/api/lastStats', youtubeController.apiGetLastStats);
+
 module.exports = router;
