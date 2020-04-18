@@ -63,6 +63,38 @@ youtubeController.getChannel = function(req,res) {
     });
 };
 
+youtubeController.apiGetChannel = function(req,res) {
+    authController.checkIfLogged(req, res);
+    request.get({
+        headers: {'Authorization' : 'Bearer '+req.user.oauthYoutube,
+            'Accept': 'application/json'
+        },
+        url:     "https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&mine=true&key="+_youtubeApiKey,
+    }, function(error, response, body){
+        if(JSON.parse(response.body).error) {
+            return res.json({
+                error: 401
+            });
+        }
+        if(JSON.parse(response.body).pageInfo.totalResults == 0) {
+            return res.json({
+                'channelName': 'Pas de chaîne',
+                'viewsCount': 0,
+                'subscribersCount': 0,
+                'createdAt' : 0
+            });
+        }
+
+        return res.json({
+            'channelName': JSON.parse(response.body).items[0].snippet.title,
+            'viewsCount': JSON.parse(response.body).items[0].statistics.viewCount,
+            'subscribersCount': JSON.parse(response.body).items[0].statistics.subscriberCount,
+            'createdAt' : JSON.parse(response.body).items[0].snippet.publishedAt
+        });
+    });
+};
+
+
 youtubeController.getLastStats = function(req, res) {
     authController.checkIfLogged(req, res);
     var current_date = new Date();

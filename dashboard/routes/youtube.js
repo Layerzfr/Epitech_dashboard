@@ -13,6 +13,8 @@ router.get('/services/callback', youtubeController.callback);
 
 router.get('/channel', youtubeController.getChannel);
 
+router.get('/api/channel', youtubeController.apiGetChannel);
+
 router.get('/lastStats', youtubeController.getLastStats);
 
 module.exports = router;

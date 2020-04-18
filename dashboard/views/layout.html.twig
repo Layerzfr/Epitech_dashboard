@@ -142,17 +142,15 @@
             </div>
             <div class="hide content" id="youtube">
                 <div>
-                    <div class="newWidget grid-stack-item ui-draggable ui-draggable-handle">
-                        <p>Contenue youtube</p>
-                        <div class="card-body grid-stack-item-content">
-                            <div>
-                                <ion-icon name="add-circle" style="font-size: 400%" role="img" class="md hydrated" aria-label="add circle"></ion-icon>
-                            </div>
-                            <div>
-                                <span>ezdijierjrejfe</span>
-                            </div>
-                        </div>
+                    <select id="youtube-count">
+                        <option value="subs" selected>Abonnés</option>
+                        <option value="views" >Vue</option>
+                    </select>
+                    <div>
+                        <label for="refresh-count-ytb">Rafraichissement toutes les </label>
+                        <input id="refresh-count-ytb" type="number" value="5"> secondes
                     </div>
+                    <button type="button" onclick="compteurYoutube($('#youtube-count').val(), $('#refresh-count-ytb').val())">Ok</button>
                 </div>
             </div>
             <div class="hide content" id="steam">

@@ -36,6 +36,21 @@
                 </div>
             </div>
 
+            <div class="grid-stack-item" data-gs-x="4" data-gs-y="6" data-gs-width="4" data-gs-height="2">
+                <div style="display: none" id="youtube-count-container">
+                    <div id="channel">
+
+                    </div>
+                    <div>
+                        <p id="type-count"></p>
+                        <p id="ytb-count"></p>
+                    </div>
+                    <div id="compteur-refresh">
+
+                    </div>
+                </div>
+            </div>
+
 
 {#            </div>#}
         </div>
@@ -205,6 +220,41 @@
 
                 });
             }
+        </script>
+
+{#        Fonction compteur youtube#}
+        <script>
+            function compteurYoutube(type, time) {
+                $.ajax({
+                    url: "http://127.0.0.1:3000/youtube/api/channel",
+                    dataType: "json",
+                    type: "GET",
+                    success: function(data){
+                        if(data.error == 401) {
+                            window.location.href = "https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/youtube&response_type=code&state=security_token%3D138r5719ru3e1%26url%3Dhttps%3A%2F%2Foauth2.example.com%2Ftoken&redirect_uri=http%3A//127.0.0.1:3000/youtube/services/callback&client_id=482608527715-8fpkr88gaq0chr2rngoer02i8240baib.apps.googleusercontent.com";
+                        }
+                        $('#channel').html(data.channelName);
+                        $('#type-count').html(type);
+                        if(type == "subs") {
+                            $("#ytb-count").html(data.subscribersCount);
+                        } else {
+                            $("#ytb-count").html(data.viewsCount);
+                        }
+                        $('#compteur-refresh').html(time)
+                        $("#youtube-count-container").show();
+                        setTimeout(function() {
+                            console.log('refreshed!')
+                            compteurYoutube(type, time);
+                        }, time * 1000);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status);
+                        alert(thrownError);
+                    }
+
+                });
+            }
+
         </script>
 
     {% else %}
