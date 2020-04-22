@@ -36,7 +36,11 @@
                 </div>
             </div>
 
-            <div class="grid-stack-item" data-gs-x="4" data-gs-y="6" data-gs-width="4" data-gs-height="2">
+            <div class="grid-stack-item" data-gs-x="4" data-gs-y="12" data-gs-width="4" data-gs-height="82">
+                <div style="display: none" id="tweet-container">
+                </div>
+            </div>
+            <div class="grid-stack-item" data-gs-x="0" data-gs-y="6" data-gs-width="4" data-gs-height="2">
                 <div style="display: none" id="youtube-count-container">
                     <div id="channel">
 
@@ -356,6 +360,14 @@
             }
         </script>
 
+{#        Fonction tweet de compte#}
+
+        <script>
+            function tweetAccount(account) {
+                $('#tweet-container').html('<a class="twitter-timeline" href="https://twitter.com/'+account+'?ref_src=twsrc%5Etfw">Tweets by '+account+'</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"/>');
+                $('#tweet-container').show();
+            }
+        </script>
     {% else %}
         {% block Connexion %}
             <link href="/stylesheets/connexion.css" rel="stylesheet"/>

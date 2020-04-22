@@ -10,7 +10,7 @@ mongoose.Promise = global.Promise;
 
 // Change to mongodb://127.0.0.1:27017/dashboard if error
 
-mongoose.connect('mongodb://mongo:27017/dashboard')
+mongoose.connect('mongodb://127.0.0.1:27017/dashboard')
     .then(() =>  console.log('connection succesful'))
     .catch((err) => console.error(err));
 
