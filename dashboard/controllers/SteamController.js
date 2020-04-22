@@ -198,6 +198,44 @@ steamController.getLibraryPrice = async function(req, res) {
     })
 };
 
+steamController.apiGetLibraryPrice = async function(req, res) {
+    var price = 0;
+    var gameCount = 0;
+
+    await request.get("http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=5BED62BD82D03D000189824F0AE1E79E&vanityurl="+req.query.user, await async function (error, response, body) {
+        if(JSON.parse(body).response.success != 1) {
+            return res.json({error: 404});
+        }else {
+            await request.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=5BED62BD82D03D000189824F0AE1E79E&steamid='+JSON.parse(body).response.steamid,await async function (error, response, body) {
+                const forLoop = async _ => {
+                    var games = JSON.parse(body).response.games;
+                    gameCount = JSON.parse(body).response.game_count;
+                    for (element in games ) {
+                        await Steam.find({appId: games[element].appid}).then(async function (item) {
+                            price += parseInt(item[0].price);
+                            // console.log('bblblbl ', price);
+                        });
+                    }
+                };
+                await forLoop();
+                console.log('final price: '+ price/100 +' €')
+                return res.json({data: {
+                    'count': gameCount,
+                        'price': price/100
+                    }})
+                // return twing.render('steam/library_price.html.twig', {
+                //     'game_count': gameCount,
+                //     'price': price/100
+                // }).then((output) => {
+                //     res.end(output);
+                // });
+            })
+        }
+    })
+
+};
+
+
 steamController.getAllGames = function(req, res) {
     Steam.find({}, function(err, result) {
         if (err) {

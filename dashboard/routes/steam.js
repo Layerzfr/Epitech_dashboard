@@ -28,4 +28,6 @@ router.get('/test', steamController.getAllGamesFromSteam);
 
 router.get('/myLibraryPrice', steamController.getLibraryPrice);
 
+router.get('/api/myPrice', steamController.apiGetLibraryPrice);
+
 module.exports = router;

@@ -68,6 +68,28 @@
                 </div>
             </div>
 
+            <div class="grid-stack-item" data-gs-x="4" data-gs-y="12" data-gs-width="4" data-gs-height="2">
+                <div style="display: none" id="steam-price-container">
+                    <div id="steam-loading">
+                        loading prices ...
+                    </div>
+                    <div style="display: none" id="steam-price-results">
+                        <p>Resultat pour </p>
+                        <div>
+                            <p id="username-steam"></p>
+                        </div>
+                        <div>
+                            <p>Nombre de jeux ( dlc inclus ) :</p>
+                            <p id="total-steam-game-count">0</p>
+                        </div>
+                        <div>
+                            <p>Prix total de la biblothèque</p>
+                            <p id="price-steam">0</p>€
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
 {#            </div>#}
         </div>
@@ -366,6 +388,30 @@
             function tweetAccount(account) {
                 $('#tweet-container').html('<a class="twitter-timeline" href="https://twitter.com/'+account+'?ref_src=twsrc%5Etfw">Tweets by '+account+'</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"/>');
                 $('#tweet-container').show();
+            }
+        </script>
+
+
+{#        Fonction prix d'une bibliothèque#}
+        <script>
+            function steamPrice(user) {
+                $('#steam-price-container').show();
+                $.ajax({
+                    url: "http://127.0.0.1:3000/steam/api/myPrice",
+                    dataType: "json",
+                    type: "GET",
+                    data: "user="+user,
+                    success: function(data) {
+                        if(!data.error) {
+                            $('#price-steam').html(data.data.price);
+                            $('#total-steam-game-count').html(data.data.count);
+                            $('#steam-loading').hide();
+                            $('#steam-price-results').show();
+                        }
+                        console.log(data);
+                    }
+
+                });
             }
         </script>
     {% else %}
