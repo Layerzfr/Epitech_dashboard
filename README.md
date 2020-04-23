@@ -37,8 +37,8 @@ Les widgets correspondants à chacuns des services sont listés ci-après.
 Un widget marqué d'une astérisque correspond à un widget qui nécéssite l'authentification à son service.
 
 Spotify : 
-- * Widget qui affiche une des playlists de l'utilisateur connecté
-- * Widget qui affiche les tops musiques/artistes écoutés et qui, quand on clique affiche un lecteur également
+- (*) Widget qui affiche une des playlists de l'utilisateur connecté
+- (*) Widget qui affiche les tops musiques/artistes écoutés et qui, quand on clique affiche un lecteur également
 
 Steam : 
 - Widget qui affiche le nombre de joueur sur un jeu spécifié
@@ -46,12 +46,12 @@ Steam :
 
 Twitter : 
 - Widget qui affiche les Tweets d'un utilisateur que l'on renseigne
-- * Widget qui affiche un compteurs (qui se rafraichit toutes les 5 secondes) de followers
-- * Widget qui affiche les données d'un compte (followers , abonnements, certifié ou non, le @ + un bouton follow)
+- (*) Widget qui affiche un compteurs (qui se rafraichit toutes les 5 secondes) de followers
+- (*) Widget qui affiche les données d'un compte (followers , abonnements, certifié ou non, le @ + un bouton follow)
 
 Youtube :
-- * Widget qui affiche un compteur d'abonné
-- * Widget qui affiche des stats spécifiques de la chaîne youtube de l'utilisateur
+- (*) Widget qui affiche un compteur d'abonné
+- (*) Widget qui affiche des stats spécifiques de la chaîne youtube de l'utilisateur
 
 ## Auteurs
 
