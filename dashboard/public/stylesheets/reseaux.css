@@ -167,6 +167,13 @@
     background-color: #1b77c1;
 }
 
+.twitter-line {
+    display: flex;
+    width: 10px;
+    margin-right: 10px;
+    background-color: #1b77c1;
+}
+
 /*      YOUTUBE    */
 
 .youtube-connexion {
@@ -178,7 +185,7 @@
     flex-direction: row;
 }
 
-.ytb-container-logo {
+.ytb-container-logo, .twitter-container-logo {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -198,14 +205,14 @@
     margin-right: 5px;
 }
 
-.ytb-channel-name {
+.ytb-channel-name, .twitter-username {
     font-family: "Roboto", sans-serif;
     color: #f4f6f7;
     font-size: 18px;
     font-weight: 400;
 }
 
-.ytb-count {
+.ytb-count, .twitter-count {
     font-family: "Roboto", sans-serif;
     color: #f4f6f7;
     font-size: 35px;
@@ -213,7 +220,7 @@
     margin-bottom: 5%;
 }
 
-.ytb-type-count {
+.ytb-type-count, .twitter-type-count {
     font-family: "Roboto", sans-serif;
     color: #d4d4d4;
     font-size: 15px;
@@ -221,14 +228,14 @@
     margin-bottom: 12%;
 }
 
-.youtube {
+.youtube, .twitter {
     display: flex;
     flex-direction: column;
     width: 100%;
     padding: 10px;
 }
 
-.youtube-count-text {
+.youtube-count-text, .twitter-count-text {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -238,7 +245,7 @@
     display: none;
 }
 
-.youtube-active {
+.youtube-active, .twitter-active {
     display: flex;
     flex-direction: row;
     width: auto;
