@@ -114,8 +114,47 @@
                 </div>
             </div>
 
+            <div class="grid-stack-item" data-gs-x="8" data-gs-y="12" data-gs-width="4" data-gs-height="2">
+                <div style="display: none" id="twitter-follower-container">
+                    <div class="grid-stack-item-content">
+                        <div>
+                            <p>Nom de l'utilisateur : </p><p id="twitter-account-username"></p>
+                        </div>
+                        <div>
+                            <p>Nombre de followers</p><p id="twitter-count"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            {#            </div>#}
+            <div class="grid-stack-item" data-gs-x="0" data-gs-y="18" data-gs-width="4" data-gs-height="2">
+                <div style="display: none" id="twitter-info-container">
+                    <div class="grid-stack-item-content">
+                        <div>
+                            <div id="profile-twitter-image">
+
+                            </div>
+                            <div>
+                                <div style="display: none" id="certified">
+                                    <p>Nom de l'utilisateur : </p><p id="twitter-info-username"></p>
+
+                                </div>
+                                <p id="twitter-info-screenname"></p>
+                            </div>
+                            <div>
+                                <p>Nombre de followers</p><p id="twitter-info-followers-count"></p>
+                                <p>Nombre d'abonnements</p><p id="twitter-info-followings-count"></p>
+                            </div>
+                            <div id="twitter-follow-button">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+{#            </div>#}
         </div>
 
         <script type="text/javascript">
@@ -245,60 +284,9 @@
             }
         </script>
 
-        {#        Fonction steam player#}
-        <script>
-            $.ajax({
-                url: "http://127.0.0.1:3000/steam/getAllGames",
-                dataType: "json",
-                type: "GET",
-                success: function (data) {
-                    var dataArr = [];
-                    $(function () {
-                        data.forEach(function (element) {
-                            dataArr.push({label: element.appName, value: element.appName, id: element.appId});
-                        })
-                        // console.log(dataArr)
-                        $("#game").autocomplete({
-                            // source: availableTags,
-                            select: function (event, ui) {
-                                // console.log(ui.item)
-                                getPlayerCount(ui.item.label, ui.item.id)
 
-                            },
-                            max: 10,
-                            minLength: 4,
 
-                            source: dataArr
-
-                        });
-                    });
-                }
-
-            });
-
-            function getPlayerCount(appName, appId) {
-                console.log("getting player count ... for appid " + appId);
-                $.ajax({
-                    url: "http://127.0.0.1:3000/steam/getPlayerCount",
-                    data: "appid=" + appId,
-                    dataType: "json",
-                    type: "GET",
-                    success: function (data) {
-                        console.log(data);
-                        $('#gameName').html(appName);
-                        $('#count').html(data.player_count);
-                        $('#player-count').show();
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
-                        alert(xhr.status);
-                        alert(thrownError);
-                    }
-
-                });
-            }
-        </script>
-
-        {#        Fonction compteur youtube#}
+{#        Fonction compteur youtube#}
         <script>
             function compteurYoutube(type, time) {
                 $.ajax({
@@ -427,8 +415,57 @@
             }
         </script>
 
+        <script>
+            function twitterAccountInfo(account){
+                $.ajax({
+                    url: "http://127.0.0.1:3000/twitter/api/accountInfo",
+                    dataType: "json",
+                    type: "GET",
+                    data: "user="+account,
+                    success: function(data){
+                        $('#twitter-account-username').html(data.screen_name);
+                        $('#twitter-count').html(data.followers_count);
+                        $('#twitter-follower-container').show();
+                        setTimeout(function() {
+                            console.log('refreshed!');
+                            twitterAccountInfo(account);
+                        }, 5000);
+                    }
 
-        {#        Fonction prix d'une bibliothèque#}
+                });
+            }
+
+            function twitterProfileInfo(account){
+                $.ajax({
+                    url: "http://127.0.0.1:3000/twitter/api/accountInfo",
+                    dataType: "json",
+                    type: "GET",
+                    data: "user="+account,
+                    success: function(data){
+                        $('#profile-twitter-image').html("<img src='"+data.profile_image_url+"'>");
+                        if(data.verified == true) {
+                            $('#twitter-info-username').html(data.name+'<img width="20" alt="Twitter Verified Badge" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Twitter_Verified_Badge.svg/512px-Twitter_Verified_Badge.svg.png">');
+                        }else{
+                            $('#twitter-info-username').html(data.name);
+                        }
+                        $('#twitter-info-screenname').html("@"+data.screen_name);
+                        $('#twitter-info-followers-count').html(data.followers_count);
+                        $('#twitter-info-followings-count').html(data.friends_count);
+                        $('#twitter-follow-button').html('<a href=\"https://twitter.com/'+data.screen_name+'?ref_src=twsrc%5Etfw\" class=\"twitter-follow-button\" data-show-count=\"false\">Follow @'+data.screen_name+'</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"/>');
+                        if(data.verified == true) {
+                            $('#certified').show();
+                        }else{
+                            $('#certified').hide();
+                        }
+                        $('#twitter-info-container').show();
+                    }
+
+                });
+            }
+        </script>
+
+
+{#        Fonction prix d'une bibliothèque#}
         <script>
             function steamPrice(user) {
                 $('#steam-price-container').show();
@@ -445,6 +482,62 @@
                             $('#steam-price-results').show();
                         }
                         console.log(data);
+                    }
+
+                });
+            }
+        </script>
+
+        {#        Fonction steam player#}
+        <script>
+            $(document).ready(function () {
+                $.ajax({
+                    url: "http://127.0.0.1:3000/steam/getAllGames",
+                    dataType: "json",
+                    type: "GET",
+                    success: function(data){
+                        var dataArr = [];
+                        $( function() {
+                            data.forEach(function (element) {
+                                dataArr.push({label: element.appName, value: element.appName, id: element.appId});
+                            })
+                            // console.log(dataArr)
+                            $( "#game" ).autocomplete({
+                                // source: availableTags,
+                                select: function( event, ui ) {
+                                    // console.log(ui.item)
+                                    getPlayerCount(ui.item.label, ui.item.id)
+
+                                },
+                                max:10,
+                                minLength: 4,
+
+                                source: dataArr
+
+                            });
+                        } );
+                    }
+
+                });
+            });
+
+
+            function getPlayerCount(appName, appId) {
+                console.log("getting player count ... for appid " + appId);
+                $.ajax({
+                    url: "http://127.0.0.1:3000/steam/getPlayerCount",
+                    data: "appid="+appId,
+                    dataType: "json",
+                    type: "GET",
+                    success: function(data){
+                        console.log(data);
+                        $('#gameName').html(appName);
+                        $('#count').html(data.player_count);
+                        $('#player-count').show();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status);
+                        alert(thrownError);
                     }
 
                 });

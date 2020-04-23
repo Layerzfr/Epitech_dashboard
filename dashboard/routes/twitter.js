@@ -12,4 +12,6 @@ router.get('/sendTweet', twitterController.postTweets);
 
 router.post('/api/sendTweet', twitterController.apiPostTweets);
 
+router.get('/api/accountInfo', twitterController.apiGetAccountInfo);
+
 module.exports = router;

@@ -122,6 +122,18 @@
                         <button type="button" onclick="tweetAccount($('#twitter-name').val())">Ok</button>
                     </div>
                 </div>
+
+                <div>
+                    <p>Compteur follower utilisateur</p>
+                    <input type="text" id="twitter-count-username" value="twitter">
+                    <button type="button" onclick="twitterAccountInfo($('#twitter-count-username').val())">Ok</button>
+                </div>
+
+                <div>
+                    <p>Informations utilisateurs</p>
+                    <input type="text" id="twitter-account-info" value="twitter">
+                    <button type="button" onclick="twitterProfileInfo($('#twitter-account-info').val())">Ok</button>
+                </div>
             </div>
             <div class="hide content" id="spotify">
                 <p>Contenue Spotify</p>
@@ -219,7 +231,10 @@
 
 </div>
 
+{% if currentPage is not defined %}
+
 <script src="/JS/sideBar.js"></script>
+{% endif %}
     <script>
 
     </script>
