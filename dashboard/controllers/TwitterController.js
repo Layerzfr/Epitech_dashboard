@@ -49,6 +49,16 @@ twitterController.callback = function(req, res) {
     });
 }
 
+twitterController.apiGetAccountInfo = function(req, res) {
+    consumer().get("https://api.twitter.com/1.1/users/show.json?screen_name="+req.query.user, req.user.oauthTwitter, req.user.oauthAccessSecret, function (error, data, response) {
+        if (error) {
+            console.log(error);
+        } else {
+            return res.json(JSON.parse(data));
+        }
+    });
+};
+
 twitterController.getTweets = function(req, res) {
     authController.checkIfLogged(req, res);
     consumer().get("https://api.twitter.com/1.1/account/verify_credentials.json", req.user.oauthTwitter, req.user.oauthAccessSecret, function (error, data, response) {

@@ -103,6 +103,19 @@
                 </div>
             </div>
 
+            <div class="grid-stack-item" data-gs-x="4" data-gs-y="12" data-gs-width="4" data-gs-height="2">
+                <div style="display: none" id="twitter-follower-container">
+                    <div class="grid-stack-item-content">
+                        <div>
+                            <p>Nom de l'utilisateur : </p><p id="twitter-account-username"></p>
+                        </div>
+                        <div>
+                            <p>Nombre de followers</p><p id="twitter-count"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
 {#            </div>#}
         </div>
@@ -403,6 +416,27 @@
             function tweetAccount(account) {
                 $('#tweet-container').html('<a class="twitter-timeline" href="https://twitter.com/'+account+'?ref_src=twsrc%5Etfw">Tweets by '+account+'</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"/>');
                 $('#tweet-container').show();
+            }
+        </script>
+
+        <script>
+            function twitterAccountInfo(account){
+                $.ajax({
+                    url: "http://127.0.0.1:3000/twitter/api/accountInfo",
+                    dataType: "json",
+                    type: "GET",
+                    data: "user="+account,
+                    success: function(data){
+                        $('#twitter-account-username').html(data.screen_name);
+                        $('#twitter-count').html(data.followers_count);
+                        $('#twitter-follower-container').show();
+                        setTimeout(function() {
+                            console.log('refreshed!');
+                            twitterAccountInfo(account);
+                        }, 5000);
+                    }
+
+                });
             }
         </script>
 
