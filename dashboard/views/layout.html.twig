@@ -125,6 +125,7 @@
             </div>
             <div class="hide content" id="spotify">
                 <p>Contenue Spotify</p>
+                {% if user.oauthYoutube %}
                 <div>
 {#                    <a href="#" onclick="$('#playlist-container').show();">Ajouter une playlist</a>#}
                     <p>Ajouter une playlist</p>
@@ -147,9 +148,16 @@
                         </div>
                     </div>
                 </div>
+
+                {% else %}
+                    Pour plus de widgets veuillez <a href="/parameter">connectez vos comptes</a>
+                {% endif %}
             </div>
             <div class="hide content" id="youtube">
-                <div>
+                <p>Contenue Youtube</p>
+
+                {% if user.oauthYoutube %}
+                    <div>
                     <select id="youtube-count">
                         <option value="subs" selected>Abonnés</option>
                         <option value="views" >Vue</option>
@@ -162,6 +170,7 @@
                 </div>
 
                 <div>
+
                     <select id="stats-select">
                         <option value="likes" selected>Likes</option>
                         <option value="dislikes">Dislikes</option>
@@ -174,6 +183,9 @@
                     </div>
                     <button type="button" onclick="statsYoutube($('#stats-select').val(), $('#refresh-stats-ytb').val())">Ok</button>
                 </div>
+                    {% else %}
+                        Pour plus de widgets veuillez <a href="/parameter">connectez vos comptes</a>
+                {% endif %}
             </div>
             <div class="hide content" id="steam">
                 <p>Contenue Steam</p>
