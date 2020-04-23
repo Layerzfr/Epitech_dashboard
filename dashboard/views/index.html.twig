@@ -236,58 +236,7 @@
             }
         </script>
 
-{#        Fonction steam player#}
-        <script>
-            $.ajax({
-                url: "http://127.0.0.1:3000/steam/getAllGames",
-                dataType: "json",
-                type: "GET",
-                success: function(data){
-                    var dataArr = [];
-                    $( function() {
-                        data.forEach(function (element) {
-                            dataArr.push({label: element.appName, value: element.appName, id: element.appId});
-                        })
-                        // console.log(dataArr)
-                        $( "#game" ).autocomplete({
-                            // source: availableTags,
-                            select: function( event, ui ) {
-                                // console.log(ui.item)
-                                getPlayerCount(ui.item.label, ui.item.id)
 
-                            },
-                            max:10,
-                            minLength: 4,
-
-                            source: dataArr
-
-                        });
-                    } );
-                }
-
-            });
-
-            function getPlayerCount(appName, appId) {
-                console.log("getting player count ... for appid " + appId);
-                $.ajax({
-                    url: "http://127.0.0.1:3000/steam/getPlayerCount",
-                    data: "appid="+appId,
-                    dataType: "json",
-                    type: "GET",
-                    success: function(data){
-                        console.log(data);
-                        $('#gameName').html(appName);
-                        $('#count').html(data.player_count);
-                        $('#player-count').show();
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
-                        alert(xhr.status);
-                        alert(thrownError);
-                    }
-
-                });
-            }
-        </script>
 
 {#        Fonction compteur youtube#}
         <script>
@@ -458,6 +407,62 @@
                             $('#steam-price-results').show();
                         }
                         console.log(data);
+                    }
+
+                });
+            }
+        </script>
+
+        {#        Fonction steam player#}
+        <script>
+            $(document).ready(function () {
+                $.ajax({
+                    url: "http://127.0.0.1:3000/steam/getAllGames",
+                    dataType: "json",
+                    type: "GET",
+                    success: function(data){
+                        var dataArr = [];
+                        $( function() {
+                            data.forEach(function (element) {
+                                dataArr.push({label: element.appName, value: element.appName, id: element.appId});
+                            })
+                            // console.log(dataArr)
+                            $( "#game" ).autocomplete({
+                                // source: availableTags,
+                                select: function( event, ui ) {
+                                    // console.log(ui.item)
+                                    getPlayerCount(ui.item.label, ui.item.id)
+
+                                },
+                                max:10,
+                                minLength: 4,
+
+                                source: dataArr
+
+                            });
+                        } );
+                    }
+
+                });
+            });
+
+
+            function getPlayerCount(appName, appId) {
+                console.log("getting player count ... for appid " + appId);
+                $.ajax({
+                    url: "http://127.0.0.1:3000/steam/getPlayerCount",
+                    data: "appid="+appId,
+                    dataType: "json",
+                    type: "GET",
+                    success: function(data){
+                        console.log(data);
+                        $('#gameName').html(appName);
+                        $('#count').html(data.player_count);
+                        $('#player-count').show();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status);
+                        alert(thrownError);
                     }
 
                 });
