@@ -185,7 +185,7 @@
     flex-direction: row;
 }
 
-.ytb-container-logo, .twitter-container-logo {
+.ytb-container-logo, .twitter-container-logo, .steam-container-logo {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -205,14 +205,14 @@
     margin-right: 5px;
 }
 
-.ytb-channel-name, .twitter-username {
+.ytb-channel-name, .twitter-username, .steam-game {
     font-family: "Roboto", sans-serif;
     color: #f4f6f7;
     font-size: 18px;
     font-weight: 400;
 }
 
-.ytb-count, .twitter-count {
+.ytb-count, .twitter-count, .steam-count {
     font-family: "Roboto", sans-serif;
     color: #f4f6f7;
     font-size: 35px;
@@ -220,7 +220,7 @@
     margin-bottom: 5%;
 }
 
-.ytb-type-count, .twitter-type-count {
+.ytb-type-count, .twitter-type-count, .steam-type-count {
     font-family: "Roboto", sans-serif;
     color: #d4d4d4;
     font-size: 15px;
@@ -228,7 +228,7 @@
     margin-bottom: 12%;
 }
 
-.youtube, .twitter {
+.youtube, .twitter, .steam {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -245,7 +245,7 @@
     display: none;
 }
 
-.youtube-active, .twitter-active {
+.youtube-active, .twitter-active, .steam-active {
     display: flex;
     flex-direction: row;
     width: auto;
@@ -316,4 +316,10 @@
 
 .text-reseaux-container-steam:hover {
     background-color: #2e4385;
+}
+.steam-line {
+    display: flex;
+    width: 10px;
+    margin-right: 10px;
+    background-color: #3459a6;
 }
