@@ -7,10 +7,13 @@
         <div class="doted grid-stack">
 {#            <p style="display: flex;margin: auto">DASHBOARD</p>#}
 {#            <div class="grid-stack">#}
-
+{#            <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4" data-gs-height="2">#}
+{#                <div class="grid-stack-item-content">my first widget</div>#}
+{#            </div>#}
             <div class="grid-stack-item" data-gs-x="4" data-gs-y="0" data-gs-width="4" data-gs-height="6">
                 <div id="playlist-container" style="display: none">
                     <div class="grid-stack-item-content">
+                        <p>test</p>
                         <div id="lecteur">
                             <iframe src="https://open.spotify.com/embed/playlist/" width="300" height="380"
                                     frameborder="0"
@@ -31,17 +34,22 @@
 
             <div class="grid-stack-item" data-gs-x="0" data-gs-y="6" data-gs-width="4" data-gs-height="2">
                 <div id="player-count" style="display: none">
+                    <div class="grid-stack-item-content">
                     Jeu: <div id="gameName"></div>
-                    Nombre de joueurs actuel <div id="count"></div>
+                        Nombre de joueurs actuel <div id="count"></div>
+                    </div>
                 </div>
             </div>
 
             <div class="grid-stack-item" data-gs-x="4" data-gs-y="12" data-gs-width="4" data-gs-height="82">
+                <div class="grid-stack-item-content">
                 <div style="display: none" id="tweet-container">
+                </div>
                 </div>
             </div>
             <div class="grid-stack-item" data-gs-x="0" data-gs-y="6" data-gs-width="4" data-gs-height="2">
                 <div style="display: none" id="youtube-count-container">
+                    <div class="grid-stack-item-content">
                     <div id="channel">
 
                     </div>
@@ -52,11 +60,13 @@
                     <div id="compteur-refresh">
 
                     </div>
+                    </div>
                 </div>
             </div>
 
             <div class="grid-stack-item" data-gs-x="8" data-gs-y="6" data-gs-width="4" data-gs-height="2">
                 <div style="display: none" id="youtube-stats-container">
+                    <div class="grid-stack-item-content">
                     <div>
                         <p id="stats-type-count"></p>
                         <p id="stats-ytb-count"></p>
@@ -65,11 +75,13 @@
                     <div id="ytb-stats-compteur-refresh">
 
                     </div>
+                    </div>
                 </div>
             </div>
 
             <div class="grid-stack-item" data-gs-x="4" data-gs-y="12" data-gs-width="4" data-gs-height="2">
                 <div style="display: none" id="steam-price-container">
+                    <div class="grid-stack-item-content">
                     <div id="steam-loading">
                         loading prices ...
                     </div>
@@ -86,6 +98,7 @@
                             <p>Prix total de la biblothèque</p>
                             <p id="price-steam">0</p>€
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
