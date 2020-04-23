@@ -3,6 +3,16 @@
     padding: 0;
 }
 
+.grid-stack-item.ui-draggable.ui-resizable.ui-resizable-autohide {
+    height: auto !important;
+    width: 25% !important;
+}
+
+.grid-stack-item.ui-draggable.ui-resizable {
+    height: auto !important;
+    width: 25% !important;
+}
+
 .check {
     display: flex;
     margin: auto;
@@ -10,6 +20,7 @@
 
 .doted {
     display: flex;
+    height: auto !important;
     width: 100%;
     border-style: dotted;
     margin: 10px;
@@ -120,7 +131,7 @@
     cursor: pointer;
 }
 
-.text-reseaux-container-spotify:hover{
+.text-reseaux-container-spotify:hover {
     background-color: #20bd5d;
 }
 
@@ -152,7 +163,7 @@
     cursor: pointer;
 }
 
-.text-reseaux-container-twitter:hover{
+.text-reseaux-container-twitter:hover {
     background-color: #1b77c1;
 }
 
@@ -160,6 +171,86 @@
 
 .youtube-connexion {
     fill: #f80400;
+}
+
+.ytb-refresh {
+    display: flex;
+    flex-direction: row;
+}
+
+.ytb-container-logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12%;
+}
+
+.ytb-logo {
+    fill: #f80400;
+}
+
+.ytb-refresh p {
+    font-family: "Roboto", sans-serif;
+    color: #f4f6f7;
+    font-size: 13px;
+    font-weight: 100;
+    margin-right: 5px;
+}
+
+.ytb-channel-name {
+    font-family: "Roboto", sans-serif;
+    color: #f4f6f7;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.ytb-count {
+    font-family: "Roboto", sans-serif;
+    color: #f4f6f7;
+    font-size: 35px;
+    font-weight: 600;
+    margin-bottom: 5%;
+}
+
+.ytb-type-count {
+    font-family: "Roboto", sans-serif;
+    color: #d4d4d4;
+    font-size: 15px;
+    font-weight: 100;
+    margin-bottom: 12%;
+}
+
+.youtube {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px;
+}
+
+.youtube-count-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.none {
+    display: none;
+}
+
+.youtube-active {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    height: auto;
+    background-color: #1e202c;
+}
+
+.youtube-line {
+    display: flex;
+    width: 10px;
+    margin-right: 10px;
+    background-color: #f80400;
 }
 
 .text-reseaux-container-youtube {
@@ -184,7 +275,7 @@
     cursor: pointer;
 }
 
-.text-reseaux-container-youtube:hover{
+.text-reseaux-container-youtube:hover {
     background-color: #c70400;
 }
 
@@ -216,6 +307,6 @@
     cursor: pointer;
 }
 
-.text-reseaux-container-steam:hover{
+.text-reseaux-container-steam:hover {
     background-color: #2e4385;
 }
