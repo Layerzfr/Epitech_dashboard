@@ -122,7 +122,7 @@
                         <button type="button" onclick="tweetAccount($('#twitter-name').val())">Ok</button>
                     </div>
                 </div>
-
+                    {% if user.oauthTwitter %}
                 <div>
                     <p>Compteur follower utilisateur</p>
                     <input type="text" id="twitter-count-username" value="twitter">
@@ -134,10 +134,14 @@
                     <input type="text" id="twitter-account-info" value="twitter">
                     <button type="button" onclick="twitterProfileInfo($('#twitter-account-info').val())">Ok</button>
                 </div>
+
+                        {% else %}
+                            Pour plus de widgets veuillez <a href="/parameter">connectez vos comptes</a>
+                {% endif %}
             </div>
             <div class="hide content" id="spotify">
                 <p>Contenue Spotify</p>
-                {% if user.oauthYoutube %}
+                {% if user.oauthSpotify %}
                 <div>
 {#                    <a href="#" onclick="$('#playlist-container').show();">Ajouter une playlist</a>#}
                     <p>Ajouter une playlist</p>
