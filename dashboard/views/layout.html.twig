@@ -217,17 +217,27 @@
                     Pour plus de widgets veuillez <a href="/parameter">connectez vos comptes</a>
                 {% endif %}
             </div>
+
             <div class="hide content" id="steam">
-                <p>Contenue Steam</p>
-                <div>
-                    Compteur de joueurs sur le jeu
-                    <input id="game">
+                <div class="container-contain">
+                    <div style="display: flex;flex-direction: column;width: 100%;justify-content: center;align-items: center;margin-bottom: 20px;">
+                        <label style="width: 100% !important;text-align: center;margin-bottom: 20px;" for="refresh-stats-ytb">Compteur de joueurs sur le jeu :</label>
+                        <div style="display: flex; flex-direction: row;">
+                            <input style="font-size: 21px !important;" class="input-contain" id="game" type="text" value="">
+                        </div>
+                    </div>
                 </div>
 
-                <div>
-                    Prix de la bibliothèque d'un utilisateur
-                    <input id="price" type="text">
-                    <button type="button" onclick="steamPrice($('#price').val())">Ok</button>
+                <div class="container-contain">
+                    <div style="display: flex;flex-direction: column;width: 100%;justify-content: center;align-items: center;margin-bottom: 20px;">
+                        <label style="width: 100% !important;text-align: center;margin-bottom: 20px;" for="refresh-stats-ytb">Prix de la bibliothèque de l'utilisateur :</label>
+                        <div style="display: flex; flex-direction: row;">
+                            <input style="font-size: 21px !important;" class="input-contain" id="price" type="text" value="">
+                        </div>
+                    </div>
+                    <a class="button-ok"
+                       onclick="steamPrice($('#price').val())">Ok
+                    </a>
                 </div>
             </div>
         </div>

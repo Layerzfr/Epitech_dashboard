@@ -173,7 +173,7 @@ body {
 }
 
 .input-contain {
-    background: none;
+    background-color: #0000001f;
     border: none;
     text-decoration: underline;
     text-decoration-color: white;
@@ -208,4 +208,16 @@ body {
     font-weight: 400;
     cursor: pointer;
     background-color: #1b77c1;
+}
+
+ul#ui-id-2 {
+    overflow: scroll !important;
+    height: 50% !important;
+    width: 20% !important;
+}
+
+.ui-menu .ui-menu-item-wrapper:hover {
+    background-color: #8b8b8b !important;
+    border: none !important;
+    outline: none !important;
 }
