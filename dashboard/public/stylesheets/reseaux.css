@@ -20,7 +20,7 @@
 
 .doted {
     display: flex;
-    height: auto !important;
+    height: 97vh !important;
     width: 100%;
     border-style: dotted;
     margin: 10px;
@@ -136,6 +136,11 @@
 }
 
 /*      TWITTER    */
+
+.tweets{
+    overflow: scroll;
+    max-height: 97vh;
+}
 
 .twitter-connexion {
     fill: #1b9dec;
