@@ -234,7 +234,7 @@
                     url: "widget/spotify-top.html",
                     context: document.body,
                     success: function (response) {
-                        grid.addWidget(response, 0, 0, 6, 8, true);
+                        grid.addWidget(response, 0, 0, 3, 5, true);
                         console.log(response);
 
                         $('#lecteur-top').attr('id', 'lecteur-top-' + i);
@@ -298,7 +298,7 @@
                         url: "widget/lecteur.html",
                         context: document.body,
                         success: function(response) {
-                            grid.addWidget(response, 0, 0, 6, 8, true);
+                            grid.addWidget(response, 0, 0, 3, 5, true);
                             $('#lecteur').attr('id', 'lecteur-'+i);
                             $('#lecteur-'+i).html('<iframe src="https://open.spotify.com/embed/playlist/' + id + '" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>')
                             i++;
