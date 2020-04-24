@@ -64,6 +64,7 @@ userController.logout = function(req, res) {
 };
 
 userController.parameter = function(req, res) {
+    userController.checkIfLogged(req, res);
     return twing.render('parameter.html.twig', {user: req.user, currentPage: 'parameter'}).then((output) => {
         res.end(output);
     });
