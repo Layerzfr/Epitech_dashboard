@@ -16,6 +16,10 @@
     cursor: grab;
 }
 
+.container-dashboard:active {
+    cursor: grabbing;
+}
+
 iframe {
     width: 100%;
 }
