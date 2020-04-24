@@ -4,15 +4,15 @@
 }
 
 .container-dashboard {
-    width: 100%;
-    height: auto;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    background-color: #282b3b;
-    border-radius: 7px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /*width: 100%;*/
+    /*height: auto;*/
+    /*padding-bottom: 10px;*/
+    /*padding-top: 10px;*/
+    /*background-color: #282b3b;*/
+    /*border-radius: 7px;*/
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
 }
 
 .grid-stack>.grid-stack-item>.grid-stack-item-content {
@@ -22,11 +22,29 @@
 .grid-stack-item.ui-draggable.ui-resizable.ui-resizable-autohide {
     height: auto !important;
     width: 25% !important;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
+    background-color: #282b3b;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .grid-stack-item.ui-draggable.ui-resizable {
     height: auto !important;
     width: 25% !important;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
+    background-color: #282b3b;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .check {
