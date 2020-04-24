@@ -188,11 +188,17 @@
                                 </select>
                             </div>
                         </div>
-                        <a class="button-ok" id="search-top-button">Ok</a>
+                        <a class="button-ok"  id="search-top-button">Ok</a>
+                        <div class="span" id="results"></div>
                     </div>
 
                 {% else %}
-                    Pour plus de widgets veuillez <a href="/parameter">connectez vos comptes</a>
+                    <div class="container-contain">
+                        <div class="demande-connexion">
+                            <p style="margin-bottom: 10px; width: 100%;">Pour plus de widgets veuillez</p>
+                            <a class="button-ok" href="/parameter" style="width: auto">Connectez vos comptes</a>
+                        </div>
+                    </div>
                 {% endif %}
             </div>
             <div class="hide content" id="youtube">
@@ -243,7 +249,12 @@
                         </a>
                     </div>
                 {% else %}
-                    Pour plus de widgets veuillez <a href="/parameter">connectez vos comptes</a>
+                    <div class="container-contain">
+                        <div class="demande-connexion">
+                            <p style="margin-bottom: 10px; width: 100%;">Pour plus de widgets veuillez</p>
+                            <a class="button-ok" href="/parameter" style="width: auto">Connectez vos comptes</a>
+                        </div>
+                    </div>
                 {% endif %}
             </div>
 
@@ -277,7 +288,7 @@
     </div>
     {#    <div><a class="btn btn-default" onClick="addNewWidget()" href="#">Add Widget</a></div>#}
     {% if user and currentPage is not defined %}
-        <div style="padding: 30px; margin-bottom: 15px;" class="trash text-center text-white ui-droppable">
+        <div style="padding: 30px; margin: auto" class="trash text-center text-white ui-droppable">
             <div>
                 <svg fill="#ff0000" version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                      viewBox="0 0 32 32">
@@ -287,22 +298,11 @@
                 </svg>
 
             </div>
-            {#        <div>#}
-            {#            <span>Supprimer un élément</span>#}
-            {#        </div>#}
         </div>
     {% endif %}
     {% block body %}
 
     {% endblock %}
-
-
-    {#    Importer un SVG proprement   #}
-    {#<svg width="100%" height="30" viewBox="0 0 24 24" class="icon">
-        <path id="icon"
-              d="M12.984 3h8.016v6h-8.016v-6zM12.984 21v-9.984h8.016v9.984h-8.016zM3 21v-6h8.016v6h-8.016zM3 12.984v-9.984h8.016v9.984h-8.016z"
-              style="fill: #b8b4cc"></path>
-    </svg>#}
 
 
 </div>
