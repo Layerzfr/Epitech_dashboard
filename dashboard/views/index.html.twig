@@ -112,7 +112,7 @@
                                 url: "test/twitter-info.html",
                                 context: document.body,
                                 success: function (response) {
-                                    grid.addWidget(response, 0, 0, 3, 2, true);
+                                    grid.addWidget(response, 0, 0, 3, 6, true);
                                     console.log(response);
 
                                     $('#twitter-info-container').attr('id', 'twitter-info-container-' + i);
@@ -174,7 +174,7 @@
                                     url: "test/twitter-follower.html",
                                     context: document.body,
                                     success: function (response) {
-                                        grid.addWidget(response, 0, 0, 3, 2, true);
+                                        grid.addWidget(response, 0, 0, 3, 6, true);
                                         console.log(response);
 
                                         $('#tweet-count-container').attr('id', 'tweet-count-container-' + i);
@@ -206,7 +206,7 @@
                         url: "test/twitter-tweets.html",
                         context: document.body,
                         success: function(response) {
-                            grid.addWidget(response, 0, 0, 3, 2, true);
+                            grid.addWidget(response, 0, 0, 3, 12, true);
                             console.log(response);
                             $('#tweet-container').attr('id', 'tweet-container-'+i);
                             $('#tweet-container-'+i).html('<a class="twitter-timeline" href="https://twitter.com/' + account + '?ref_src=twsrc%5Etfw">Tweets by ' + account + '</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"/>')
@@ -230,7 +230,7 @@
                     url: "test/spotify-top.html",
                     context: document.body,
                     success: function (response) {
-                        grid.addWidget(response, 0, 0, 3, 2, true);
+                        grid.addWidget(response, 0, 0, 6, 8, true);
                         console.log(response);
 
                         $('#lecteur-top').attr('id', 'lecteur-top-' + i);
@@ -294,7 +294,7 @@
                         url: "test/lecteur.html",
                         context: document.body,
                         success: function(response) {
-                            grid.addWidget(response, 0, 0, 3, 2, true);
+                            grid.addWidget(response, 0, 0, 6, 8, true);
                             $('#lecteur').attr('id', 'lecteur-'+i);
                             $('#lecteur-'+i).html('<iframe src="https://open.spotify.com/embed/playlist/' + id + '" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>')
                             i++;
@@ -341,7 +341,7 @@
                                 url: "test/youtube-compteur.html",
                                 context: document.body,
                                 success: function (response) {
-                                    grid.addWidget(response, 0, 0, 3, 2, true);
+                                    grid.addWidget(response, 0, 0, 3, 6, true);
                                     console.log(response);
 
                                     $('#youtube-count-container').attr('id', 'youtube-count-container-' + i);
@@ -463,7 +463,7 @@
                                 url: "test/youtube-stats.html",
                                 context: document.body,
                                 success: function (response) {
-                                    grid.addWidget(response, 0, 0, 3, 2, true);
+                                    grid.addWidget(response, 0, 0, 3, 6, true);
                                     console.log(response);
 
                                     $('#youtube-stats-container').attr('id', 'youtube-stats-container-' + i);
@@ -574,7 +574,7 @@
                     url: "test/steam-price.html",
                     context: document.body,
                     success: function(response) {
-                        grid.addWidget(response, 0, 0, 3, 2, true);
+                        grid.addWidget(response, 0, 0, 3, 6, true);
                         $.ajax({
                             url: "http://127.0.0.1:3000/steam/api/myPrice",
                             dataType: "json",
@@ -664,7 +664,7 @@
                             url: "test/steam-count.html",
                             context: document.body,
                             success: function(response) {
-                                grid.addWidget(response, 0, 0, 3, 2, true);
+                                grid.addWidget(response, 0, 0, 3, 6, true);
                                 $('#gameName').attr('id', 'gameName-'+i);
                                 $('#count').attr('id', 'count-'+i);
 
