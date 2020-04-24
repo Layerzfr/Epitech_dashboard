@@ -119,21 +119,21 @@
                     <div>
                         <label for="twitter-name">Nom du compte</label>
                         <input id="twitter-name" type="text" value="twitter">
-                        <button type="button" onclick="tweetAccount($('#twitter-name').val())">Ok</button>
+                        <button type="button" id="twitter-tl" onclick="tweetAccount($('#twitter-name').val())">Ok</button>
                     </div>
                 </div>
                 {% if user.oauthTwitter %}
                     <div>
                         <p>Compteur follower utilisateur</p>
                         <input type="text" id="twitter-count-username" value="twitter">
-                        <button type="button" onclick="twitterAccountInfo($('#twitter-count-username').val())">Ok
+                        <button type="button" id="twitter-follow-button">Ok
                         </button>
                     </div>
 
                     <div>
                         <p>Informations utilisateurs</p>
                         <input type="text" id="twitter-account-info" value="twitter">
-                        <button type="button" onclick="twitterProfileInfo($('#twitter-account-info').val())">Ok</button>
+                        <button type="button" id="twitter-info-button">Ok</button>
                     </div>
 
                 {% else %}
@@ -159,7 +159,7 @@
                                 <option value="artists" selected>Artiste</option>
                                 <option value="tracks">Track</option>
                             </select>
-                            <button type="button" onclick='searchTop($("#select-track").val())'>Ok</button>
+                            <button type="button" id="search-top-button">Ok</button>
                             <div id="results">
 
                             </div>
@@ -176,8 +176,8 @@
                         <div class="custom-select">
                             <select id="youtube-count">
                                 <option value="0">Contenu :</option>
-                                <option value="1">Abonnés</option>
-                                <option value="2">Vue</option>
+                                <option value="subs">Abonnés</option>
+                                <option value="views">Vue</option>
                             </select>
                         </div>
                         <div style="display: flex;flex-direction: row;width: 100%;justify-content: center;align-items: center;margin-bottom: 20px;">
@@ -188,7 +188,7 @@
                             </div>
                         </div>
                         <a class="button-ok"
-                           onclick="compteurYoutube($('#youtube-count').val(), $('#refresh-count-ytb').val())">Ok
+                           onclick="compteurYoutube($('#youtube-count').val(), $('#refresh-count-ytb').val(), null)">Ok
                         </a>
                     </div>
 
@@ -210,7 +210,7 @@
                             </div>
                         </div>
                         <a class="button-ok"
-                           onclick="statsYoutube($('#stats-select').val(), $('#refresh-stats-ytb').val())">Ok
+                           onclick="statsYoutube($('#stats-select').val(), $('#refresh-stats-ytb').val(), null)">Ok
                         </a>
                     </div>
                 {% else %}

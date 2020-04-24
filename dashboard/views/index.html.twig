@@ -3,193 +3,23 @@
 
 {% block body %}
     <link href="/stylesheets/reseaux.css" rel="stylesheet"/>
+    <div id="etest">
+
+    </div>
+    <script>
+
+    </script>
+
     {% if user %}
         <div class="doted grid-stack">
-            {#            <p style="display: flex;margin: auto">DASHBOARD</p>#}
-            {#            <div class="grid-stack">#}
-            {#            <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4" data-gs-height="2">#}
-            {#                <div class="grid-stack-item-content">my first widget</div>#}
-            {#            </div>#}
-            <div class="grid-stack-item" data-gs-x="4" data-gs-y="0" data-gs-width="4" data-gs-height="6">
-                <div id="playlist-container" style="display: none">
-                    <div class="grid-stack-item-content">
-                        <p>test</p>
-                        <div id="lecteur">
-                            <iframe src="https://open.spotify.com/embed/playlist/" width="300" height="380"
-                                    frameborder="0"
-                                    allowtransparency="true" allow="encrypted-media"></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid-stack-item" data-gs-x="8" data-gs-y="0" data-gs-width="4" data-gs-height="6">
-                <div id="playlist-container-top" style="display: none">
-                    <div class="grid-stack-item-content">
-                        <div id="lecteur-top">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid-stack-item" data-gs-x="0" data-gs-y="6" data-gs-width="4" data-gs-height="2">
-                <div class="none" id="player-count">
-                    <div class="steam-line"></div>
-                    <div class="grid-stack-item-content steam">
-                        <div class="steam-container-logo">
-                            <p class="steam-game" id="gameName"></p>
-                            <svg style="width: 68px" version="1.1" xmlns="http://www.w3.org/2000/svg" class="steam-connexion" width="28" height="28" viewBox="0 0 32 32">
-                                <title>steam2</title>
-                                <path d="M9.498 26.125c0.848 0 1.681-0.41 2.187-1.169 0.804-1.206 0.478-2.836-0.728-3.64l-2.065-1.377c0.353-0.096 0.725-0.149 1.109-0.149 2.325 0 4.209 1.884 4.209 4.209s-1.885 4.209-4.209 4.209c-2.263 0-4.108-1.785-4.205-4.024l2.249 1.499c0.448 0.298 0.953 0.441 1.454 0.441zM26.667 0c2.934 0 5.333 2.4 5.333 5.334v21.332c0 2.936-2.399 5.334-5.333 5.334h-21.333c-2.934 0-5.334-2.398-5.334-5.334v-6.345l3.792 2.528c-0.364 1.974 0.217 4.088 1.744 5.615 2.466 2.466 6.463 2.466 8.929 0 1.515-1.515 2.098-3.607 1.752-5.568l7.783-6.968c1.445-0.207 2.838-0.867 3.95-1.979 2.734-2.734 2.734-7.166 0-9.899s-7.166-2.734-9.9 0c-1.112 1.112-1.771 2.505-1.979 3.95v0l-6.397 9.695c-0.995 0.051-1.981 0.336-2.866 0.856l-6.808-4.539v-8.678c0-2.934 2.4-5.334 5.334-5.334h21.333zM28 9c0-2.761-2.239-5-5-5s-5 2.239-5 5 2.239 5 5 5 5-2.239 5-5zM20 9c0-1.657 1.343-3 3-3s3 1.343 3 3-1.343 3-3 3-3-1.343-3-3z"></path>
-                            </svg>
-                        </div>
-                        <div class="twitter-count-text">
-                            <p class="steam-count" id="count"></p>
-                            <p class="steam-type-count">joueurs en ligne</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid-stack-item" data-gs-x="4" data-gs-y="12" data-gs-width="4" data-gs-height="82">
-                <div class="grid-stack-item-content">
-                    <div style="display: none" id="tweet-container">
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid-stack-item" data-gs-x="0" data-gs-y="6" data-gs-width="4" data-gs-height="2">
-                <div class="none" id="youtube-count-container">
-                    <div class="youtube-line"></div>
-                    <div class="grid-stack-item-content youtube">
-                        <div class="ytb-container-logo">
-                            <p class="ytb-channel-name" id="channel"></p>
-                            <svg width="32" height="32" id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 22.51">
-                                <rect x="10.36" y="4.84" width="13.23" height="12.04" style="fill:#fff"/>
-                                <path d="M31.68,9.6a6.85,6.85,0,0,0-1.27-3.17A4.55,4.55,0,0,0,27.2,5.07C22.73,4.74,16,4.74,16,4.74h0s-6.71,0-11.19.33A4.56,4.56,0,0,0,1.59,6.43,6.79,6.79,0,0,0,.33,9.6,48.41,48.41,0,0,0,0,14.78v2.43a48.66,48.66,0,0,0,.32,5.18,7,7,0,0,0,1.26,3.17,5.45,5.45,0,0,0,3.53,1.37c2.57.25,10.89.32,10.89.32s6.72,0,11.2-.33a4.59,4.59,0,0,0,3.2-1.36,6.94,6.94,0,0,0,1.28-3.17A48.41,48.41,0,0,0,32,17.21V14.78a50,50,0,0,0-.33-5.18Zm-19,10.55v-9l8.65,4.51Z"
-                                      transform="translate(-0.01 -4.74)" style="fill:#f80300"/>
-                            </svg>
-                        </div>
-                        <div class="youtube-count-text">
-                            <p class="ytb-count" id="ytb-count"></p>
-                            <p class="ytb-type-count" id="type-count"></p>
-                            <div class="ytb-refresh">
-                                <p>Refresh Timer : </p>
-                                <p id="compteur-refresh"></p>
-                                <p> ms</p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid-stack-item" data-gs-x="8" data-gs-y="6" data-gs-width="4" data-gs-height="2">
-                <div style="display: none" id="youtube-stats-container">
-                    <div class="youtube-line"></div>
-                    <div class="grid-stack-item-content youtube">
-                        <div class="ytb-container-logo">
-                            <p class="ytb-channel-name" id="channel"></p>
-                            <svg width="32" height="32" id="Calque_1" data-name="Calque 1"
-                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 22.51">
-                                <rect x="10.36" y="4.84" width="13.23" height="12.04" style="fill:#fff"/>
-                                <path d="M31.68,9.6a6.85,6.85,0,0,0-1.27-3.17A4.55,4.55,0,0,0,27.2,5.07C22.73,4.74,16,4.74,16,4.74h0s-6.71,0-11.19.33A4.56,4.56,0,0,0,1.59,6.43,6.79,6.79,0,0,0,.33,9.6,48.41,48.41,0,0,0,0,14.78v2.43a48.66,48.66,0,0,0,.32,5.18,7,7,0,0,0,1.26,3.17,5.45,5.45,0,0,0,3.53,1.37c2.57.25,10.89.32,10.89.32s6.72,0,11.2-.33a4.59,4.59,0,0,0,3.2-1.36,6.94,6.94,0,0,0,1.28-3.17A48.41,48.41,0,0,0,32,17.21V14.78a50,50,0,0,0-.33-5.18Zm-19,10.55v-9l8.65,4.51Z"
-                                      transform="translate(-0.01 -4.74)" style="fill:#f80300"/>
-                            </svg>
-                        </div>
-                        <div class="youtube-count-text">
-                            <p class="ytb-count" id="stats-ytb-count"></p>
-                            <p class="ytb-type-count" id="stats-type-count"></p>
-                            <p class="ytb-count" id="diff-ytb-count"></p>
-
-                            <div class="ytb-refresh">
-                                <p>Refresh Timer : </p>
-                                <p id="ytb-stats-compteur-refresh"></p>
-                                <p> ms</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid-stack-item" data-gs-x="4" data-gs-y="12" data-gs-width="4" data-gs-height="2">
-                <div style="display: none" id="steam-price-container">
-                    <div class="grid-stack-item-content">
-                        <div id="steam-loading">
-                            loading prices ...
-                        </div>
-                        <div style="display: none" id="steam-price-results">
-                            <p>Resultat pour </p>
-                            <div>
-                                <p id="username-steam"></p>
-                            </div>
-                            <div>
-                                <p>Nombre de jeux ( dlc inclus ) :</p>
-                                <p id="total-steam-game-count">0</p>
-                            </div>
-                            <div>
-                                <p>Prix total de la biblothèque</p>
-                                <p id="price-steam">0</p>€
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid-stack-item" data-gs-x="8" data-gs-y="12" data-gs-width="4" data-gs-height="2">
-                <div class="none" id="twitter-follower-container">
-                    <div class="twitter-line"></div>
-                    <div class="grid-stack-item-content twitter">
-                        <div class="twitter-container-logo">
-                            <p class="twitter-username" id="twitter-account-username"></p>
-                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 32 32">
-                                <title>twitter</title>
-                                <path class="twitter-connexion" d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
-                            </svg>
-                        </div>
-                        <div class="twitter-count-text">
-                            <p class="ytb-count" id="twitter-count"></p>
-                            <p class="twitter-type-count">Followers</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid-stack-item" data-gs-x="0" data-gs-y="18" data-gs-width="4" data-gs-height="2">
-                <div style="display: none" id="twitter-info-container">
-                    <div class="grid-stack-item-content">
-                        <div>
-                            <div id="profile-twitter-image">
-
-                            </div>
-                            <div>
-                                <div style="display: none" id="certified">
-                                    <p>Nom de l'utilisateur : </p><p id="twitter-info-username"></p>
-
-                                </div>
-                                <p id="twitter-info-screenname"></p>
-                            </div>
-                            <div>
-                                <p>Nombre de followers</p><p id="twitter-info-followers-count"></p>
-                                <p>Nombre d'abonnements</p><p id="twitter-info-followings-count"></p>
-                            </div>
-                            <div id="twitter-follow-button">
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-
-{#            </div>#}
         </div>
 
         <script type="text/javascript">
+            var grid;
             $(document).ready(function () {
 
                 let count = 0;
-                var grid = GridStack.init({
+                grid = GridStack.init({
                     alwaysShowResizeHandle: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
                         navigator.userAgent
                     ),
@@ -227,6 +57,164 @@
                     console.log(type + items.length + ' items.' + str);
                 }
 
+
+                $('#twitter-tl').on('click', function () {
+                    tweetAccount($('#twitter-name').val())
+                });
+
+                $('#twitter-follow-button').on('click',function () {
+                    twitterAccountInfo($('#twitter-count-username').val());
+                })
+
+                $('#twitter-info-button').on('click', function () {
+                    twitterProfileInfo($('#twitter-account-info').val());
+                });
+
+                $('#search-top-button').on('click', function () {
+                    searchTop($("#select-track").val())
+                });
+
+
+
+
+                function searchTop(type) {
+                    $.ajax({
+                        url: "/spotify/api/top",
+                        dataType: "json",
+                        data: "type=" + type,
+                        type: "GET",
+                        success: function (data) {
+                            if (data.error == 401) {
+                                window.location.href = "https://accounts.spotify.com/fr/authorize?client_id=2847f09c105d4a07aec94c448957fe60&response_type=code&redirect_uri=http://127.0.0.1:3000/spotify/sessions/callback&&scope=user-read-private%20user-read-email%20playlist-read-private%20user-top-read";
+                            }
+                            var data = JSON.parse(data);
+                            $("#results").html('');
+                            let i = 1;
+                            data.items.forEach(function (item) {
+                                let p = "'";
+                                $("#results").append('<div>' + i + ' - <span onclick="displayLecteurTop(\'+p+item.id+p+\', ' + p + type + p + ')" >' + item.name + '</span></div>')
+                                i++;
+                            })
+                        }
+
+                    });
+                }
+
+                function twitterProfileInfo(account){
+                    $.ajax({
+                        url: "http://127.0.0.1:3000/twitter/api/accountInfo",
+                        dataType: "json",
+                        type: "GET",
+                        data: "user="+account,
+                        success: function(data){
+
+                            $.ajax({
+                                url: "test/twitter-info.html",
+                                context: document.body,
+                                success: function (response) {
+                                    grid.addWidget(response, 0, 0, 3, 2, true);
+                                    console.log(response);
+
+                                    $('#twitter-info-container').attr('id', 'twitter-info-container-' + i);
+                                    $('#profile-twitter-image').attr('id', 'profile-twitter-image-' + i);
+                                    $('#twitter-info-username').attr('id', 'twitter-info-username-' + i);
+                                    $('#twitter-info-screenname').attr('id', 'twitter-info-screenname-' + i);
+                                    $('#twitter-info-followers-count').attr('id', 'twitter-info-followers-count-' + i);
+                                    $('#twitter-follow-buttonaction').attr('id', 'twitter-follow-buttonaction-' + i);
+                                    $('#certified').attr('id', 'certified-' + i);
+
+                                    $('#profile-twitter-image-'+i).html("<img src='"+data.profile_image_url+"'>");
+                                    if(data.verified == true) {
+                                        $('#twitter-info-username-'+i).html(data.name+'<img width="20" alt="Twitter Verified Badge" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Twitter_Verified_Badge.svg/512px-Twitter_Verified_Badge.svg.png">');
+                                    }else{
+                                        $('#twitter-info-username-'+i).html(data.name);
+                                    }
+                                    $('#twitter-info-screenname-'+i).html("@"+data.screen_name);
+                                    $('#twitter-info-followers-count-'+i).html(data.followers_count);
+                                    $('#twitter-info-followings-count-'+i).html(data.friends_count);
+                                    $('#twitter-follow-buttonaction-'+i).html('<a href=\"https://twitter.com/'+data.screen_name+'?ref_src=twsrc%5Etfw\" class=\"twitter-follow-button\" data-show-count=\"false\">Follow @'+data.screen_name+'</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"/>');
+                                    if(data.verified == true) {
+                                        $('#certified-'+i).show();
+                                    }else{
+                                        $('#certified-'+i).hide();
+                                    }
+                                    // $('#tweet-container').attr('id', 'tweet-container-'+i);
+                                    // $('#tweet-container-'+i).html('<a class="twitter-timeline" href="https://twitter.com/' + account + '?ref_src=twsrc%5Etfw">Tweets by ' + account + '</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"/>')
+                                    i++;
+                                }
+                            });
+
+
+
+
+
+
+                        }
+
+                    });
+                }
+
+                function twitterAccountInfo(account, id = null){
+                    $.ajax({
+                        url: "http://127.0.0.1:3000/twitter/api/accountInfo",
+                        dataType: "json",
+                        type: "GET",
+                        data: "user="+account,
+                        success: function(data){
+                            if(id !== null) {
+                                console.log(id);
+                                $('#twitter-account-username-'+id).html(data.screen_name);
+                                $('#twitter-count-'+id).html(data.followers_count);
+                                setTimeout(function() {
+                                    console.log('refreshed!');
+                                    twitterAccountInfo(account, id);
+                                }, 5000);
+                            } else {
+                                $.ajax({
+                                    url: "test/twitter-follower.html",
+                                    context: document.body,
+                                    success: function (response) {
+                                        grid.addWidget(response, 0, 0, 3, 2, true);
+                                        console.log(response);
+
+                                        $('#tweet-count-container').attr('id', 'tweet-count-container-' + i);
+                                        $('#twitter-account-username').attr('id', 'twitter-account-username-' + i);
+                                        $('#twitter-count').attr('id', 'twitter-count-' + i);
+
+                                        $('#twitter-account-username-' + i).html(data.screen_name);
+                                        $('#twitter-count-' + i).html(data.followers_count);
+                                        // $('#twitter-follower-container').show();
+                                        setTimeout(function () {
+                                            console.log('refreshed!');
+                                            twitterAccountInfo(account, i-1);
+                                        }, 5000);
+                                        // $('#tweet-container').attr('id', 'tweet-container-'+i);
+                                        // $('#tweet-container-'+i).html('<a class="twitter-timeline" href="https://twitter.com/' + account + '?ref_src=twsrc%5Etfw">Tweets by ' + account + '</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"/>')
+                                        i++;
+                                    }
+                                });
+                            }
+
+                        }
+
+                    });
+                }
+
+                function tweetAccount(account) {
+                    console.log(account);
+                    $.ajax({
+                        url: "test/twitter-tweets.html",
+                        context: document.body,
+                        success: function(response) {
+                            grid.addWidget(response, 0, 0, 3, 2, true);
+                            console.log(response);
+                            $('#tweet-container').attr('id', 'tweet-container-'+i);
+                            $('#tweet-container-'+i).html('<a class="twitter-timeline" href="https://twitter.com/' + account + '?ref_src=twsrc%5Etfw">Tweets by ' + account + '</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"/>')
+                            i++;
+                        }
+                    });
+                }
+
                 // TODO: switch jquery-ui out
                 $('.newWidget').draggable({
                     revert: 'invalid',
@@ -235,6 +223,33 @@
                     helper: 'clone'
                 });
             })
+
+            function displayLecteurTop(id, type) {
+
+                $.ajax({
+                    url: "test/spotify-top.html",
+                    context: document.body,
+                    success: function (response) {
+                        grid.addWidget(response, 0, 0, 3, 2, true);
+                        console.log(response);
+
+                        $('#lecteur-top').attr('id', 'lecteur-top-' + i);
+
+
+                        if (type == "tracks") {
+                            $('#lecteur-top-'+i).html('<iframe src="https://open.spotify.com/embed/track/' + id + '" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>')
+                        } else {
+                            $('#lecteur-top-'+i).html('<iframe src="https://open.spotify.com/embed/artist/' + id + '" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>')
+                        }
+
+
+                        i++;
+                    }
+                });
+
+
+
+            }
 
         </script>
 
@@ -259,7 +274,7 @@
                         $("#playlist").autocomplete({
                             select: function (event, ui) {
                                 displayLecteur(ui.item.id);
-                                $("#playlist-container").show();
+                                // $("#playlist-container").show();
 
                             },
                             max: 10,
@@ -271,53 +286,31 @@
 
             });
 
+            var i = 1;
+
+
             function displayLecteur(id) {
-                $('#lecteur').html('<iframe src="https://open.spotify.com/embed/playlist/' + id + '" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>')
+                    $.ajax({
+                        url: "test/lecteur.html",
+                        context: document.body,
+                        success: function(response) {
+                            grid.addWidget(response, 0, 0, 3, 2, true);
+                            $('#lecteur').attr('id', 'lecteur-'+i);
+                            $('#lecteur-'+i).html('<iframe src="https://open.spotify.com/embed/playlist/' + id + '" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>')
+                            i++;
+                        }
+                    });
+
+                // $('#lecteur').html('<iframe src="https://open.spotify.com/embed/playlist/' + id + '" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>')
             }
             {% endif %}
-        </script>
-
-
-        {#        //spotify lecteur top#}
-        <script>
-            function displayLecteurTop(id, type) {
-                if (type == "tracks") {
-                    $('#lecteur-top').html('<iframe src="https://open.spotify.com/embed/track/' + id + '" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>')
-                } else {
-                    $('#lecteur-top').html('<iframe src="https://open.spotify.com/embed/artist/' + id + '" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>')
-                }
-                $('#playlist-container-top').show();
-            }
-
-            function searchTop(type) {
-                $.ajax({
-                    url: "/spotify/api/top",
-                    dataType: "json",
-                    data: "type=" + type,
-                    type: "GET",
-                    success: function (data) {
-                        if (data.error == 401) {
-                            window.location.href = "https://accounts.spotify.com/fr/authorize?client_id=2847f09c105d4a07aec94c448957fe60&response_type=code&redirect_uri=http://127.0.0.1:3000/spotify/sessions/callback&&scope=user-read-private%20user-read-email%20playlist-read-private%20user-top-read";
-                        }
-                        var data = JSON.parse(data);
-                        $("#results").html('');
-                        let i = 1;
-                        data.items.forEach(function (item) {
-                            let p = "'";
-                            $("#results").append('<div>' + i + ' - <span onclick="displayLecteurTop(\'+p+item.id+p+\', ' + p + type + p + ')" >' + item.name + '</span></div>')
-                            i++;
-                        })
-                    }
-
-                });
-            }
         </script>
 
 
 
 {#        Fonction compteur youtube#}
         <script>
-            function compteurYoutube(type, time) {
+            function compteurYoutube(type, time, id = null) {
                 $.ajax({
                     url: "http://127.0.0.1:3000/youtube/api/channel",
                     dataType: "json",
@@ -326,21 +319,54 @@
                         if (data.error == 401) {
                             window.location.href = "https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/youtube&response_type=code&state=security_token%3D138r5719ru3e1%26url%3Dhttps%3A%2F%2Foauth2.example.com%2Ftoken&redirect_uri=http%3A//127.0.0.1:3000/youtube/services/callback&client_id=482608527715-8fpkr88gaq0chr2rngoer02i8240baib.apps.googleusercontent.com";
                         }
-                        $('#channel').html(data.channelName);
-                        $('#type-count').html(type);
-                        if (type == "subs") {
-                            $("#ytb-count").html(data.subscribersCount);
+
+                        if(id != null) {
+                            console.log(id);
+                            $('#channel-'+id).html(data.channelName);
+                            $('#type-count-'+id).html(type);
+                            if (type == "subs") {
+                                $("#ytb-count-"+id).html(data.subscribersCount);
+                            } else {
+                                $("#ytb-count-"+id).html(data.viewsCount);
+                            }
+                            $('#compteur-refresh-'+id).html(time);
+                            setTimeout(function () {
+                                console.log('refreshed!');
+                                compteurYoutube(type, time, id);
+                            }, time * 1000);
                         } else {
-                            $("#ytb-count").html(data.viewsCount);
+
+
+                            $.ajax({
+                                url: "test/youtube-compteur.html",
+                                context: document.body,
+                                success: function (response) {
+                                    grid.addWidget(response, 0, 0, 3, 2, true);
+                                    console.log(response);
+
+                                    $('#youtube-count-container').attr('id', 'youtube-count-container-' + i);
+                                    $('#channel').attr('id', 'channel-' + i);
+                                    $('#type-count').attr('id', 'type-count-' + i);
+                                    $('#ytb-count').attr('id', 'ytb-count-' + i);
+                                    $('#compteur-refresh').attr('id', 'compteur-refresh-' + i);
+
+                                    $('#channel-' + i).html(data.channelName);
+                                    $('#type-count-' + i).html(type);
+                                    if (type == "subs") {
+                                        $("#ytb-count-" + i).html(data.subscribersCount);
+                                    } else {
+                                        $("#ytb-count-" + i).html(data.viewsCount);
+                                    }
+                                    $('#compteur-refresh-' + i).html(time);
+                                    setTimeout(function () {
+                                        console.log('refreshed!')
+                                        compteurYoutube(type, time, i - 1);
+                                    }, time * 1000);
+
+                                    i++;
+                                }
+                            });
                         }
-                        $('#compteur-refresh').html(time);
-                        let youtube = document.getElementById('youtube-count-container');
-                        youtube.classList.replace('none', 'youtube-active');
-                        ///$("#youtube-count-container").className.replace('none', 'youtube-active');
-                        setTimeout(function () {
-                            console.log('refreshed!')
-                            compteurYoutube(type, time);
-                        }, time * 1000);
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
                         alert(xhr.status);
@@ -355,7 +381,7 @@
 
         {#        Fonction statistiques youtube#}
         <script>
-            function statsYoutube(type, time) {
+            function statsYoutube(type, time, id = null) {
                 $.ajax({
                     url: "http://127.0.0.1:3000/youtube/api/lastStats",
                     dataType: "json",
@@ -364,67 +390,159 @@
                         if (data.error == 401) {
                             window.location.href = "https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/youtube&response_type=code&state=security_token%3D138r5719ru3e1%26url%3Dhttps%3A%2F%2Foauth2.example.com%2Ftoken&redirect_uri=http%3A//127.0.0.1:3000/youtube/services/callback&client_id=482608527715-8fpkr88gaq0chr2rngoer02i8240baib.apps.googleusercontent.com";
                         }
-                        $('#stats-type-count').html(type);
-                        if (type == "views") {
-                            $('#stats-ytb-count').html(data.views.currentMonth);
-                            if (data.views.stats == 0) {
-                                $('#diff-ytb-count').html("Soit 0% de plus que le dernier mois");
-                            } else {
-                                if (data.views.stats >= 1000) {
-                                    $('#diff-ytb-count').html("Soit > 999,99% de plus que le derniers mois");
-                                } else if (data.views.stats <= -1000) {
-                                    $('#diff-ytb-count').html("Soit > 999,99% de moins que le derniers mois");
+                        if(id != null) {
+                            $('#stats-type-count-'+id).html(type);
+                            if (type == "views") {
+                                $('#stats-ytb-count-'+id).html(data.views.currentMonth);
+                                if (data.views.stats == 0) {
+                                    $('#diff-ytb-count-'+id).html("Soit 0% de plus que le dernier mois");
                                 } else {
-                                    $('#diff-ytb-count').html("Soit " + data.views.stats + " % par rapport au derniers mois");
+                                    if (data.views.stats >= 1000) {
+                                        $('#diff-ytb-count-'+id).html("Soit > 999,99% de plus que le derniers mois");
+                                    } else if (data.views.stats <= -1000) {
+                                        $('#diff-ytb-count-'+id).html("Soit > 999,99% de moins que le derniers mois");
+                                    } else {
+                                        $('#diff-ytb-count-'+id).html("Soit " + data.views.stats + " % par rapport au derniers mois");
+                                    }
+                                }
+                            } else if (type == "likes") {
+                                $('#stats-ytb-count-'+id).html(data.likes.currentMonth);
+                                if (data.likes.stats == 0) {
+                                    $('#diff-ytb-count-'+id).html("Soit 0% de plus que le dernier mois");
+                                } else {
+                                    if (data.likes.stats >= 1000) {
+                                        $('#diff-ytb-count-'+id).html("Soit > 999,99% de plus que le derniers mois");
+                                    } else if (data.likes.stats <= -1000) {
+                                        $('#diff-ytb-count-'+id).html("Soit > 999,99% de moins que le derniers mois");
+                                    } else {
+                                        $('#diff-ytb-count-'+id).html("Soit " + data.likes.stats + " % par rapport au derniers mois");
+                                    }
+                                }
+                            } else if (type == "dislikes") {
+                                $('#stats-ytb-count-'+id).html(data.dislikes.currentMonth);
+                                if (data.dislikes.stats == 0) {
+                                    $('#diff-ytb-count-'+id).html("Soit 0% de plus que le dernier mois");
+                                } else {
+                                    if (data.dislikes.stats >= 1000) {
+                                        $('#diff-ytb-count-'+id).html("Soit > 999,99% de plus que le derniers mois");
+                                    } else if (data.dislikes.stats <= -1000) {
+                                        $('#diff-ytb-count-'+id).html("Soit > 999,99% de moins que le derniers mois");
+                                    } else {
+                                        $('#diff-ytb-count-'+id).html("Soit " + data.dislikes.stats + " % par rapport au derniers mois");
+                                    }
+                                }
+                            } else {
+                                $('#stats-ytb-count-'+id).html(data.subs.currentMonth);
+                                if (data.subs.stats == 0) {
+                                    $('#diff-ytb-count-'+id).html("Soit 0% de plus que le dernier mois");
+                                } else {
+                                    if (data.subs.stats >= 1000) {
+                                        $('#diff-ytb-count-'+id).html("Soit > 999,99% de plus que le derniers mois");
+                                    } else if (data.subs.stats <= -1000) {
+                                        $('#diff-ytb-count-'+id).html("Soit > 999,99% de moins que le derniers mois");
+                                    } else {
+                                        $('#diff-ytb-count-'+id).html("Soit " + data.subs.stats + " % par rapport au derniers mois");
+                                    }
                                 }
                             }
-                        } else if (type == "likes") {
-                            $('#stats-ytb-count').html(data.likes.currentMonth);
-                            if (data.likes.stats == 0) {
-                                $('#diff-ytb-count').html("Soit 0% de plus que le dernier mois");
-                            } else {
-                                if (data.likes.stats >= 1000) {
-                                    $('#diff-ytb-count').html("Soit > 999,99% de plus que le derniers mois");
-                                } else if (data.likes.stats <= -1000) {
-                                    $('#diff-ytb-count').html("Soit > 999,99% de moins que le derniers mois");
-                                } else {
-                                    $('#diff-ytb-count').html("Soit " + data.likes.stats + " % par rapport au derniers mois");
-                                }
-                            }
-                        } else if (type == "dislikes") {
-                            $('#stats-ytb-count').html(data.dislikes.currentMonth);
-                            if (data.dislikes.stats == 0) {
-                                $('#diff-ytb-count').html("Soit 0% de plus que le dernier mois");
-                            } else {
-                                if (data.dislikes.stats >= 1000) {
-                                    $('#diff-ytb-count').html("Soit > 999,99% de plus que le derniers mois");
-                                } else if (data.dislikes.stats <= -1000) {
-                                    $('#diff-ytb-count').html("Soit > 999,99% de moins que le derniers mois");
-                                } else {
-                                    $('#diff-ytb-count').html("Soit " + data.dislikes.stats + " % par rapport au derniers mois");
-                                }
-                            }
-                        } else {
-                            $('#stats-ytb-count').html(data.subs.currentMonth);
-                            if (data.subs.stats == 0) {
-                                $('#diff-ytb-count').html("Soit 0% de plus que le dernier mois");
-                            } else {
-                                if (data.subs.stats >= 1000) {
-                                    $('#diff-ytb-count').html("Soit > 999,99% de plus que le derniers mois");
-                                } else if (data.subs.stats <= -1000) {
-                                    $('#diff-ytb-count').html("Soit > 999,99% de moins que le derniers mois");
-                                } else {
-                                    $('#diff-ytb-count').html("Soit " + data.subs.stats + " % par rapport au derniers mois");
-                                }
-                            }
+
+                            $('#ytb-stats-compteur-refresh-'+id).html(time);
+
+                            let refresh = id;
+                            setTimeout(function () {
+                                console.log('refreshed!');
+                                statsYoutube(type, time, refresh);
+                            }, time * 1000);
                         }
 
-                        $('#ytb-stats-compteur-refresh').html(time);
-                        $("#youtube-stats-container").show();
-                        setTimeout(function () {
-                            console.log('refreshed!')
-                            statsYoutube(type, time);
-                        }, time * 1000);
+                        else {
+                            console.log(data);
+
+
+                            $.ajax({
+                                url: "test/youtube-stats.html",
+                                context: document.body,
+                                success: function (response) {
+                                    grid.addWidget(response, 0, 0, 3, 2, true);
+                                    console.log(response);
+
+                                    $('#youtube-stats-container').attr('id', 'youtube-stats-container-' + i);
+                                    $('#stats-type-count').attr('id', 'stats-type-count-' + i);
+                                    $('#stats-ytb-count').attr('id', 'stats-ytb-count-' + i);
+                                    $('#diff-ytb-count').attr('id', 'diff-ytb-count-' + i);
+                                    $('#ytb-stats-compteur-refresh').attr('id', 'ytb-stats-compteur-refresh-' + i);
+
+
+                                    $('#stats-type-count-' + i).html(type);
+                                    if (type == "views") {
+                                        $('#stats-ytb-count-' + i).html(data.views.currentMonth);
+                                        if (data.views.stats == 0) {
+                                            $('#diff-ytb-count-' + i).html("Soit 0% de plus que le dernier mois");
+                                        } else {
+                                            if (data.views.stats >= 1000) {
+                                                $('#diff-ytb-count-' + i).html("Soit > 999,99% de plus que le derniers mois");
+                                            } else if (data.views.stats <= -1000) {
+                                                $('#diff-ytb-count-' + i).html("Soit > 999,99% de moins que le derniers mois");
+                                            } else {
+                                                $('#diff-ytb-count-' + i).html("Soit " + data.views.stats + " % par rapport au derniers mois");
+                                            }
+                                        }
+                                    } else if (type == "likes") {
+                                        $('#stats-ytb-count-' + i).html(data.likes.currentMonth);
+                                        if (data.likes.stats == 0) {
+                                            $('#diff-ytb-count-' + i).html("Soit 0% de plus que le dernier mois");
+                                        } else {
+                                            if (data.likes.stats >= 1000) {
+                                                $('#diff-ytb-count-' + i).html("Soit > 999,99% de plus que le derniers mois");
+                                            } else if (data.likes.stats <= -1000) {
+                                                $('#diff-ytb-count-' + i).html("Soit > 999,99% de moins que le derniers mois");
+                                            } else {
+                                                $('#diff-ytb-count-' + i).html("Soit " + data.likes.stats + " % par rapport au derniers mois");
+                                            }
+                                        }
+                                    } else if (type == "dislikes") {
+                                        $('#stats-ytb-count-' + i).html(data.dislikes.currentMonth);
+                                        if (data.dislikes.stats == 0) {
+                                            $('#diff-ytb-count-' + i).html("Soit 0% de plus que le dernier mois");
+                                        } else {
+                                            if (data.dislikes.stats >= 1000) {
+                                                $('#diff-ytb-count-' + i).html("Soit > 999,99% de plus que le derniers mois");
+                                            } else if (data.dislikes.stats <= -1000) {
+                                                $('#diff-ytb-count-' + i).html("Soit > 999,99% de moins que le derniers mois");
+                                            } else {
+                                                $('#diff-ytb-count-' + i).html("Soit " + data.dislikes.stats + " % par rapport au derniers mois");
+                                            }
+                                        }
+                                    } else {
+                                        $('#stats-ytb-count-' + i).html(data.subs.currentMonth);
+                                        if (data.subs.stats == 0) {
+                                            $('#diff-ytb-count-' + i).html("Soit 0% de plus que le dernier mois");
+                                        } else {
+                                            if (data.subs.stats >= 1000) {
+                                                $('#diff-ytb-count-' + i).html("Soit > 999,99% de plus que le derniers mois");
+                                            } else if (data.subs.stats <= -1000) {
+                                                $('#diff-ytb-count-' + i).html("Soit > 999,99% de moins que le derniers mois");
+                                            } else {
+                                                $('#diff-ytb-count-' + i).html("Soit " + data.subs.stats + " % par rapport au derniers mois");
+                                            }
+                                        }
+                                    }
+
+                                    $('#ytb-stats-compteur-refresh-' + i).html(time);
+
+                                    let refresh = i;
+                                    setTimeout(function () {
+                                        console.log('refreshed!')
+                                        statsYoutube(type, time, refresh);
+                                    }, time * 1000);
+
+                                    i++;
+                                }
+                            });
+
+                        }
+
+
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
                         alert(xhr.status);
@@ -444,78 +562,52 @@
             }
         </script>
 
-        <script>
-            function twitterAccountInfo(account){
-                $.ajax({
-                    url: "http://127.0.0.1:3000/twitter/api/accountInfo",
-                    dataType: "json",
-                    type: "GET",
-                    data: "user="+account,
-                    success: function(data){
-                        $('#twitter-account-username').html(data.screen_name);
-                        $('#twitter-count').html(data.followers_count);
-                        // $('#twitter-follower-container').show();
-                        let twitter = document.getElementById('twitter-follower-container');
-                        twitter.classList.replace('none', 'twitter-active');
-                        setTimeout(function() {
-                            console.log('refreshed!');
-                            twitterAccountInfo(account);
-                        }, 5000);
-                    }
-
-                });
-            }
-
-            function twitterProfileInfo(account){
-                $.ajax({
-                    url: "http://127.0.0.1:3000/twitter/api/accountInfo",
-                    dataType: "json",
-                    type: "GET",
-                    data: "user="+account,
-                    success: function(data){
-                        $('#profile-twitter-image').html("<img src='"+data.profile_image_url+"'>");
-                        if(data.verified == true) {
-                            $('#twitter-info-username').html(data.name+'<img width="20" alt="Twitter Verified Badge" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Twitter_Verified_Badge.svg/512px-Twitter_Verified_Badge.svg.png">');
-                        }else{
-                            $('#twitter-info-username').html(data.name);
-                        }
-                        $('#twitter-info-screenname').html("@"+data.screen_name);
-                        $('#twitter-info-followers-count').html(data.followers_count);
-                        $('#twitter-info-followings-count').html(data.friends_count);
-                        $('#twitter-follow-button').html('<a href=\"https://twitter.com/'+data.screen_name+'?ref_src=twsrc%5Etfw\" class=\"twitter-follow-button\" data-show-count=\"false\">Follow @'+data.screen_name+'</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"/>');
-                        if(data.verified == true) {
-                            $('#certified').show();
-                        }else{
-                            $('#certified').hide();
-                        }
-                        $('#twitter-info-container').show();
-                    }
-
-                });
-            }
-        </script>
 
 
 {#        Fonction prix d'une bibliothèque#}
         <script>
             function steamPrice(user) {
-                $('#steam-price-container').show();
-                $.ajax({
-                    url: "http://127.0.0.1:3000/steam/api/myPrice",
-                    dataType: "json",
-                    type: "GET",
-                    data: "user=" + user,
-                    success: function (data) {
-                        if (!data.error) {
-                            $('#price-steam').html(data.data.price);
-                            $('#total-steam-game-count').html(data.data.count);
-                            $('#steam-loading').hide();
-                            $('#steam-price-results').show();
-                        }
-                        console.log(data);
-                    }
 
+
+
+                $.ajax({
+                    url: "test/steam-price.html",
+                    context: document.body,
+                    success: function(response) {
+                        grid.addWidget(response, 0, 0, 3, 2, true);
+                        $.ajax({
+                            url: "http://127.0.0.1:3000/steam/api/myPrice",
+                            dataType: "json",
+                            type: "GET",
+                            data: "user=" + user,
+                            success: function (data) {
+                                if (!data.error) {
+
+                                    $('#price-steam').attr('id', 'price-steam-'+i);
+                                    $('#total-steam-game-count').attr('id', 'total-steam-game-count-'+i);
+                                    $('#steam-loading').attr('id', 'steam-loading-'+i);
+                                    $('#steam-price-container').attr('id', 'steam-price-container-'+i);
+                                    $('#steam-price-results').attr('id', 'steam-price-results-'+i);
+
+
+                                    $('#price-steam-'+i).html(data.data.price);
+                                    $('#total-steam-game-count-'+i).html(data.data.count);
+                                    $('#steam-loading-'+i).hide();
+                                    $('#steam-price-results-'+i).show();
+                                    i++;
+
+                                }
+                                console.log(data);
+                            }
+
+                        });
+
+                    }
                 });
+
+
+
+
             }
         </script>
 
@@ -555,6 +647,11 @@
 
             function getPlayerCount(appName, appId) {
                 console.log("getting player count ... for appid " + appId);
+
+
+
+
+
                 $.ajax({
                     url: "http://127.0.0.1:3000/steam/getPlayerCount",
                     data: "appid="+appId,
@@ -562,10 +659,20 @@
                     type: "GET",
                     success: function(data){
                         console.log(data);
-                        $('#gameName').html(appName);
-                        $('#count').html(data.player_count);
-                        let steam = document.getElementById('player-count');
-                        steam.classList.replace('none', 'steam-active');
+
+                        $.ajax({
+                            url: "test/steam-count.html",
+                            context: document.body,
+                            success: function(response) {
+                                grid.addWidget(response, 0, 0, 3, 2, true);
+                                $('#gameName').attr('id', 'gameName-'+i);
+                                $('#count').attr('id', 'count-'+i);
+
+                                $('#gameName-'+i).html(appName);
+                                $('#count-'+i).html(data.player_count);
+                                i++;
+                            }
+                        });
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
                         alert(xhr.status);
