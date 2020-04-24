@@ -40,8 +40,12 @@
                 </div>
             {% endif %}
             {% if user is defined and user.username is defined %}
-                <div class="button-icon">
+                <div class="button-icon" id="twitter-sidebar">
+                    {% if currentPage is not defined %}
                     <a href="#twitter" style="display: flex">
+                        {% else %}
+                        <a href="/#twitter" style="display: flex">
+                        {% endif %}
                         <div class="trait trait-none"></div>
                         <svg width="100%" height="25" viewBox="0 0 32 32" class="icon">
                             <path class="path-base path"
@@ -51,8 +55,12 @@
                     </a>
                 </div>
 
-                <div class="button-icon">
+                <div class="button-icon" id="spotify-sidebar">
+                    {% if currentPage is not defined %}
                     <a href="#spotify" style="display: flex">
+                        {% else %}
+                        <a href="/#spotify" style="display: flex">
+                        {% endif %}
                         <div class="trait trait-none"></div>
                         <svg width="100%" height="25" viewBox="0 0 32 32" class="icon">
                             <path class="path-base path"
@@ -62,8 +70,12 @@
                     </a>
                 </div>
 
-                <div class="button-icon">
+                <div class="button-icon" id="youtube-sidebar">
+                    {% if currentPage is not defined %}
                     <a href="#youtube" style="display: flex">
+                        {% else %}
+                        <a href="/#youtube" style="display: flex">
+                        {% endif %}
                         <div class="trait trait-none"></div>
                         <svg width="100%" height="25" viewBox="0 0 32 32" class="icon">
                             <path class="path-base path"
@@ -73,8 +85,12 @@
                     </a>
                 </div>
 
-                <div class="button-icon">
+                <div class="button-icon" id="steam-sidebar">
+                    {% if currentPage is not defined %}
                     <a href="#steam" style="display: flex">
+                        {% else %}
+                        <a href="/#steam" style="display: flex">
+                        {% endif %}
                         <div class="trait trait-none"></div>
                         <svg width="100%" height="25" viewBox="0 0 32 32" class="icon">
                             <path class="path-base path"

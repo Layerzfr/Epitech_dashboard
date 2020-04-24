@@ -4,6 +4,19 @@ let all = document.querySelectorAll('.button-icon');
 let content = document.getElementsByClassName('content');
 let traitContent = document.getElementsByClassName('trait-content');
 
+$(document).ready(function() {
+    let socials = ['twitter', 'steam', 'youtube', 'spotify'];
+
+    socials.forEach(function (e) {
+        if (window.location.href.indexOf("#"+e) > -1) {
+            $('#'+e+'-sidebar').click();
+        }
+    })
+    // if (window.location.href.indexOf("#steam") > -1) {
+    //     $('#steam-sidebar').click();
+    // }
+});
+
 for (let i = 0; i < all.length; i++) {
     all[i].addEventListener('click', function (e) {
 
