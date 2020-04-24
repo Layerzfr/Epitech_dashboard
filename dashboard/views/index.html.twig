@@ -591,8 +591,10 @@
                                     $('#steam-loading').attr('id', 'steam-loading-'+i);
                                     $('#steam-price-container').attr('id', 'steam-price-container-'+i);
                                     $('#steam-price-results').attr('id', 'steam-price-results-'+i);
+                                    $('#username-steam').attr('id', 'username-steam-'+i);
 
 
+                                    $('#username-steam-'+i).html(data.data.user);
                                     $('#price-steam-'+i).html(data.data.price+' €');
                                     $('#total-steam-game-count-'+i).html(data.data.count);
                                     $('#steam-loading-'+i).hide();

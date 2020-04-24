@@ -221,7 +221,8 @@ steamController.apiGetLibraryPrice = async function(req, res) {
                 console.log('final price: '+ price/100 +' €')
                 return res.json({data: {
                     'count': gameCount,
-                        'price': price/100
+                        'price': price/100,
+                        'user': req.query.user
                     }})
                 // return twing.render('steam/library_price.html.twig', {
                 //     'game_count': gameCount,
