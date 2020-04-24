@@ -40,6 +40,7 @@
                     log('added ', items)
                 });
                 grid.on('removed', function (e, items) {
+                    grid.compact()
                     log('removed ', items)
                 });
                 grid.on('change', function (e, items) {
@@ -564,16 +565,6 @@
                 });
             }
         </script>
-
-        {#        Fonction tweet de compte#}
-
-        <script>
-            function tweetAccount(account) {
-                $('#tweet-container').html('<a class="twitter-timeline" href="https://twitter.com/' + account + '?ref_src=twsrc%5Etfw">Tweets by ' + account + '</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"/>');
-                $('#tweet-container').show();
-            }
-        </script>
-
 
 
 {#        Fonction prix d'une bibliothèque#}
