@@ -183,12 +183,10 @@ steamController.getLibraryPrice = async function(req, res) {
             for (element in games ) {
                     await Steam.find({appId: games[element].appid}).then(async function (item) {
                         price += parseInt(item[0].price);
-                        // console.log('bblblbl ', price);
                     });
             }
         };
         await forLoop();
-        console.log('final price: '+ price/100 +' €')
         return twing.render('steam/library_price.html.twig', {
             'game_count': gameCount,
             'price': price/100
@@ -213,23 +211,15 @@ steamController.apiGetLibraryPrice = async function(req, res) {
                     for (element in games ) {
                         await Steam.find({appId: games[element].appid}).then(async function (item) {
                             price += parseInt(item[0].price);
-                            // console.log('bblblbl ', price);
                         });
                     }
                 };
                 await forLoop();
-                console.log('final price: '+ price/100 +' €')
                 return res.json({data: {
                     'count': gameCount,
                         'price': price/100,
                         'user': req.query.user
                     }})
-                // return twing.render('steam/library_price.html.twig', {
-                //     'game_count': gameCount,
-                //     'price': price/100
-                // }).then((output) => {
-                //     res.end(output);
-                // });
             })
         }
     })
@@ -242,7 +232,6 @@ steamController.getAllGames = function(req, res) {
         if (err) {
             console.log(err);
         } else {
-            console.log(result);
             return res.json(result);
         }
     });
@@ -253,7 +242,6 @@ steamController.getCurrentPlayerForGame = function(req, res) {
         if (err) {
             console.log(err);
         } else {
-            console.log(JSON.parse(JSON.stringify(result)));
             return twing.render('steam/current_player_for_game.html.twig', {
                 'games': result,
             }).then((output) => {
@@ -296,48 +284,11 @@ steamController.getPlayerCount = function(req, res) {
     })
 };
 
-// steamController.getGamesPrice = async function(req, res) {
-//     var apps = [];
-//     await request.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=5BED62BD82D03D000189824F0AE1E79E&steamid='+req.user.oauthSteam,await async function (error, response, body) {
-//         var i = 1;
-//         var price = 0;
-//
-//         JSON.parse(body).response.games.forEach(await async function (games) {
-//             apps.push(games.appid);
-//         });
-//         const forLoop = async _ => {
-//             console.log('Start')
-//             console.log('Temps max estimé : ~' + ((apps.length +1) / 60) + ' minutes');
-//
-//             for (let element in apps) {
-//                 console.log(apps[element]);
-//                 const response = await fetch("https://store.steampowered.com/api/appdetails/?appids=" + apps[element] + "&cc=EE&l=english&v=1");
-//                 const json = await response.json();
-//                 try {
-//                     if(json[apps[element]].data.price_overview) {
-//                         price += (json[apps[element]].data.price_overview.initial);
-//                     }
-//                 } catch (e) {
-//                     console.log(e)
-//                 }
-//                 await wait(1000);
-//                 console.log(price/100 +' €')
-//             }
-//
-//             console.log('End')
-//         };
-//
-//         await forLoop();
-//
-//
-//         console.log('final price: '+ price/100 +' €')
-//     })
-// };
-
+//TODO A SUPPRIMER
 steamController.getUserName = function(req, res) {
     authController.checkIfLogged(req, res);
     request.get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=5BED62BD82D03D000189824F0AE1E79E&steamids='+req.user.oauthSteam, function (error, response, body) {
-        console.log(JSON.parse(body).response.players[0].personaname);
+        return null;
     })
 };
 

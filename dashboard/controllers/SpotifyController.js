@@ -15,7 +15,6 @@ spotifyController.connect = function(req, res) {
 };
 
 spotifyController.callback = function(req, res) {
-    console.log(req.user);
     request.post({
         headers: {'Authorization' : 'Basic Mjg0N2YwOWMxMDVkNGEwN2FlYzk0YzQ0ODk1N2ZlNjA6ODYwY2YxMzdkNTU0NGU1NmEwNTQ4YjFiNjVmZDA5MDg=',
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -27,7 +26,6 @@ spotifyController.callback = function(req, res) {
             if (err) return res.status(500).send(err);
             res.redirect('/');
         });
-        console.log(JSON.parse(response.body).access_token)
     });
 };
 
@@ -65,7 +63,6 @@ spotifyController.getTopTrackAndPlaylist = function(req, res) {
 }
 
 spotifyController.apiGetTops = function(req, res) {
-    console.log(req.query.type);
     request.get({
         headers: {'Authorization' : 'Bearer '+req.user.oauthSpotify,
             'Accept': 'application/json',

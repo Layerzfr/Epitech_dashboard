@@ -6,8 +6,6 @@ var steamController = require('../controllers/SteamController');
 
 router.get('/getusername', steamController.getUserName);
 
-// router.get('/getgamesPrice', steamController.getGamesPrice);
-
 router.get('/getPlayerCount', steamController.getPlayerCount);
 
 router.get('/getrecentplayedgames', steamController.getRecentPlayedGames);

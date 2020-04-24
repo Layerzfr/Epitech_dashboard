@@ -114,7 +114,6 @@
                                 context: document.body,
                                 success: function (response) {
                                     grid.addWidget(response, 0, 0, 3, 6, true);
-                                    console.log(response);
 
                                     $('#twitter-info-container').attr('id', 'twitter-info-container-' + i);
                                     $('#profile-twitter-image').attr('id', 'profile-twitter-image-' + i);
@@ -166,11 +165,9 @@
                         data: "user="+account,
                         success: function(data){
                             if(id !== null) {
-                                console.log(id);
                                 $('#twitter-account-username-'+id).html(data.screen_name);
                                 $('#twitter-count-'+id).html(data.followers_count);
                                 setTimeout(function() {
-                                    console.log('refreshed!');
                                     twitterAccountInfo(account, id);
                                 }, 5000);
                             } else {
@@ -179,7 +176,6 @@
                                     context: document.body,
                                     success: function (response) {
                                         grid.addWidget(response, 0, 0, 3, 6, true);
-                                        console.log(response);
 
                                         $('#tweet-count-container').attr('id', 'tweet-count-container-' + i);
                                         $('#twitter-account-username').attr('id', 'twitter-account-username-' + i);
@@ -187,13 +183,10 @@
 
                                         $('#twitter-account-username-' + i).html(data.screen_name);
                                         $('#twitter-count-' + i).html(data.followers_count);
-                                        // $('#twitter-follower-container').show();
                                         setTimeout(function () {
                                             console.log('refreshed!');
                                             twitterAccountInfo(account, i-1);
                                         }, 5000);
-                                        // $('#tweet-container').attr('id', 'tweet-container-'+i);
-                                        // $('#tweet-container-'+i).html('<a class="twitter-timeline" href="https://twitter.com/' + account + '?ref_src=twsrc%5Etfw">Tweets by ' + account + '</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"/>')
                                         i++;
                                     }
                                 });
@@ -205,13 +198,11 @@
                 }
 
                 function tweetAccount(account) {
-                    console.log(account);
                     $.ajax({
                         url: "widget/twitter-tweets.html",
                         context: document.body,
                         success: function(response) {
                             grid.addWidget(response, 0, 0, 3, 12, true);
-                            console.log(response);
                             $('#tweet-container').attr('id', 'tweet-container-'+i);
                             $('#tweet-container-'+i).html('<a class="twitter-timeline" href="https://twitter.com/' + account + '?ref_src=twsrc%5Etfw">Tweets by ' + account + '</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"/>')
                             i++;
@@ -235,7 +226,6 @@
                     context: document.body,
                     success: function (response) {
                         grid.addWidget(response, 0, 0, 3, 5, true);
-                        console.log(response);
 
                         $('#lecteur-top').attr('id', 'lecteur-top-' + i);
 
@@ -245,14 +235,9 @@
                         } else {
                             $('#lecteur-top-'+i).html('<iframe src="https://open.spotify.com/embed/artist/' + id + '" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>')
                         }
-
-
                         i++;
                     }
                 });
-
-
-
             }
 
         </script>
@@ -266,7 +251,6 @@
                 dataType: "json",
                 type: "GET",
                 success: function (data) {
-                    console.log(data);
                     if (data.error == 401) {
                         window.location.href = "https://accounts.spotify.com/fr/authorize?client_id=2847f09c105d4a07aec94c448957fe60&response_type=code&redirect_uri=http://127.0.0.1:3000/spotify/sessions/callback&&scope=user-read-private%20user-read-email%20playlist-read-private%20user-top-read";
                     }
@@ -278,8 +262,6 @@
                         $("#playlist").autocomplete({
                             select: function (event, ui) {
                                 displayLecteur(ui.item.id);
-                                // $("#playlist-container").show();
-
                             },
                             max: 10,
                             minLength: 4,
@@ -304,8 +286,6 @@
                             i++;
                         }
                     });
-
-                // $('#lecteur').html('<iframe src="https://open.spotify.com/embed/playlist/' + id + '" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>')
             }
             {% endif %}
         </script>
@@ -326,12 +306,7 @@
                         if (data.error == 401) {
                             window.location.href = "https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/youtube&response_type=code&state=security_token%3D138r5719ru3e1%26url%3Dhttps%3A%2F%2Foauth2.example.com%2Ftoken&redirect_uri=http%3A//127.0.0.1:3000/youtube/services/callback&client_id=482608527715-8fpkr88gaq0chr2rngoer02i8240baib.apps.googleusercontent.com";
                         }
-
                         if(id != null) {
-                            console.log($('#youtube-count-container-'+id).length);
-
-
-                            console.log(id);
                             $('#channel-'+id).html(data.channelName);
                             $('#type-count-'+id).html(type);
                             if (type == "subs") {
@@ -341,7 +316,6 @@
                             }
                             $('#compteur-refresh-'+id).html(time);
                             setTimeout(function () {
-                                console.log('refreshed!');
                                 compteurYoutube(type, time, id);
                             }, time * 1000);
                         } else {
@@ -352,7 +326,6 @@
                                 context: document.body,
                                 success: function (response) {
                                     grid.addWidget(response, 0, 0, 3, 3, true);
-                                    console.log(response);
 
                                     $('#youtube-count-container').attr('id', 'youtube-count-container-' + i);
                                     $('#channel').attr('id', 'channel-' + i);
@@ -369,7 +342,6 @@
                                     }
                                     $('#compteur-refresh-' + i).html(time);
                                     setTimeout(function () {
-                                        console.log('refreshed!')
                                         compteurYoutube(type, time, i - 1);
                                     }, time * 1000);
 
@@ -379,8 +351,8 @@
                         }
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
-                        alert(xhr.status);
-                        alert(thrownError);
+                        console.log(xhr.status);
+                        console.log(thrownError);
                     }
 
                 });
@@ -463,21 +435,15 @@
 
                             let refresh = id;
                             setTimeout(function () {
-                                console.log('refreshed!');
                                 statsYoutube(type, time, refresh);
                             }, time * 1000);
                         }
-
                         else {
-                            console.log(data);
-
-
                             $.ajax({
                                 url: "widget/youtube-stats.html",
                                 context: document.body,
                                 success: function (response) {
                                     grid.addWidget(response, 0, 0, 3, 3, true);
-                                    console.log(response);
 
                                     $('#youtube-stats-container').attr('id', 'youtube-stats-container-' + i);
                                     $('#stats-type-count').attr('id', 'stats-type-count-' + i);
@@ -551,21 +517,16 @@
 
                                     let refresh = i;
                                     setTimeout(function () {
-                                        console.log('refreshed!')
                                         statsYoutube(type, time, refresh);
                                     }, time * 1000);
-
                                     i++;
                                 }
                             });
-
                         }
-
-
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
-                        alert(xhr.status);
-                        alert(thrownError);
+                        console.log(xhr.status);
+                        console.log(thrownError);
                     }
 
                 });
@@ -576,9 +537,6 @@
 {#        Fonction prix d'une bibliothèque#}
         <script>
             function steamPrice(user) {
-
-
-
                 $.ajax({
                     url: "widget/steam-price.html",
                     context: document.body,
@@ -591,14 +549,12 @@
                             data: "user=" + user,
                             success: function (data) {
                                 if (!data.error) {
-
                                     $('#price-steam').attr('id', 'price-steam-'+i);
                                     $('#total-steam-game-count').attr('id', 'total-steam-game-count-'+i);
                                     $('#steam-loading').attr('id', 'steam-loading-'+i);
                                     $('#steam-price-container').attr('id', 'steam-price-container-'+i);
                                     $('#steam-price-results').attr('id', 'steam-price-results-'+i);
                                     $('#username-steam').attr('id', 'username-steam-'+i);
-
 
                                     $('#username-steam-'+i).html(data.data.user);
                                     $('#price-steam-'+i).html(data.data.price+' €');
@@ -608,17 +564,10 @@
                                     i++;
 
                                 }
-                                console.log(data);
                             }
-
                         });
-
                     }
                 });
-
-
-
-
             }
         </script>
 
@@ -635,42 +584,26 @@
                             data.forEach(function (element) {
                                 dataArr.push({label: element.appName, value: element.appName, id: element.appId});
                             })
-                            // console.log(dataArr)
                             $( "#game" ).autocomplete({
-                                // source: availableTags,
                                 select: function( event, ui ) {
-                                    // console.log(ui.item)
                                     getPlayerCount(ui.item.label, ui.item.id)
-
                                 },
                                 max:10,
                                 minLength: 4,
-
                                 source: dataArr
-
                             });
                         } );
                     }
-
                 });
             });
 
-
             function getPlayerCount(appName, appId) {
-                console.log("getting player count ... for appid " + appId);
-
-
-
-
-
                 $.ajax({
                     url: "http://127.0.0.1:3000/steam/getPlayerCount",
                     data: "appid="+appId,
                     dataType: "json",
                     type: "GET",
                     success: function(data){
-                        console.log(data);
-
                         $.ajax({
                             url: "widget/steam-count.html",
                             context: document.body,
@@ -686,8 +619,8 @@
                         });
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
-                        alert(xhr.status);
-                        alert(thrownError);
+                        console.log(xhr.status);
+                        console.log(thrownError);
                     }
 
                 });

@@ -31,7 +31,6 @@ for (let i = 0; i < all.length; i++) {
             if (i !== 0) {
                 content[i - 1].classList.replace('hide', 'show');
                 traitContent[0].classList.replace('hide', 'show');
-                console.log(traitContent);
             }
 
         }
