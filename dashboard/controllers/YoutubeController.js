@@ -230,7 +230,7 @@ youtubeController.apiGetLastStats = function(req, res) {
                 error: 401
             })
         }
-        if(data.length == 0) {
+        if(data.length == 0 || !data[1]) {
             return res.json({
                 'views': null,
                 'subs': null,
