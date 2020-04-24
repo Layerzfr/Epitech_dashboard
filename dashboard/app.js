@@ -52,8 +52,8 @@ var OpenIDStrategy = require('passport-openid').Strategy;
 var SteamStrategy = new OpenIDStrategy({
       providerURL: 'http://steamcommunity.com/openid',
       stateless: true,
-      returnURL: 'http://localhost:3000/steam/sessions/callback',
-      realm: 'http://localhost:3000/',
+      returnURL: 'http://127.0.0.1:3000/steam/sessions/callback',
+      realm: 'http://127.0.0.1:3000/',
     },
     function(identifier, done) {
       process.nextTick(function () {
