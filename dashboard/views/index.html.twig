@@ -109,10 +109,10 @@
                         success: function(data){
 
                             $.ajax({
-                                url: "test/twitter-info.html",
+                                url: "widget/twitter-info.html",
                                 context: document.body,
                                 success: function (response) {
-                                    grid.addWidget(response, 0, 0, 3, 2, true);
+                                    grid.addWidget(response, 0, 0, 3, 6, true);
                                     console.log(response);
 
                                     $('#twitter-info-container').attr('id', 'twitter-info-container-' + i);
@@ -171,10 +171,10 @@
                                 }, 5000);
                             } else {
                                 $.ajax({
-                                    url: "test/twitter-follower.html",
+                                    url: "widget/twitter-follower.html",
                                     context: document.body,
                                     success: function (response) {
-                                        grid.addWidget(response, 0, 0, 3, 2, true);
+                                        grid.addWidget(response, 0, 0, 3, 6, true);
                                         console.log(response);
 
                                         $('#tweet-count-container').attr('id', 'tweet-count-container-' + i);
@@ -203,10 +203,10 @@
                 function tweetAccount(account) {
                     console.log(account);
                     $.ajax({
-                        url: "test/twitter-tweets.html",
+                        url: "widget/twitter-tweets.html",
                         context: document.body,
                         success: function(response) {
-                            grid.addWidget(response, 0, 0, 3, 2, true);
+                            grid.addWidget(response, 0, 0, 3, 12, true);
                             console.log(response);
                             $('#tweet-container').attr('id', 'tweet-container-'+i);
                             $('#tweet-container-'+i).html('<a class="twitter-timeline" href="https://twitter.com/' + account + '?ref_src=twsrc%5Etfw">Tweets by ' + account + '</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"/>')
@@ -227,10 +227,10 @@
             function displayLecteurTop(id, type) {
 
                 $.ajax({
-                    url: "test/spotify-top.html",
+                    url: "widget/spotify-top.html",
                     context: document.body,
                     success: function (response) {
-                        grid.addWidget(response, 0, 0, 3, 2, true);
+                        grid.addWidget(response, 0, 0, 6, 8, true);
                         console.log(response);
 
                         $('#lecteur-top').attr('id', 'lecteur-top-' + i);
@@ -291,10 +291,10 @@
 
             function displayLecteur(id) {
                     $.ajax({
-                        url: "test/lecteur.html",
+                        url: "widget/lecteur.html",
                         context: document.body,
                         success: function(response) {
-                            grid.addWidget(response, 0, 0, 3, 2, true);
+                            grid.addWidget(response, 0, 0, 6, 8, true);
                             $('#lecteur').attr('id', 'lecteur-'+i);
                             $('#lecteur-'+i).html('<iframe src="https://open.spotify.com/embed/playlist/' + id + '" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>')
                             i++;
@@ -338,10 +338,10 @@
 
 
                             $.ajax({
-                                url: "test/youtube-compteur.html",
+                                url: "widget/youtube-compteur.html",
                                 context: document.body,
                                 success: function (response) {
-                                    grid.addWidget(response, 0, 0, 3, 2, true);
+                                    grid.addWidget(response, 0, 0, 3, 6, true);
                                     console.log(response);
 
                                     $('#youtube-count-container').attr('id', 'youtube-count-container-' + i);
@@ -460,10 +460,10 @@
 
 
                             $.ajax({
-                                url: "test/youtube-stats.html",
+                                url: "widget/youtube-stats.html",
                                 context: document.body,
                                 success: function (response) {
-                                    grid.addWidget(response, 0, 0, 3, 2, true);
+                                    grid.addWidget(response, 0, 0, 3, 6, true);
                                     console.log(response);
 
                                     $('#youtube-stats-container').attr('id', 'youtube-stats-container-' + i);
@@ -571,10 +571,10 @@
 
 
                 $.ajax({
-                    url: "test/steam-price.html",
+                    url: "widget/steam-price.html",
                     context: document.body,
                     success: function(response) {
-                        grid.addWidget(response, 0, 0, 3, 2, true);
+                        grid.addWidget(response, 0, 0, 3, 6, true);
                         $.ajax({
                             url: "http://127.0.0.1:3000/steam/api/myPrice",
                             dataType: "json",
@@ -661,10 +661,10 @@
                         console.log(data);
 
                         $.ajax({
-                            url: "test/steam-count.html",
+                            url: "widget/steam-count.html",
                             context: document.body,
                             success: function(response) {
-                                grid.addWidget(response, 0, 0, 3, 2, true);
+                                grid.addWidget(response, 0, 0, 3, 6, true);
                                 $('#gameName').attr('id', 'gameName-'+i);
                                 $('#count').attr('id', 'count-'+i);
 
