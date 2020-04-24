@@ -155,6 +155,9 @@
                 }
 
                 function twitterAccountInfo(account, id = null){
+                    if(id != null && $('#twitter-account-username-'+id).length == 0) {
+                        return;
+                    }
                     $.ajax({
                         url: "http://127.0.0.1:3000/twitter/api/accountInfo",
                         dataType: "json",
@@ -311,6 +314,9 @@
 {#        Fonction compteur youtube#}
         <script>
             function compteurYoutube(type, time, id = null) {
+                if(id != null && $('#youtube-count-container-'+id).length == 0) {
+                    return;
+                }
                 $.ajax({
                     url: "http://127.0.0.1:3000/youtube/api/channel",
                     dataType: "json",
@@ -321,6 +327,9 @@
                         }
 
                         if(id != null) {
+                            console.log($('#youtube-count-container-'+id).length);
+
+
                             console.log(id);
                             $('#channel-'+id).html(data.channelName);
                             $('#type-count-'+id).html(type);
@@ -382,6 +391,9 @@
         {#        Fonction statistiques youtube#}
         <script>
             function statsYoutube(type, time, id = null) {
+                if(id != null && $('#youtube-stats-container-'+id).length == 0) {
+                    return;
+                }
                 $.ajax({
                     url: "http://127.0.0.1:3000/youtube/api/lastStats",
                     dataType: "json",
@@ -590,7 +602,7 @@
                                     $('#steam-price-results').attr('id', 'steam-price-results-'+i);
 
 
-                                    $('#price-steam-'+i).html(data.data.price);
+                                    $('#price-steam-'+i).html(data.data.price+' €');
                                     $('#total-steam-game-count-'+i).html(data.data.count);
                                     $('#steam-loading-'+i).hide();
                                     $('#steam-price-results-'+i).show();

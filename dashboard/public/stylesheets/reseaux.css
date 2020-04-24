@@ -4,15 +4,11 @@
 }
 
 .container-dashboard {
-    padding-bottom: 10px;
-    padding-top: 10px;
-    padding-right: 5px;
-    padding-left: 5px;
     background-color: #282b3b;
     border-radius: 7px;
-    display: flex;
     justify-content: center;
     align-items: center;
+    padding: 30px;
 }
 
 .grid-stack>.grid-stack-item>.grid-stack-item-content {
