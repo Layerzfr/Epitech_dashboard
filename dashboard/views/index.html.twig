@@ -484,7 +484,13 @@
                                     $('#stats-ytb-count').attr('id', 'stats-ytb-count-' + i);
                                     $('#diff-ytb-count').attr('id', 'diff-ytb-count-' + i);
                                     $('#ytb-stats-compteur-refresh').attr('id', 'ytb-stats-compteur-refresh-' + i);
+                                    $('#stats-youtube-results').attr('id', 'stats-youtube-results-' + i);
 
+                                    if(data.empty_channel == 1) {
+                                        $('#stats-youtube-results-'+i).html("Pas de statistiques pour cette chaîne");
+                                        i++;
+                                        return;
+                                    }
 
                                     $('#stats-type-count-' + i).html(type);
                                     if (type == "views") {
