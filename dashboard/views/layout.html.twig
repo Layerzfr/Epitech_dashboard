@@ -276,7 +276,7 @@
         </div>
     </div>
     {#    <div><a class="btn btn-default" onClick="addNewWidget()" href="#">Add Widget</a></div>#}
-    {% if user %}
+    {% if user and currentPage is not defined %}
         <div style="padding: 30px; margin-bottom: 15px;" class="trash text-center text-white ui-droppable">
             <div>
                 <svg fill="#ff0000" version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32"

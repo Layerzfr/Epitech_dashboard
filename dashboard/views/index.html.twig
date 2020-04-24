@@ -351,7 +351,7 @@
                                 url: "widget/youtube-compteur.html",
                                 context: document.body,
                                 success: function (response) {
-                                    grid.addWidget(response, 0, 0, 3, 6, true);
+                                    grid.addWidget(response, 0, 0, 3, 3, true);
                                     console.log(response);
 
                                     $('#youtube-count-container').attr('id', 'youtube-count-container-' + i);
@@ -476,7 +476,7 @@
                                 url: "widget/youtube-stats.html",
                                 context: document.body,
                                 success: function (response) {
-                                    grid.addWidget(response, 0, 0, 3, 6, true);
+                                    grid.addWidget(response, 0, 0, 3, 3, true);
                                     console.log(response);
 
                                     $('#youtube-stats-container').attr('id', 'youtube-stats-container-' + i);
@@ -583,7 +583,7 @@
                     url: "widget/steam-price.html",
                     context: document.body,
                     success: function(response) {
-                        grid.addWidget(response, 0, 0, 3, 6, true);
+                        grid.addWidget(response, 0, 0, 3, 4, true);
                         $.ajax({
                             url: "http://127.0.0.1:3000/steam/api/myPrice",
                             dataType: "json",
