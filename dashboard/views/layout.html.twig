@@ -113,27 +113,40 @@
         <div class="side-content">
             <div class="hide trait-content"></div>
             <div class="hide content" id="twitter">
-                <p>Contenue Twitter</p>
-                <div>
-                    <p>Ajouter les Tweets d'un compte</p>
-                    <div>
-                        <label for="twitter-name">Nom du compte</label>
-                        <input id="twitter-name" type="text" value="twitter">
-                        <button type="button" id="twitter-tl" onclick="tweetAccount($('#twitter-name').val())">Ok</button>
+
+                <div class="container-contain">
+                    <div style="display: flex;flex-direction: column;width: 100%;justify-content: center;align-items: center;margin-bottom: 20px;">
+                        <label style="width: 100% !important;text-align: center;margin-bottom: 20px;" for="twitter-name">Ajouter les Tweets d'un compte</label>
+                        <div style="display: flex; flex-direction: row;">
+                            <input style="font-size: 21px !important;" class="input-contain" id="twitter-name" type="text" value="twitter">
+                        </div>
                     </div>
+                    <a class="button-ok" id="twitter-tl">Ok
+                    </a>
                 </div>
                 {% if user.oauthTwitter %}
-                    <div>
-                        <p>Compteur follower utilisateur</p>
-                        <input type="text" id="twitter-count-username" value="twitter">
-                        <button type="button" id="twitter-follow-button">Ok
-                        </button>
+
+
+                    <div class="container-contain">
+                        <div style="display: flex;flex-direction: column;width: 100%;justify-content: center;align-items: center;margin-bottom: 20px;">
+                            <label style="width: 100% !important;text-align: center;margin-bottom: 20px;" for="twitter-count-username">Compteur follower utilisateur</label>
+                            <div style="display: flex; flex-direction: row;">
+                                <input style="font-size: 21px !important;" class="input-contain" id="twitter-count-username" type="text" value="twitter">
+                            </div>
+                        </div>
+                        <a class="button-ok" id="twitter-follow-button">Ok
+                        </a>
                     </div>
 
-                    <div>
-                        <p>Informations utilisateurs</p>
-                        <input type="text" id="twitter-account-info" value="twitter">
-                        <button type="button" id="twitter-info-button">Ok</button>
+                    <div class="container-contain">
+                        <div style="display: flex;flex-direction: column;width: 100%;justify-content: center;align-items: center;margin-bottom: 20px;">
+                            <label style="width: 100% !important;text-align: center;margin-bottom: 20px;" for="twitter-account-info">Informations utilisateurs</label>
+                            <div style="display: flex; flex-direction: row;">
+                                <input style="font-size: 21px !important;" class="input-contain" id="twitter-account-info" type="text" value="twitter">
+                            </div>
+                        </div>
+                        <a class="button-ok" id="twitter-info-button">Ok
+                        </a>
                     </div>
 
                 {% else %}
@@ -141,14 +154,13 @@
                 {% endif %}
             </div>
             <div class="hide content" id="spotify">
-                <p>Contenue Spotify</p>
                 {% if user.oauthSpotify %}
-                    <div>
-                        {#                    <a href="#" onclick="$('#playlist-container').show();">Ajouter une playlist</a>#}
-                        <p>Ajouter une playlist</p>
-                        <div>
-                            <label for="playlist">Nom de la playlist</label>
-                            <input id="playlist" type="text">
+                    <div class="container-contain">
+                        <div style="display: flex;flex-direction: column;width: 100%;justify-content: center;align-items: center;margin-bottom: 20px;">
+                            <label style="width: 100% !important;text-align: center;margin-bottom: 20px;" for="game">Ajouter une playlist:</label>
+                            <div style="display: flex; flex-direction: row;">
+                                <input style="font-size: 21px !important;" class="input-contain" id="playlist" type="text">
+                            </div>
                         </div>
                     </div>
 
@@ -173,6 +185,7 @@
             <div class="hide content" id="youtube">
                 {% if user.oauthYoutube %}
                     <div class="container-contain">
+                        <label style="width: 100% !important;text-align: center;margin-bottom: 20px;" for="youtube-count">Compteur de vues / abonnés</label>
                         <div class="custom-select">
                             <select id="youtube-count">
                                 <option value="0">Contenu :</option>
@@ -193,6 +206,7 @@
                     </div>
 
                     <div class="container-contain">
+                        <label style="width: 100% !important;text-align: center;margin-bottom: 20px;" for="stats-select">Statistiques sur le dernier mois</label>
                         <div class="custom-select">
                             <select id="stats-select">
                                 <option value="0">Contenu :</option>
