@@ -109,7 +109,7 @@
                         success: function(data){
 
                             $.ajax({
-                                url: "test/twitter-info.html",
+                                url: "widget/twitter-info.html",
                                 context: document.body,
                                 success: function (response) {
                                     grid.addWidget(response, 0, 0, 3, 6, true);
@@ -171,7 +171,7 @@
                                 }, 5000);
                             } else {
                                 $.ajax({
-                                    url: "test/twitter-follower.html",
+                                    url: "widget/twitter-follower.html",
                                     context: document.body,
                                     success: function (response) {
                                         grid.addWidget(response, 0, 0, 3, 6, true);
@@ -203,7 +203,7 @@
                 function tweetAccount(account) {
                     console.log(account);
                     $.ajax({
-                        url: "test/twitter-tweets.html",
+                        url: "widget/twitter-tweets.html",
                         context: document.body,
                         success: function(response) {
                             grid.addWidget(response, 0, 0, 3, 12, true);
@@ -227,7 +227,7 @@
             function displayLecteurTop(id, type) {
 
                 $.ajax({
-                    url: "test/spotify-top.html",
+                    url: "widget/spotify-top.html",
                     context: document.body,
                     success: function (response) {
                         grid.addWidget(response, 0, 0, 6, 8, true);
@@ -291,7 +291,7 @@
 
             function displayLecteur(id) {
                     $.ajax({
-                        url: "test/lecteur.html",
+                        url: "widget/lecteur.html",
                         context: document.body,
                         success: function(response) {
                             grid.addWidget(response, 0, 0, 6, 8, true);
@@ -338,7 +338,7 @@
 
 
                             $.ajax({
-                                url: "test/youtube-compteur.html",
+                                url: "widget/youtube-compteur.html",
                                 context: document.body,
                                 success: function (response) {
                                     grid.addWidget(response, 0, 0, 3, 6, true);
@@ -460,7 +460,7 @@
 
 
                             $.ajax({
-                                url: "test/youtube-stats.html",
+                                url: "widget/youtube-stats.html",
                                 context: document.body,
                                 success: function (response) {
                                     grid.addWidget(response, 0, 0, 3, 6, true);
@@ -571,7 +571,7 @@
 
 
                 $.ajax({
-                    url: "test/steam-price.html",
+                    url: "widget/steam-price.html",
                     context: document.body,
                     success: function(response) {
                         grid.addWidget(response, 0, 0, 3, 6, true);
@@ -661,7 +661,7 @@
                         console.log(data);
 
                         $.ajax({
-                            url: "test/steam-count.html",
+                            url: "widget/steam-count.html",
                             context: document.body,
                             success: function(response) {
                                 grid.addWidget(response, 0, 0, 3, 6, true);
