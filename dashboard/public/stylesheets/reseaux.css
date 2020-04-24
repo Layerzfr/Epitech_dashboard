@@ -356,4 +356,7 @@ iframe {
 .grid-stack-item-removing{
     filter: blur(2px);
     transition: filter 0.5s ease-in-out;
+    -webkit-transition: filter 0.5s ease-in-out;
+    -moz-transition: filter 0.5s ease-in-out;
+    -o-transition: filter 0.5s ease-in-out;
 }
