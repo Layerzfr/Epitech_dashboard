@@ -3,6 +3,22 @@
     padding: 0;
 }
 
+.container-dashboard {
+    width: 100%;
+    height: auto;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    background-color: #282b3b;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-stack>.grid-stack-item>.grid-stack-item-content {
+    position: unset !important;
+}
+
 .grid-stack-item.ui-draggable.ui-resizable.ui-resizable-autohide {
     height: auto !important;
     width: 25% !important;
@@ -139,7 +155,7 @@
 
 .tweets{
     overflow: scroll;
-    max-height: 97vh;
+    max-height: 94.5vh;
 }
 
 .twitter-connexion {
@@ -253,8 +269,8 @@
 .youtube-active, .twitter-active, .steam-active {
     display: flex;
     flex-direction: row;
-    width: auto;
-    height: auto;
+    width: 95%;
+    height: 95%;
     background-color: #1e202c;
 }
 
