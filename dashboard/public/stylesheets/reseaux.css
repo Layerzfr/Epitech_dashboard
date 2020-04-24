@@ -16,6 +16,15 @@
     cursor: grab;
 }
 
+.line-sep {
+    height: 3px;
+    border-radius: 25px;
+    background-color: #ffffff99;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
 .container-dashboard:active {
     cursor: grabbing;
 }
@@ -255,7 +264,7 @@ iframe {
     color: #d4d4d4;
     font-size: 15px;
     font-weight: 100;
-    margin-bottom: 12%;
+    margin-bottom: 20px;
 }
 
 .youtube, .twitter, .steam {
@@ -278,7 +287,7 @@ iframe {
 .youtube-active, .twitter-active, .steam-active {
     display: flex;
     flex-direction: row;
-    width: 95%;
+    width: 100%;
     height: 95%;
     background-color: #1e202c;
 }
