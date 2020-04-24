@@ -81,6 +81,7 @@ twitterController.postTweets = function(req, res) {
     });
 };
 
+//TODO A SUPPRIMER
 twitterController.apiPostTweets = function(req, res) {
     var client = new Twitter({
         consumer_key: _twitterConsumerKey,

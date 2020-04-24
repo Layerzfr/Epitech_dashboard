@@ -32,7 +32,6 @@ userController.doRegister = function(req, res) {
 };
 
 userController.login = function(req, res) {
-    console.log(req.user)
     twing.render('login.html.twig', {}).then((output) => {
         res.end(output);
     });
@@ -64,6 +63,7 @@ userController.logout = function(req, res) {
 };
 
 userController.parameter = function(req, res) {
+    userController.checkIfLogged(req, res);
     return twing.render('parameter.html.twig', {user: req.user, currentPage: 'parameter'}).then((output) => {
         res.end(output);
     });

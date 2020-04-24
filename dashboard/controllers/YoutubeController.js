@@ -27,7 +27,6 @@ youtubeController.callback = function(req,res) {
             if (err) return res.status(500).send(err);
             res.redirect('/');
         });
-        console.log((response.body))
     });
 };
 
@@ -114,7 +113,6 @@ youtubeController.getLastStats = function(req, res) {
         },
         url:     "https://youtubeanalytics.googleapis.com/v2/reports?dimensions=month&endDate=2020-"+cmonth+"-01&ids=channel%3D%3DMINE&metrics=views%2CsubscribersGained%2CsubscribersLost%2Clikes%2Cdislikes&startDate=2020-"+lastMonth+"-01&key="+_youtubeApiKey,
     }, function(error, response, body){
-        console.log(JSON.parse(response.body));
         var data = JSON.parse(response.body).rows;
         if(JSON.parse(response.body).error) {
             return res.redirect('https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/youtube&response_type=code&state=security_token%3D138r5719ru3e1%26url%3Dhttps%3A%2F%2Foauth2.example.com%2Ftoken&redirect_uri=http%3A//127.0.0.1:3000/youtube/services/callback&client_id=482608527715-8fpkr88gaq0chr2rngoer02i8240baib.apps.googleusercontent.com');
@@ -191,7 +189,6 @@ youtubeController.getLastStats = function(req, res) {
             }
         }
 
-        console.log(views, subsGain, likes, dislikes);
         return twing.render('youtube/last_stats.html.twig', {
             'views': views,
             'subs': subsGain,
@@ -223,7 +220,6 @@ youtubeController.apiGetLastStats = function(req, res) {
         },
         url:     "https://youtubeanalytics.googleapis.com/v2/reports?dimensions=month&endDate=2020-"+cmonth+"-01&ids=channel%3D%3DMINE&metrics=views%2CsubscribersGained%2CsubscribersLost%2Clikes%2Cdislikes&startDate=2020-"+lastMonth+"-01&key="+_youtubeApiKey,
     }, function(error, response, body){
-        console.log(JSON.parse(response.body));
         var data = JSON.parse(response.body).rows;
         if(JSON.parse(response.body).error) {
             return res.json({
@@ -299,8 +295,6 @@ youtubeController.apiGetLastStats = function(req, res) {
                 dislikes.stats = dislikes.stats.toFixed(2);
             }
         }
-
-        console.log(views, subsGain, likes, dislikes);
 
         return res.json({
             'views': views,
