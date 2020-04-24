@@ -177,18 +177,18 @@
                         </div>
                     </div>
 
-                    <div>
-                        <p>Ajouter une playlist ou un artiste préféré</p>
-                        <div>
-                            <select id="select-track">
-                                <option value="artists" selected>Artiste</option>
-                                <option value="tracks">Track</option>
-                            </select>
-                            <button type="button" id="search-top-button">Ok</button>
-                            <div id="results">
-
+                    <div class="container-contain">
+                        <div style="display: flex;flex-direction: column;width: 100%;justify-content: center;align-items: center;margin-bottom: 20px;">
+                            <label style="width: 100% !important;text-align: center;margin-bottom: 20px;">Ajouter une playlist ou un artiste préféré</label>
+                            <div class="custom-select">
+                                <select id="select-track">
+                                    <option value="artists">Contenu :</option>
+                                    <option value="artists">Artiste</option>
+                                    <option value="tracks">Track</option>
+                                </select>
                             </div>
                         </div>
+                        <a class="button-ok" id="search-top-button">Ok</a>
                     </div>
 
                 {% else %}
@@ -202,6 +202,7 @@
                                for="youtube-count">Compteur de vues / abonnés</label>
                         <div class="custom-select">
                             <select id="youtube-count">
+                                <option value="subs">Contenu :</option>
                                 <option value="subs">Abonnés</option>
                                 <option value="views">Vue</option>
                             </select>
@@ -223,6 +224,7 @@
                                for="stats-select">Statistiques sur le dernier mois</label>
                         <div class="custom-select">
                             <select id="stats-select">
+                                <option value="likes">Contenu :</option>
                                 <option value="likes">Likes</option>
                                 <option value="dislikes">Dislikes</option>
                                 <option value="subs">Subs</option>
