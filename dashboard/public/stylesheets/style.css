@@ -256,6 +256,11 @@ ul#ui-id-2 {
     width: 20% !important;
 }
 
+.ui-menu {
+    max-height: 500px;
+    overflow: scroll;
+}
+
 .ui-menu .ui-menu-item-wrapper:hover {
     background-color: #8b8b8b !important;
     border: none !important;
