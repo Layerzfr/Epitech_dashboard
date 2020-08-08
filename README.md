@@ -1,3 +1,7 @@
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 # Dashboard
 
 Ce projet est un Dahboard comprenant des widgets pour les services Twitter, Youtube, Spotify et Steam.
@@ -53,13 +57,6 @@ Youtube :
 - (*) Widget qui affiche un compteur d'abonné
 - (*) Widget qui affiche des stats spécifiques de la chaîne youtube de l'utilisateur
 
-## Auteurs
-
-Baptiste DUMONT, Damien RADATOVIC, Mathieu REBOUL
-
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
