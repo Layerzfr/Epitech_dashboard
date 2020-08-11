@@ -7,8 +7,8 @@ var authController = require('./AuthControllers');
 
 var spotifyController = {};
 
-var _spotifyConsumerKey = "2847f09c105d4a07aec94c448957fe60";
-var _spotifyConsumerSecret = "860cf137d5544e56a0548b1b65fd0908";
+var _spotifyConsumerKey = "SPOTIFY_CONSUMER_KEY";
+var _spotifyConsumerSecret = "SPOTIFY_CONSUMER_SECRET";
 
 spotifyController.connect = function(req, res) {
     res.redirect("https://accounts.spotify.com/fr/authorize?client_id=2847f09c105d4a07aec94c448957fe60&response_type=code&redirect_uri=http://127.0.0.1:3000/spotify/sessions/callback&&scope=user-read-private%20user-read-email%20playlist-read-private%20user-top-read");
