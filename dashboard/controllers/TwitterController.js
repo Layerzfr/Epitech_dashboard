@@ -12,8 +12,8 @@ var authController = require('./AuthControllers');
 
 var twitterController = {};
 
-var _twitterConsumerKey = "rfivln94JNkVoPVKoBn79crdc";
-var _twitterConsumerSecret = "ppY9iUnH5uEL5QABgd1hEwZMt8cPUHrcCoqqhIwNUR2zl2xr0w";
+var _twitterConsumerKey = "TWITTER_CONSUMER_KEY";
+var _twitterConsumerSecret = "TWITTER_CONSUMER_SECRET";
 
 function consumer() {
     return new oauth.OAuth(
@@ -80,21 +80,4 @@ twitterController.postTweets = function(req, res) {
         res.end(output);
     });
 };
-
-//TODO A SUPPRIMER
-twitterController.apiPostTweets = function(req, res) {
-    var client = new Twitter({
-        consumer_key: _twitterConsumerKey,
-        consumer_secret: _twitterConsumerSecret,
-        access_token_key: req.user.oauthTwitter,
-        access_token_secret: req.user.oauthAccessSecret
-    });
-    var text = req.body.content;
-    client.post('statuses/update', {status: text}, function (error, tweet, response) {
-        if (!error) {
-            console.log(tweet);
-        }
-    });
-};
-
 module.exports = twitterController;
